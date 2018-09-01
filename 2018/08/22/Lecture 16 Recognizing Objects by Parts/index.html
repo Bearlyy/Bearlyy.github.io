@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算机视觉,CS131," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Lecture 16 Recognizing Objects by Parts1 Introduction计算机视觉不止检测物体的分类，还要检测物体的相关信息。例如：  淘宝以图搜购买链接 某种蘑菇能不能吃 …  通常，计算机视觉需要能够提供物体基本特征之外的信息。 What can computer recognize today?找到特定类别的物体（品牌、地标、书本…），不过只能精确匹配。对于">
+<meta name="keywords" content="计算机视觉,CS131">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS131 Lecture 16 Recognizing Objects by Parts">
+<meta property="og:url" content="http://yoursite.com/2018/08/22/Lecture 16 Recognizing Objects by Parts/index.html">
+<meta property="og:site_name" content="Xiong&#39;s Blog">
+<meta property="og:description" content="Lecture 16 Recognizing Objects by Parts1 Introduction计算机视觉不止检测物体的分类，还要检测物体的相关信息。例如：  淘宝以图搜购买链接 某种蘑菇能不能吃 …  通常，计算机视觉需要能够提供物体基本特征之外的信息。 What can computer recognize today?找到特定类别的物体（品牌、地标、书本…），不过只能精确匹配。对于">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/16.1.png">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/16.2.png">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/16.3.png">
+<meta property="og:updated_time" content="2018-09-01T16:52:58.116Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CS131 Lecture 16 Recognizing Objects by Parts">
+<meta name="twitter:description" content="Lecture 16 Recognizing Objects by Parts1 Introduction计算机视觉不止检测物体的分类，还要检测物体的相关信息。例如：  淘宝以图搜购买链接 某种蘑菇能不能吃 …  通常，计算机视觉需要能够提供物体基本特征之外的信息。 What can computer recognize today?找到特定类别的物体（品牌、地标、书本…），不过只能精确匹配。对于">
+<meta name="twitter:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/16.1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/22/Lecture 16 Recognizing Objects by Parts/"/>
+
+
+
+
+
+  <title>CS131 Lecture 16 Recognizing Objects by Parts | Xiong's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xiong's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/22/Lecture 16 Recognizing Objects by Parts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LY Xiong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CS131 Lecture 16 Recognizing Objects by Parts</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-22T19:49:39+08:00">
+                2018-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机视觉/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,145
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Lecture-16-Recognizing-Objects-by-Parts"><a href="#Lecture-16-Recognizing-Objects-by-Parts" class="headerlink" title="Lecture 16 Recognizing Objects by Parts"></a>Lecture 16 Recognizing Objects by Parts</h1><h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><p>计算机视觉不止检测物体的分类，还要检测物体的相关信息。例如：</p>
+<ul>
+<li>淘宝以图搜购买链接</li>
+<li>某种蘑菇能不能吃</li>
+<li>…</li>
+</ul>
+<p>通常，计算机视觉需要能够提供物体基本特征之外的信息。</p>
+<h2 id="What-can-computer-recognize-today"><a href="#What-can-computer-recognize-today" class="headerlink" title="What can computer recognize today?"></a>What can computer recognize today?</h2><p>找到特定类别的物体（品牌、地标、书本…），不过只能精确匹配。对于当今的系统来说，找到一个通用的对象要困难得多。</p>
+<h2 id="What’s-next-to-work-on"><a href="#What’s-next-to-work-on" class="headerlink" title="What’s next to work on?"></a>What’s next to work on?</h2><p>计算机视觉尚未达到的主要目标是通用类别识别。即能识别图中所有物体类别。例如：对于一个橘色杯子，我们想要找到咖啡杯，但图像搜索只能找到有橘色物体在同一位置的图片。</p>
+<p>现在的系统无法识别训练集之外的任意物体，而现在有太多的物体类别，很难决定专注于哪个物体。</p>
+<h2 id="Big-Data-from-the-Internet"><a href="#Big-Data-from-the-Internet" class="headerlink" title="Big Data from the Internet"></a>Big Data from the Internet</h2><p>现在互联网上86%的数据都是可视数据，而可视数据不能被自动分析。很多识别问题对机器来说较难，但对于人类来说很简单。当人类找不到答案时也可以简单的求助于他人寻找答案，而机器无法做到，所以当今互联网提供了一个将人类帮助和机器识别结合的环境。</p>
+<h2 id="ImageNet-and-Confusion-Matrices"><a href="#ImageNet-and-Confusion-Matrices" class="headerlink" title="ImageNet and Confusion Matrices"></a>ImageNet and Confusion Matrices</h2><p>既然模型受限于训练集中类的数目，一个可行的方法是拓展训练集中的类的数目。比较有名的数据集有：ImageNet(13M images, 22000 categories), Caltech101(9K images, 101 categories), LabelMe (30k images), SUN (131K images)。</p>
+<p>Deng从PASCAL VOC到ImageNet应用了四种分类模型，发现随着类别数目的提升，精度也随之大幅下降。他将结果画成以下的混淆矩阵(confusion matrix)：</p>
+<p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/16.1.png" alt=""></p>
+<p>混淆矩阵在xy轴上画出类别，并衡量类中物体正确分类与否的程度。主要看对角线上格子颜色，颜色越浅，分类器效果越好。</p>
+<p>从图中我们可以看出，分类器需要区分的类越“细”（或越相似），分类错误就越多。例如：区分狗与鸟的错误率比区分鸟的种类要低。</p>
+<h2 id="Challenges-and-Solutions"><a href="#Challenges-and-Solutions" class="headerlink" title="Challenges and Solutions"></a>Challenges and Solutions</h2><h2 id="Semantic-Hierarchy"><a href="#Semantic-Hierarchy" class="headerlink" title="Semantic Hierarchy"></a>Semantic Hierarchy</h2><p>一个解决正确区分相似类的方法是语义层次(semantic hierarchy)。下图即为一个例子。我们创建了一个树结构，它的每个孩子都是父亲的子类。系统将尝试尽量识别到树的深处，即更精确的类。当类更精确时，不确定度也会增加。这个概念称作”hedging”——系统试图识别不确定树中的位置，根据位置做出猜测以得到足够信息，减少错误。</p>
+<p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/16.2.png" alt=""></p>
+<p>为了正式定义这个问题，我们假设训练和测试集有同样的数据分布。另外，我们假设我们可以得到一个给出层次结构的后验概率的基本类$g$。接下来，定义一个奖励函数$R(f)$，它给在树更深处的类（更精确的类）更高的分数。再定义一个预计精度函数$A(f)$，它随着我们沿书向下移动（不确定性增加）而降低。我们的问题定义为<br>$$<br>\max_{A(f)\geq 1-\epsilon} R(f)<br>$$<br>其中$\epsilon$是预先设置的常数，表示对所有例子而言，分类器所允许误差。</p>
+<p>为了保证最后方案是最优方案，我们定义一个全局的，固定的，标量参数$\lambda\geq 0$。对每个节点，我们将$\lambda$加入奖励值，然后正规化后验分布。流程如下：</p>
+<ol>
+<li>选择一个$\lambda$</li>
+<li>找到与$\lambda$相关的决策规则$f$</li>
+<li>在验证集上衡量表现</li>
+<li>检查是否$A\approx 1-\epsilon$。不是则重复</li>
+</ol>
+<p>我们可以用二分搜索快速找到$\lambda $</p>
+<h3 id="Fine-grained-Classes"><a href="#Fine-grained-Classes" class="headerlink" title="Fine-grained Classes"></a>Fine-grained Classes</h3><p>现有的方法从图中所有可能的位置选择特征，但是它可能找不到正确的特征。例如：两种相似的鸟区别在于尾巴，但是计算机可能无法找到这是个辨别特征。解决方案是众包(crowd-sourcing)。</p>
+<p>那么，什么是最好的方法来询问一个人群：哪些特征可以区分图像的类别？</p>
+<p><strong>Crowd-sourced bubble games</strong>： 用泡沫来代表特征，利用游戏特性来吸引大量人群为图像标记出主要特征，因为有奖惩系统，所以标记质量也较高。</p>
+<p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/16.3.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机视觉/" rel="tag"><i class="fa fa-tag"></i> 计算机视觉</a>
+          
+            <a href="/tags/CS131/" rel="tag"><i class="fa fa-tag"></i> CS131</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/21/Lecture 15 Detecting Objects by Parts/" rel="next" title="CS131 Lecture 15 Detecting Objects by Parts">
+                <i class="fa fa-chevron-left"></i> CS131 Lecture 15 Detecting Objects by Parts
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/25/Lecture 17 Motion/" rel="prev" title="CS131 Lecture 17 Motion">
+                CS131 Lecture 17 Motion <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="LY Xiong" />
+            
+              <p class="site-author-name" itemprop="name">LY Xiong</p>
+              <p class="site-description motion-element" itemprop="description">普普通通</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+<br>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86
+src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-16-Recognizing-Objects-by-Parts"><span class="nav-number">1.</span> <span class="nav-text">Lecture 16 Recognizing Objects by Parts</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">1 Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-can-computer-recognize-today"><span class="nav-number">1.2.</span> <span class="nav-text">What can computer recognize today?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What’s-next-to-work-on"><span class="nav-number">1.3.</span> <span class="nav-text">What’s next to work on?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Big-Data-from-the-Internet"><span class="nav-number">1.4.</span> <span class="nav-text">Big Data from the Internet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ImageNet-and-Confusion-Matrices"><span class="nav-number">1.5.</span> <span class="nav-text">ImageNet and Confusion Matrices</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Challenges-and-Solutions"><span class="nav-number">1.6.</span> <span class="nav-text">Challenges and Solutions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantic-Hierarchy"><span class="nav-number">1.7.</span> <span class="nav-text">Semantic Hierarchy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fine-grained-Classes"><span class="nav-number">1.7.1.</span> <span class="nav-text">Fine-grained Classes</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LY Xiong</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访问量:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+<!-- 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

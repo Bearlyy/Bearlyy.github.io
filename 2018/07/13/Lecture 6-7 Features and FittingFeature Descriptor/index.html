@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算机视觉,CS131," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Lecture 6-7 Features and Fitting/Feature DescriptorLocal Invariant(局部不变) FeaturesMotivation使用局部不变的特征的目的出于它在广泛环境下的有用性，之前讨论的方法在这些环境下均产生问题，例如：交叉相关。这个方法通过找到图像中局部、独特的结构，并用周围区域来作为小块，而不是使用全局作为代表来找到相对应的结构。这样做">
+<meta name="keywords" content="计算机视觉,CS131">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS131 Lecture 6-7 Features and Fitting&#x2F;Feature Descriptor">
+<meta property="og:url" content="http://yoursite.com/2018/07/13/Lecture 6-7 Features and FittingFeature Descriptor/index.html">
+<meta property="og:site_name" content="Xiong&#39;s Blog">
+<meta property="og:description" content="Lecture 6-7 Features and Fitting/Feature DescriptorLocal Invariant(局部不变) FeaturesMotivation使用局部不变的特征的目的出于它在广泛环境下的有用性，之前讨论的方法在这些环境下均产生问题，例如：交叉相关。这个方法通过找到图像中局部、独特的结构，并用周围区域来作为小块，而不是使用全局作为代表来找到相对应的结构。这样做">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.7.png">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.10.png">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.11.png">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.12.png">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.8.png">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.9.png">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/7.1.png">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/7.4.png">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/7.2.png">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/7.3.png">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/7.5.png">
+<meta property="og:updated_time" content="2018-09-01T15:43:26.713Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CS131 Lecture 6-7 Features and Fitting&#x2F;Feature Descriptor">
+<meta name="twitter:description" content="Lecture 6-7 Features and Fitting/Feature DescriptorLocal Invariant(局部不变) FeaturesMotivation使用局部不变的特征的目的出于它在广泛环境下的有用性，之前讨论的方法在这些环境下均产生问题，例如：交叉相关。这个方法通过找到图像中局部、独特的结构，并用周围区域来作为小块，而不是使用全局作为代表来找到相对应的结构。这样做">
+<meta name="twitter:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.7.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/13/Lecture 6-7 Features and FittingFeature Descriptor/"/>
+
+
+
+
+
+  <title>CS131 Lecture 6-7 Features and Fitting/Feature Descriptor | Xiong's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xiong's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/13/Lecture 6-7 Features and FittingFeature Descriptor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LY Xiong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CS131 Lecture 6-7 Features and Fitting/Feature Descriptor</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-13T13:45:13+08:00">
+                2018-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机视觉/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,530
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Lecture-6-7-Features-and-Fitting-Feature-Descriptor"><a href="#Lecture-6-7-Features-and-Fitting-Feature-Descriptor" class="headerlink" title="Lecture 6-7 Features and Fitting/Feature Descriptor"></a>Lecture 6-7 Features and Fitting/Feature Descriptor</h1><h2 id="Local-Invariant-局部不变-Features"><a href="#Local-Invariant-局部不变-Features" class="headerlink" title="Local Invariant(局部不变) Features"></a>Local Invariant(局部不变) Features</h2><h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>使用局部不变的特征的目的出于它在广泛环境下的有用性，之前讨论的方法在这些环境下均产生问题，例如：交叉相关。这个方法通过找到图像中局部、独特的结构，并用周围区域来作为小块，而不是使用全局作为代表来找到相对应的结构。这样做可以得到一个强健性更高的图片检测策略，该策略对物体旋转、视角改变、尺度变换等具有不变性。</p>
+<h3 id="General-Approach"><a href="#General-Approach" class="headerlink" title="General Approach"></a>General Approach</h3><ol>
+<li>找到一系列特别的关键点</li>
+<li>在关键点附近定义一个局部区域</li>
+<li>从该区域提取并归一化局部内容</li>
+<li>从归一化的区域中计算一个局部描述子(local descriptor)，例如：像素颜色函数</li>
+<li>匹配局部描述子</li>
+</ol>
+<p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.7.png" alt=""></p>
+<h3 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h3><p>好的局部特征应该具有以下性质：</p>
+<ol>
+<li><p>重复性</p>
+<p>同一个物体或场景在不同摄像情况下（例如，光照或者视角改变），应该都能检测到大量的特征。换句话说，该特征需要对光线变化、噪音、模糊等具有稳健性，同时对旋转和视角改变也保持不变性。</p>
+</li>
+<li><p>局部性</p>
+<p>特征需要是局部的以避免背景遮挡(occlusion)和混淆(clutter)导致的问题</p>
+</li>
+<li><p>数量</p>
+<p>需要足够多的特征被选择去有效的检测物体</p>
+</li>
+<li><p>特殊性</p>
+<p>特征需要有能展现出大量变换的特点，这样才能保证可以区分不同特征。</p>
+</li>
+<li><p>效率</p>
+<p>新图像的特征匹配需要有利于实时应用</p>
+</li>
+</ol>
+<h2 id="Keypoint-Localization"><a href="#Keypoint-Localization" class="headerlink" title="Keypoint Localization"></a>Keypoint Localization</h2><h3 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h3><p>关键点定位目标是持续且重复地检测区域、达到更精确的定位、在图像中找到游泳的内容。</p>
+<h3 id="General-Approach-1"><a href="#General-Approach-1" class="headerlink" title="General Approach"></a>General Approach</h3><p>我们寻找角点，因为它们在大量图像中都是可重复且有特点的。为了找到角点，我们需要寻找在所有维度上强度剧烈变化的地方，也是梯度有两个以上主要方向的地方。为了提供上下文，一个“平整”的区域在任何方向上都不会改变且边沿的方向不会产生变化。我们用Harris技术找到这些角点。</p>
+<p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.10.png" alt=""></p>
+<h3 id="Harris-Detector"><a href="#Harris-Detector" class="headerlink" title="Harris Detector"></a>Harris Detector</h3><p>计算移动$[u,v]$强度的改变量$E(u,v)$，其中$I(x,y)$表示强度函数，$w(x,y)$表示窗函数（用于对信号进行截断，也叫截断函数）：<br>$$<br>E(u,v)=\sum _{x,y}w(x,y)[I(x+u,y+v)-I(x,y)]^{2}<br>$$<br><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.11.png" alt=""></p>
+<p>为了找到角点，我们需要最大化函数$E(u,v)$。用Taylor Expansion可以得到以下方程：<br>$$<br>E(u,v)=\left[ \begin{matrix}<br>u &amp;v<br>\end{matrix} \right]<br>M<br>\left[ \begin{matrix}<br>u \v<br>\end{matrix} \right]<br>$$<br>其中M定义为<br>$$<br>M=\sum <em>{x,y}w(x,y)\left[ \begin{matrix}<br>I</em>{x}I_{x} &amp;I_{x}I_{y}\<br>I_{x}I_{y}  &amp; I_{y}I_{y}<br>\end{matrix} \right] \<br>\left[ \begin{matrix}<br>I_{x}I_{x} &amp;I_{x}I_{y}\<br>I_{x}I_{y}  &amp; I_{y}I_{y}<br>\end{matrix} \right]=x的梯度\times y的梯度<br>$$<br>这个矩阵显示<br>$$<br>M=\left[ \begin{matrix}<br>\sum I_{x}I_{x} &amp; \sum I_{x}I_{y}\<br>\sum I_{x}I_{y}  &amp; \sum I_{y}I_{y}<br>\end{matrix} \right]=<br>\left[ \begin{matrix}<br>\lambda_{1} &amp; 0\<br>0  &amp; \lambda_{2}<br>\end{matrix} \right]<br>$$<br>角点的两个特征值$\lambda_{1}$、$\lambda_{2}$都是大且相近的，而边缘只有其中一个特征值较大，平坦区域两个特征值均较小。</p>
+<p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.12.png" alt=""></p>
+<p>角点响应函数(Corner Response Function)为每个窗计算一个值：<br>$$<br>\theta=det(M)-\alpha trace(M)^{2}<br>$$<br>其中$\alpha$范围为$[0.04,0.06]$。</p>
+<p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.8.png" alt=""></p>
+<p>为了增加旋转不变性，我们用经过加权和的高斯函数进行光滑化：<br>$$<br>M=g(\sigma) * \left[ \begin{matrix}<br>I_{x}I_{x} &amp;I_{x}I_{y}\<br>I_{x}I_{y}  &amp; I_{y}I_{y}<br>\end{matrix} \right]<br>$$<br>最后，下图展示了Harris detector找到的关键点：</p>
+<p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.9.png" alt=""></p>
+<h2 id="Scale-Invariant-Keypoint-Detection"><a href="#Scale-Invariant-Keypoint-Detection" class="headerlink" title="Scale Invariant Keypoint Detection"></a>Scale Invariant Keypoint Detection</h2><h3 id="Motivation-2"><a href="#Motivation-2" class="headerlink" title="Motivation"></a>Motivation</h3><p>之前我们用Harris detector找到角点的关键点。Harris detector为了维持良好的定位，用的窗较小。因为用的是小窗，所以会当图片缩放后，窗会受到影响，其梯度会发生改变。下图展现了同样大小的框在图片放大后的改变。</p>
+<p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/7.1.png" alt=""></p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>我们可以设计一个可伸缩的函数，即窗对应的区域不受尺度变换影响（例如，平均强度）。我们可以用一个圈表示这个可伸缩函数。圆上一个点表示一个圆半径对应区域大小的函数，所以只要选取一个特征比较明显的点（如峰值），所对应的函数就能在不同的图中取得不同的窗大小。</p>
+<p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/7.4.png" alt=""></p>
+<h3 id="General-Approach-2"><a href="#General-Approach-2" class="headerlink" title="General Approach"></a>General Approach</h3><p>我们可以找到一个函数的局部最大值。相对于局部最大值，区域大小应该不随尺度改变。这意味着区域大小和图像尺寸应该共同变化。一个好的函数应该有有且仅有一个明显的局部最大值。换句话说，我们应该用在强度上有鲜明对比的函数。</p>
+<p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/7.2.png" alt=""></p>
+<p>我们将函数定义为：$f=kernel*image$，可以用Laplacian（拉普拉斯算子）或者Difference of Gaussians（DoG，差分高斯算子）作为核<br>$$<br>L=\sigma^{2}(G_{xx}(x,y,\sigma)+G_{yy}(x,y,\sigma))\<br>DoG=G(x,y,k\sigma)-G(x,y,\sigma)\<br>where\space G(x,y,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^{2}+y^{2}}{2\sigma^{2}}}<br>$$<br>这些核都具有旋转与伸缩不变性。</p>
+<p>附加：拉普拉斯算子的推导</p>
+<p>对于图像$f$，首先进行高斯平滑处理滤去噪点：<br>$$<br>G(x,y,\sigma)<em>f(x,y)<br>$$<br>对上式求微分，进行边缘检测：<br>$$<br>\frac{d}{dx}(G</em>f)=\frac{dG}{dx}*f<br>$$<br>其中，$dG/dx$即为拉普拉斯算子。</p>
+<p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/7.3.png" alt=""></p>
+<p>基于 DoG 算子，可以采用 SIFT 算法进行特征匹配，在空间和尺度上找到DOG局部最大值。基于拉普拉斯算子，可以采用 Harris-Laplacian 算法进行特征匹配，在空间上找到Harris角点检测器的局部最大值、在尺度上找到拉普拉斯的局部最大值。</p>
+<p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/7.5.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机视觉/" rel="tag"><i class="fa fa-tag"></i> 计算机视觉</a>
+          
+            <a href="/tags/CS131/" rel="tag"><i class="fa fa-tag"></i> CS131</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/11/Lecture 6 Edge Detection/" rel="next" title="CS131 Lecture 6 Edge Detection">
+                <i class="fa fa-chevron-left"></i> CS131 Lecture 6 Edge Detection
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/07/Lecture 8 Feature Descriptors and Resizing/" rel="prev" title="CS131 Lecture 8 Feature Descriptors and Resizing">
+                CS131 Lecture 8 Feature Descriptors and Resizing <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="LY Xiong" />
+            
+              <p class="site-author-name" itemprop="name">LY Xiong</p>
+              <p class="site-description motion-element" itemprop="description">普普通通</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+<br>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86
+src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-6-7-Features-and-Fitting-Feature-Descriptor"><span class="nav-number">1.</span> <span class="nav-text">Lecture 6-7 Features and Fitting/Feature Descriptor</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Local-Invariant-局部不变-Features"><span class="nav-number">1.1.</span> <span class="nav-text">Local Invariant(局部不变) Features</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation"><span class="nav-number">1.1.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Approach"><span class="nav-number">1.1.2.</span> <span class="nav-text">General Approach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Requirements"><span class="nav-number">1.1.3.</span> <span class="nav-text">Requirements</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Keypoint-Localization"><span class="nav-number">1.2.</span> <span class="nav-text">Keypoint Localization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Approach-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">General Approach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Harris-Detector"><span class="nav-number">1.2.3.</span> <span class="nav-text">Harris Detector</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scale-Invariant-Keypoint-Detection"><span class="nav-number">1.3.</span> <span class="nav-text">Scale Invariant Keypoint Detection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">1.3.2.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Approach-2"><span class="nav-number">1.3.3.</span> <span class="nav-text">General Approach</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LY Xiong</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访问量:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+<!-- 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
