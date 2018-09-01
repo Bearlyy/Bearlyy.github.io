@@ -413,6 +413,483 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/07/Lecture 2 Color and Linear Algebra/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LY Xiong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/07/Lecture 2 Color and Linear Algebra/" itemprop="url">CS131 Lecture 2 Color and Linear Algebra</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-07T08:09:57+08:00">
+                2018-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机视觉/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,688
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="颜色物理学"><a href="#颜色物理学" class="headerlink" title="颜色物理学"></a>颜色物理学</h2><h3 id="什么是颜色？"><a href="#什么是颜色？" class="headerlink" title="什么是颜色？"></a>什么是颜色？</h3><p>颜色是环境中的物理光和我们视觉系统交互的结果。它是一种我们在看物品和光时的视觉体验的心理性质，而不是这些物品和光的物理性质。</p>
+<h3 id="颜色和光"><a href="#颜色和光" class="headerlink" title="颜色和光"></a>颜色和光</h3><p>白光由几乎平均能量的可视光谱的波长组成</p>
+<h3 id="电磁光谱"><a href="#电磁光谱" class="headerlink" title="电磁光谱"></a>电磁光谱</h3><p>光由不同波长的波组成，可视光谱范围从400nm到700nm，人类对可视光谱中间部分最敏感。人类只能看到可视光谱的原因的太阳发射黄光最多，而且温度较高。</p>
+<h3 id="可视光"><a href="#可视光" class="headerlink" title="可视光"></a>可视光</h3><p>Plank’s Law基于星球的表面温度测量电磁辐射发出的波长。</p>
+<h3 id="物理光"><a href="#物理光" class="headerlink" title="物理光"></a>物理光</h3><p>任何光都可以用它的光谱描述（每秒钟发射的波长在400-700nm之间的能量）。物品反射的光时常集中于可视光谱的特定部分，因此物品呈现出不同颜色，例如：香蕉的黄色、番茄的红色。</p>
+<h3 id="光和表面的交互"><a href="#光和表面的交互" class="headerlink" title="光和表面的交互"></a>光和表面的交互</h3><p>反射的颜色是光源范围和物品表面反射交互的结果。通常，单位和定义是 per unit wavelengths，关系是光谱而不是单独的波长。光照度被量化为：光照度*反射度=颜色信号</p>
+<h2 id="人类对颜色的编码"><a href="#人类对颜色的编码" class="headerlink" title="人类对颜色的编码"></a>人类对颜色的编码</h2><h3 id="Rods-and-Cones"><a href="#Rods-and-Cones" class="headerlink" title="Rods and Cones"></a>Rods and Cones</h3><p>视网膜上主要包含两种光敏感细胞：rods and cones。Rods数量更多且更敏感，用于低光环境下的物品检测。而cones则相反，数量少且不敏感，用于高光环境下的检测。这两种细胞帮助我们通过一种机制感知颜色。</p>
+<h3 id="Cones和颜色"><a href="#Cones和颜色" class="headerlink" title="Cones和颜色"></a>Cones和颜色</h3><p>rods和cones的主要不同处在于cones以三种不同形式出现，每种以一个独特的对光不同波长的反应曲线为特征。每个反应曲线高峰位于440（蓝）, 530（绿）, 560nm（红）。然而，rods和cones运作方式像过滤器，输出的结果是光谱上所有波长的整合，所以一些信息会丢失。这意味着一些光谱的子集会被错误的整合成一样的，这种光谱称称为metamers</p>
+<h3 id="颜色匹配"><a href="#颜色匹配" class="headerlink" title="颜色匹配"></a>颜色匹配</h3><p>因为我们要设计一个对所有人都提供一致视觉体验的系统，所以理解可以创造所有可感知颜色的最小数量的颜色很有帮助。通过一系列研究，红黄蓝是最充分的编码颜色。</p>
+<h2 id="色彩空间"><a href="#色彩空间" class="headerlink" title="色彩空间"></a>色彩空间</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>色彩空间是一个抽象的数学模型，它用数字元组描述了一些列颜色，例如RGB。一个颜色空间可以是任意的或者有数学结构的，几乎所有颜色模型都能匹配到一个绝对的和全球的颜色解释理解系统。</p>
+<h3 id="线性颜色空间"><a href="#线性颜色空间" class="headerlink" title="线性颜色空间"></a>线性颜色空间</h3><p>由三原色定义，其数值代表某种原色的权重。因为两种原色只能在直线上表示颜色，但三种原色可以在空间上表示颜色。</p>
+<ul>
+<li><p>RGB Space</p>
+<ul>
+<li>原色是单色（对于监视器，它们对应三种不同的磷光体）</li>
+<li>减法匹配需要光的特定波长</li>
+<li>下图RGB的原色和匹配函数。匹配函数表示在水平尺度上显示的波长的单色测试颜色所需的原色数量。 </li>
+</ul>
+<p><img src="http://bearly.oss-cn-hangzhou.aliyuncs.com/18-9-1/6020442.jpg" alt=""></p>
+</li>
+<li><p>CIE XYZ Color Space</p>
+<ul>
+<li>原色是虚构的，但匹配方程处处为正</li>
+<li>Y向量对应一个颜色的亮度</li>
+<li>通过线性转化和RGB Space相关联，在Grassmann’s Law之上</li>
+</ul>
+<p><img src="http://bearly.oss-cn-hangzhou.aliyuncs.com/18-9-1/10727870.jpg" alt=""></p>
+</li>
+</ul>
+<h3 id="非线性颜色空间：HSV"><a href="#非线性颜色空间：HSV" class="headerlink" title="非线性颜色空间：HSV"></a>非线性颜色空间：HSV</h3><ul>
+<li><p>用于反射更多传统和直觉色彩混合模型（例如：颜料混合）</p>
+</li>
+<li><p>基于颜色如何在人的视觉中组织和概念化。</p>
+</li>
+<li><p>维度：色彩、饱和度、强度</p>
+<p><img src="http://bearly.oss-cn-hangzhou.aliyuncs.com/18-9-1/62736448.jpg" alt=""></p>
+</li>
+</ul>
+<h2 id="白平衡"><a href="#白平衡" class="headerlink" title="白平衡"></a>白平衡</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>白平衡是将传感器接收到的图片数据调整至合适的呈现中性的颜色（灰、白等等）的过程。</p>
+<h3 id="白平衡的重要性"><a href="#白平衡的重要性" class="headerlink" title="白平衡的重要性"></a>白平衡的重要性</h3><ol>
+<li>相机的传感器和人眼感受不同</li>
+<li>不同的显示媒体渲染图像的方式不同</li>
+<li>照片被拍下时的观察条件和照片的观察条件不同</li>
+</ol>
+<p><img src="http://bearly.oss-cn-hangzhou.aliyuncs.com/18-9-1/19453658.jpg" alt=""></p>
+<h3 id="Von-Kries-Method"><a href="#Von-Kries-Method" class="headerlink" title="Von Kries Method"></a>Von Kries Method</h3><p>按增益系数将每个通道缩放至匹配灰度中性物品的外观。通过Gray Card Method（灰卡方法）实现：假设一个卡的中性值为$r_{w},g_{w},b_{w}$，那么我们将每个通道通过$1/r_{w},1/g_{w},1/b_{w}$缩放。</p>
+<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><p>如果不用灰卡方法，我们需要猜测哪个像素对应白色物体。</p>
+<ul>
+<li><p>Gray World Assumption</p>
+<p>假设平均像素值为灰值$r_{ave},g_{ave},b_{ave}$，那么我们将每个通道通过$1/r_{ave},1/g_{ave},1/b_{ave}$缩放。</p>
+</li>
+<li><p>Brightest Pixel Assumption</p>
+<p>适用于不饱和图像，对每个通道依据最亮的像素以反比例加权。</p>
+</li>
+<li><p>Gamut Mapping </p>
+<p>Gamut是图像上所有像素颜色的一个集合，也是所有颜色可能结合的子集。接下来我们可以将图片的gamut映射到标准白光下的gamut</p>
+</li>
+</ul>
+<h3 id="颜色在计算机视觉中的其他应用"><a href="#颜色在计算机视觉中的其他应用" class="headerlink" title="颜色在计算机视觉中的其他应用"></a>颜色在计算机视觉中的其他应用</h3><p>皮肤检测、图像分割</p>
+<h2 id="线性代数引入：向量与矩阵"><a href="#线性代数引入：向量与矩阵" class="headerlink" title="线性代数引入：向量与矩阵"></a>线性代数引入：向量与矩阵</h2><h3 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h3><p>列向量(column vector)$v$, 行向量(row vector)$v^{T}$ ，CS131默认使用列向量。</p>
+<h3 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h3><p><strong>matrix</strong> m行n列，若m=n则为square</p>
+<p><strong>image</strong> 在python中表现为一个像素亮度矩阵，左上角表示为[y,x]。</p>
+<p><strong>Grayscale images</strong> 储存于$mxn$矩阵中</p>
+<p><img src="http://bearly.oss-cn-hangzhou.aliyuncs.com/18-9-1/35355764.jpg" alt=""></p>
+<p><strong>Color images</strong> 储存于$mxnx3$矩阵中，多了一个维度表示RGB三个值</p>
+<p><img src="http://bearly.oss-cn-hangzhou.aliyuncs.com/18-9-1/36246984.jpg" alt=""></p>
+<h3 id="基本矩阵运算"><a href="#基本矩阵运算" class="headerlink" title="基本矩阵运算"></a>基本矩阵运算</h3><p><strong>Norm</strong> $||x||<em>{2}=\sqrt{\sum\limits</em>{i=1}^{n}x^{2}_{i}}$</p>
+<p>更广泛来讲，norm是任何满足以下条件的函数：</p>
+<ol>
+<li>非负性</li>
+<li>当且仅当$x=0$时，$f(x)=0$</li>
+<li>$f(tx)=|t|f(x)$</li>
+<li>$f(x+y)\leq f(x)+f(y)$</li>
+</ol>
+<p>例如：</p>
+<p><strong>One Norm</strong> $||x||<em>{1}=\sum\limits</em>{i=1}^{n}|x_{i}|$</p>
+<p><strong>Infinity Norm</strong> $||x||<em>{inf}=max</em>{i}|x_{i}|$</p>
+<p><strong>General P Norm</strong> $||x||<em>{p}=(\sum\limits</em>{i=1}^{n}x_{i}^{p})^{1/p}$</p>
+<p><strong>Matrix Norm</strong>  $||A||<em>{F}=\sqrt{\sum\limits</em>{i=1}^{n}\sum\limits_{j=1}^{n}A^{2}_{ij}}=\sqrt{tr(A^{T}A)}$</p>
+<p><strong>Inner or Dot Product</strong> 内积或点乘，返回 <strong>Projection</strong>。如果B是一个单位向量，则A·B返回A在B方向上的长度</p>
+<p><strong>Determinant</strong> $det(A)$返回一个标量，$A=\left [ \begin{matrix} a &amp; b \ c &amp; d \end{matrix} \right ]  $ 则$det(A)=ad-bc$</p>
+<p>性质：</p>
+<ul>
+<li>$det(A^{-1})=1/det(A)$</li>
+<li>$det(A^{T})=det(A)$</li>
+</ul>
+<p><strong>Trace</strong> $tr(A)$为对角线上元素和</p>
+<p>性质：$tr(A+B)=tr(A)+tr(B)$</p>
+<p><strong>Transpose</strong> 转置矩阵，表示为$A^{T}$，且$(ABC)^{T}=C^{T}B^{T}A^{T}$</p>
+<p><strong>Identity Matrix</strong> 缩写为$I$ ，表示单位矩阵</p>
+<p><strong>Diagonal Matrix</strong> 和单位矩阵区别在于对角线上不一定是1，可以为其他数字</p>
+<p><strong>Symmetric Matrix</strong> 对称矩阵$A^{T}=A$</p>
+<p><strong>Skew-symmetric Matrix</strong> $A^{T}=-A$</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/Lecture 1 Course Introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LY Xiong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/05/Lecture 1 Course Introduction/" itemprop="url">CS131 Lecture 1 Course Introduction</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-05T13:12:34+08:00">
+                2018-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机视觉/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  993
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是计算机视觉？"><a href="#什么是计算机视觉？" class="headerlink" title="什么是计算机视觉？"></a>什么是计算机视觉？</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
+<li>从数字图像中提取信息。这些信息可以随着定义不同而改变，可以是空间测量、现实增强等等</li>
+<li>构造一个可以理解图片意思并能应用的算法。<h3 id="一个艰难的问题"><a href="#一个艰难的问题" class="headerlink" title="一个艰难的问题"></a>一个艰难的问题</h3>50年来，计算视觉都没有很好的被解决。</li>
+<li>可以暴力算出棋类解法，但是无法写诗</li>
+<li>目标识别比3D建模更难</li>
+<li>计算机视觉难在像素和其意义的不同<h2 id="理解人类视觉"><a href="#理解人类视觉" class="headerlink" title="理解人类视觉"></a>理解人类视觉</h2><h3 id="视觉定义"><a href="#视觉定义" class="headerlink" title="视觉定义"></a>视觉定义</h3></li>
+<li>一个可以提取尽可能多的信息的传感器（眼睛、相机）。这方面相机优于人眼，因为可以通过技术看到更远的地方。</li>
+<li>处理器需要处理信息并提取其中的含义。这部分计算机视觉仍然落后于人类。<h3 id="人类视觉系统"><a href="#人类视觉系统" class="headerlink" title="人类视觉系统"></a>人类视觉系统</h3>1962年，科学家发现猫的一些视觉神经只有在特殊的线条位置、特别的角度会产生反映。由此引发了对人类视觉的研究。<h3 id="人类视觉有多强？"><a href="#人类视觉有多强？" class="headerlink" title="人类视觉有多强？"></a>人类视觉有多强？</h3></li>
+<li><p>速度<br>人类视觉系统效率极高，下图是人类对动物/非动物图片反映时间</p>
+<p><img src="http://bearly.oss-cn-hangzhou.aliyuncs.com/18-9-1/90374355.jpg" alt=""></p>
+</li>
+<li><p>错觉<br>人类视觉会因为专注于图片的重要部分而忽视不相关的小细节，如果信号十分接近背景，那就十分难以从图片的相关部分中检测和分割出来。</p>
+</li>
+<li><p>环境（背景知识）<br>人类依赖先前的知识来识别图片的线索（图片的重点、特殊位置会出现什么），这是计算机视觉难以做到的。环境也能帮助大脑补偿阴影中的颜色，但是有时候环境也会愚弄人类。</p>
+<h3 id="从大自然中学习"><a href="#从大自然中学习" class="headerlink" title="从大自然中学习"></a>从大自然中学习</h3><p>计算机视觉不是完全模仿人脑，然而，神经学家希望能深入了解视觉、语言和其他形式的智力背后的概念。 </p>
+<h2 id="从图片中提取信息"><a href="#从图片中提取信息" class="headerlink" title="从图片中提取信息"></a>从图片中提取信息</h2><p>可以提取两类信息：度量值、语义信息</p>
+<h3 id="度量设备"><a href="#度量设备" class="headerlink" title="度量设备"></a>度量设备</h3><p>自动驾驶到未知地点需要扫描周围环境确定最佳路径，这时计算机视觉就可以作为度量设备测量环境并创造环境地图。立体摄像头通过三角测量提供深度信息，像眼睛一样。如果我们将视角点提高到包含物体所有面，我们就可以创造物体的3D表面，甚至可以通过Google图片重构一个纪念碑的3D模型。同时，计算机视觉还可以帮助机器理解物品的3D几何结构，以便于机器找到好的把握位置。</p>
+<h3 id="语义信息来源"><a href="#语义信息来源" class="headerlink" title="语义信息来源"></a>语义信息来源</h3><p>在度量信息之上还包含着密集的语义信息。我们可以标记图片中的各种物体，例如：整个风景、人、动作、姿态、脸等等。医学图片也有很多语义信息，例如：通过皮肤细胞的图片来判断是否有癌症。</p>
+<h2 id="计算机视觉的应用"><a href="#计算机视觉的应用" class="headerlink" title="计算机视觉的应用"></a>计算机视觉的应用</h2><p>以下是一份不完全的计算机视觉应用列表</p>
+</li>
+<li>特效：将人类演员的动作表情复制到动画人物上。我们需要检测3D空间内演员脸上标记的准确位置，然后将它们重构到人物上，例如：阿凡达。</li>
+<li>3D城市模型：用于将无人机拍到的照片整合到一起，创建城市的3D模型。</li>
+<li>风景识别：识别图片的拍摄地点。</li>
+<li>面部检测：可以帮助相机识别并专注于人脸，拍出更好的照片。</li>
+<li>光学字符检测：用于读取邮政编码之类，最老的应用之一。</li>
+<li>移动视觉搜索：加快以图搜图的速度。</li>
+<li>自动驾驶</li>
+<li>自助收银</li>
+<li>基于视觉的互动：Microsoft’s Kinect 和 任天堂的Wii</li>
+<li>增强现实： AR(Augmented Reality)</li>
+<li>虚拟显示：VR(Virtual Reality)</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/17/Matlab-Week3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1874,399 +2351,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/03/机器学习Week5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LY Xiong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xiong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/03/机器学习Week5/" itemprop="url">机器学习Week5</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-03T00:00:00+08:00">
-                2017-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  801
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="代价函数-Cost-Function-和-反向传播-Backpropagation"><a href="#代价函数-Cost-Function-和-反向传播-Backpropagation" class="headerlink" title="代价函数(Cost Function) 和 反向传播(Backpropagation)"></a>代价函数(Cost Function) 和 反向传播(Backpropagation)</h2><h3 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h3><h4 id="一些缩写"><a href="#一些缩写" class="headerlink" title="一些缩写"></a>一些缩写</h4><ul>
-<li>L = 总层数</li>
-<li>sl = l层的单元数（不包括偏置单元）</li>
-<li>K = 输出单元数</li>
-</ul>
-<h4 id="代价函数-1"><a href="#代价函数-1" class="headerlink" title="代价函数"></a>代价函数</h4><p><img src="https://i.imgur.com/MPK5FaW.png" alt=""></p>
-<p>由逻辑回归的代价函数推广得到神经网络的代价函数。其中，前半部分∑k=1 K表示h(x)的所有维（输出单元数）相加，后半部分两个∑表示所有单元的θ之和。</p>
-<h3 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h3><p>最小化代价函数的一种方式，也是通过计算J(θ)的导数来实现。具体方式如下：</p>
-<p><img src="https://i.imgur.com/mdbVRtz.png" alt=""></p>
-<p>深入理解：<br>$$<br>J(\Theta) = - \frac{1}{m} \sum_{t=1}^m\sum_{k=1}^K \left[ y^{(t)}<em>k \ \log (h</em>\Theta (x^{(t)}))_k + (1 - y^{(t)}<em>k)\ \log (1 - h</em>\Theta(x^{(t)})<em>k)\right] + \frac{\lambda}{2m}\sum</em>{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_l+1} ( \Theta_{j,i}^{(l)})^2 \<br>cost(t) =y^{(t)} \ \log (h_\Theta (x^{(t)})) + (1 - y^{(t)})\ \log (1 - h_\Theta(x^{(t)})) \<br>delta_j^{(l)} = \dfrac{\partial}{\partial z_j^{(l)}} cost(t)<br>$$</p>
-<h2 id="反向传播算法的实现"><a href="#反向传播算法的实现" class="headerlink" title="反向传播算法的实现"></a>反向传播算法的实现</h2><h3 id="将θ从矩阵展开为向量"><a href="#将θ从矩阵展开为向量" class="headerlink" title="将θ从矩阵展开为向量"></a>将θ从矩阵展开为向量</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">thetaVec=[theta1(:);theta2(:)]; <span class="comment">%矩阵(:)表示将矩阵中元素取出并排列成向量</span></span><br><span class="line">theta1=<span class="built_in">reshape</span>(thetaVec(<span class="number">1</span>:<span class="number">110</span>),<span class="number">10</span>,<span class="number">11</span>); <span class="comment">%将向量thetaVec中1——110元素取出并排列成10*11矩阵</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://i.imgur.com/c7Dly86.png" alt=""></p>
-<h3 id="梯度检验-gradient-checking"><a href="#梯度检验-gradient-checking" class="headerlink" title="梯度检验(gradient checking)"></a>梯度检验(gradient checking)</h3><p>有时候反向传播算法表面上可以计算，实际上存在一些bug，这时候就要哟用到梯度检验来检测以减少错误。</p>
-<p><img src="https://i.imgur.com/WsaeBGQ.png" alt=""></p>
-<p>matlab代码如下：</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">epsilon = <span class="number">1e-4</span>;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:n,</span><br><span class="line">  thetaPlus = theta;</span><br><span class="line">  thetaPlus(<span class="built_in">i</span>) += epsilon;</span><br><span class="line">  thetaMinus = theta;</span><br><span class="line">  thetaMinus(<span class="built_in">i</span>) -= epsilon;</span><br><span class="line">  gradApprox(<span class="built_in">i</span>) = (J(thetaPlus) - J(thetaMinus))/(<span class="number">2</span>*epsilon)</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
-<p>若与反向传播算法计算出的导数结果相似，则正确。</p>
-<h4 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h4><ul>
-<li>一旦用梯度检验检测算法没有错误后，就要把梯度检验关掉，再正式进行分类器的迭代训练。否则，整个算法会变得很慢。</li>
-</ul>
-<h3 id="随机初始化"><a href="#随机初始化" class="headerlink" title="随机初始化"></a>随机初始化</h3><p>讨论了θ的初始值(initialtheta)，由于将θ全部初始化为0的时候，θ的值会无法更新且始终为0，同样其他值也永远不会改变，所以要进行θ的随机初始化（也称为打破对称）。</p>
-<p><img src="https://i.imgur.com/Wopi5p0.png" alt=""></p>
-<p>matlab实现：</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%If the dimensions of Theta1 is 10x11, Theta2 is 10x11 and Theta3 is 1x11.</span></span><br><span class="line"></span><br><span class="line">Theta1 = <span class="built_in">rand</span>(<span class="number">10</span>,<span class="number">11</span>) * (<span class="number">2</span> * INIT_EPSILON) - INIT_EPSILON;</span><br><span class="line">Theta2 = <span class="built_in">rand</span>(<span class="number">10</span>,<span class="number">11</span>) * (<span class="number">2</span> * INIT_EPSILON) - INIT_EPSILON;</span><br><span class="line">Theta3 = <span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">11</span>) * (<span class="number">2</span> * INIT_EPSILON) - INIT_EPSILON;</span><br></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="单元以及层数的选择"><a href="#单元以及层数的选择" class="headerlink" title="单元以及层数的选择"></a>单元以及层数的选择</h3><p>输入单元：x的个数</p>
-<p>输出单元：分类器y的个数，同时需要将y写成向量形式</p>
-<p>隐藏层数：默认选择只有一个隐藏层，如果一定要有多个隐藏层，则每个隐藏层的单元数要求相同</p>
-<p>隐藏层的单元数：一般来说略大于输入单元的个数</p>
-<h3 id="神经网络训练过程"><a href="#神经网络训练过程" class="headerlink" title="神经网络训练过程"></a>神经网络训练过程</h3><ol>
-<li>随机初始化权值(weight)，一般初始化为很小接近于的数</li>
-<li>执行向前传播算法，计算h(x)</li>
-<li>计算代价函数J(θ)</li>
-<li>使用向后传播算法计算J(θ)的偏微分</li>
-<li>利用梯度检查检测反向传播算法，并在检测后删除梯度检查代码</li>
-<li>用梯度下降法或者其他高级优化算法最小化J(θ)并得到θ值</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/31/机器学习Week4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LY Xiong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xiong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/31/机器学习Week4/" itemprop="url">机器学习Week4</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-31T00:00:00+08:00">
-                2017-08-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  150
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h2><p> 模拟大脑，用于解决样本量大的非线性分类问题。θ=模型参数=权重，表示一个波矩阵，起到控制层与层之间的作用。矩阵大小：下一层特征量数X（本层特征量数+1）</p>
-<p>layer1输入层（输入特征项x0,x1，…,xn）——&gt;layer2,3,…,n-1隐藏层（激励函数a0,a1,…,an）——&gt;layern输出层(最终的一个神经元)。</p>
-<p>其中，x0=1,a0=1被称为bios unit（偏置单元），可以选择性画出。</p>
-<p><img src="https://i.imgur.com/FKg3QPA.png" alt=""></p>
-<h3 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h3><p>依据cost公式通过向前传播的方法依层计算</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2321,7 +2405,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2332,7 +2416,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2343,7 +2427,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
