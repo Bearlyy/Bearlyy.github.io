@@ -349,7 +349,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  801
+                  717
                 </span>
               
 
@@ -395,8 +395,11 @@
 <p>由逻辑回归的代价函数推广得到神经网络的代价函数。其中，前半部分∑k=1 K表示h(x)的所有维（输出单元数）相加，后半部分两个∑表示所有单元的θ之和。</p>
 <h3 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h3><p>最小化代价函数的一种方式，也是通过计算J(θ)的导数来实现。具体方式如下：</p>
 <p><img src="https://i.imgur.com/mdbVRtz.png" alt=""></p>
-<p>深入理解：<br>$$<br>J(\Theta) = - \frac{1}{m} \sum_{t=1}^m\sum_{k=1}^K \left[ y^{(t)}_k  \log (h_\Theta (x^{(t)}))_k + (1 - y^{(t)}_k) \log (1 - h_\Theta(x^{(t)})_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_l+1} ( \Theta_{j,i}^{(l)})^2 \\<br>cost(t) =y^{(t)}  \log (h_\Theta (x^{(t)})) + (1 - y^{(t)}) \log (1 - h_\Theta(x^{(t)})) \\<br>delta_j^{(l)} = \dfrac{\partial}{\partial z_j^{(l)}} cost(t)<br>$$</p>
-<h2 id="反向传播算法的实现"><a href="#反向传播算法的实现" class="headerlink" title="反向传播算法的实现"></a>反向传播算法的实现</h2><h3 id="将θ从矩阵展开为向量"><a href="#将θ从矩阵展开为向量" class="headerlink" title="将θ从矩阵展开为向量"></a>将θ从矩阵展开为向量</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">thetaVec=[theta1(:);theta2(:)]; <span class="comment">%矩阵(:)表示将矩阵中元素取出并排列成向量</span></span><br><span class="line">theta1=<span class="built_in">reshape</span>(thetaVec(<span class="number">1</span>:<span class="number">110</span>),<span class="number">10</span>,<span class="number">11</span>); <span class="comment">%将向量thetaVec中1——110元素取出并排列成10*11矩阵</span></span><br></pre></td></tr></table></figure>
+<p>深入理解：</p>
+<script type="math/tex; mode=display">
+J(\Theta) = - \frac{1}{m} \sum_{t=1}^m\sum_{k=1}^K \left[ y^{(t)}_k \ \log (h_\Theta (x^{(t)}))_k + (1 - y^{(t)}_k)\ \log (1 - h_\Theta(x^{(t)})_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_l+1} ( \Theta_{j,i}^{(l)})^2 \\
+cost(t) =y^{(t)} \ \log (h_\Theta (x^{(t)})) + (1 - y^{(t)})\ \log (1 - h_\Theta(x^{(t)})) \\
+delta_j^{(l)} = \dfrac{\partial}{\partial z_j^{(l)}} cost(t)</script><h2 id="反向传播算法的实现"><a href="#反向传播算法的实现" class="headerlink" title="反向传播算法的实现"></a>反向传播算法的实现</h2><h3 id="将θ从矩阵展开为向量"><a href="#将θ从矩阵展开为向量" class="headerlink" title="将θ从矩阵展开为向量"></a>将θ从矩阵展开为向量</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">thetaVec=[theta1(:);theta2(:)]; <span class="comment">%矩阵(:)表示将矩阵中元素取出并排列成向量</span></span><br><span class="line">theta1=<span class="built_in">reshape</span>(thetaVec(<span class="number">1</span>:<span class="number">110</span>),<span class="number">10</span>,<span class="number">11</span>); <span class="comment">%将向量thetaVec中1——110元素取出并排列成10*11矩阵</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/c7Dly86.png" alt=""></p>
 <h3 id="梯度检验-gradient-checking"><a href="#梯度检验-gradient-checking" class="headerlink" title="梯度检验(gradient checking)"></a>梯度检验(gradient checking)</h3><p>有时候反向传播算法表面上可以计算，实际上存在一些bug，这时候就要哟用到梯度检验来检测以减少错误。</p>
 <p><img src="https://i.imgur.com/WsaeBGQ.png" alt=""></p>
@@ -784,7 +787,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

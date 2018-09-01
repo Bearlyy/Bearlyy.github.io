@@ -355,7 +355,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,536
+                  2,376
                 </span>
               
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  10
+                  9
                 </span>
               
             </div>
@@ -406,38 +406,50 @@
 </ol>
 <p>需要权衡$r$和$c$值，因为值越小，越少附近点被加入，计算量增加。但值小也减少了错误率，提高了精度。</p>
 <h3 id="Technical-Details"><a href="#Technical-Details" class="headerlink" title="Technical Details"></a>Technical Details</h3><p>为了正确移动窗，我们需要确定一个有最高密度的邻近地区，来计算移动向量。这里我们使用多变量核密度估计(the multivariate kernel density estimate)，是估计一个随机变量的概率密度函数的方法。</p>
-<p>给定$n$个数据点$x\in R^d$，使用径向对称核(radially symmetric kernel)$K(x)$，多变量核密度估计被定义为：<br>$$<br>\hat{f}_K=\frac{1}{nh^d}\sum_{i=1}^nK(\frac{x-x_i}{h})<br>$$<br>其中，$h$是带宽(bandwidth)参数，定义了核的半径。径向对称核$K(x)$定义为<br>$$<br>K(x)=c_kk(||x||^2)<br>$$<br>其中，$c_k$代表标准化常数。</p>
+<p>给定$n$个数据点$x\in R^d$，使用径向对称核(radially symmetric kernel)$K(x)$，多变量核密度估计被定义为：</p>
+<script type="math/tex; mode=display">
+\hat{f}_K=\frac{1}{nh^d}\sum_{i=1}^nK(\frac{x-x_i}{h})</script><p>其中，$h$是带宽(bandwidth)参数，定义了核的半径。径向对称核$K(x)$定义为</p>
+<script type="math/tex; mode=display">
+K(x)=c_kk(||x||^2)</script><p>其中，$c_k$代表标准化常数。</p>
 <p>选择合适的$h$对精确密度估计十分重要。$h$过小导致半径过小，使得数据受到噪音影响。$h$过大导致包括太多偏远点，集群数减少。</p>
-<p>多变量核密度估计的导数为<br>$$<br>\nabla\hat{f}(x)=\frac{2c_{k,d}}{nh^{d+2}}[\sum_{i=1}^ng(||\frac{x-x_i}{h}||^2)][\frac{\sum_{i=1}^{n}x_ig(||\frac{x-x_i}{h}||^2)}{\sum_{i=1}^{n}g(||\frac{x-x_i}{h}||^2)}-x]<br>$$<br>其中$g(x)=-K’(x)$，代表被选择的核剖面的导数。</p>
+<p>多变量核密度估计的导数为</p>
+<script type="math/tex; mode=display">
+\nabla\hat{f}(x)=\frac{2c_{k,d}}{nh^{d+2}}[\sum_{i=1}^ng(||\frac{x-x_i}{h}||^2)][\frac{\sum_{i=1}^{n}x_ig(||\frac{x-x_i}{h}||^2)}{\sum_{i=1}^{n}g(||\frac{x-x_i}{h}||^2)}-x]</script><p>其中$g(x)=-K’(x)$，代表被选择的核剖面的导数。</p>
 <p>第一项$\frac{2c_{k,d}}{nh^{d+2}}[\sum_{i=1}^ng(||\frac{x-x_i}{h}||^2)]$，与$x$的密度估计成正比。第二项$[\frac{\sum_{i=1}^{n}x_ig(||\frac{x-x_i}{h}||^2)}{\sum_{i=1}^{n}g(||\frac{x-x_i}{h}||^2)}-x]$，是指向最大密度的均值-偏移矢量。</p>
 <h3 id="Mean-shift-Procedure"><a href="#Mean-shift-Procedure" class="headerlink" title="Mean-shift Procedure"></a>Mean-shift Procedure</h3><p>对于给定的点$x_t$，执行以下步骤找到集群中心。</p>
 <ol>
-<li><p>计算均值-偏移矢量$m$（公式(13)的第二项）：<br>$$<br>m=[\frac{\sum_{i=1}^{n}x_ig(||\frac{x-x_i}{h}||^2)}{\sum_{i=1}^{n}g(||\frac{x-x_i}{h}||^2)}-x]<br>$$</p>
-</li>
-<li><p>用均值-偏移矢量转换密度窗：<br>$$<br>x_i^{t+1}=x^t_i+m(x_i^t)<br>$$</p>
-</li>
-<li><p>重复以上两步，直到收敛<br>$$<br>\nabla f(x_i)=0<br>$$</p>
-</li>
+<li><p>计算均值-偏移矢量$m$（公式(13)的第二项）：</p>
+<script type="math/tex; mode=display">
+m=[\frac{\sum_{i=1}^{n}x_ig(||\frac{x-x_i}{h}||^2)}{\sum_{i=1}^{n}g(||\frac{x-x_i}{h}||^2)}-x]</script></li>
+<li><p>用均值-偏移矢量转换密度窗：</p>
+<script type="math/tex; mode=display">
+x_i^{t+1}=x^t_i+m(x_i^t)</script></li>
+<li><p>重复以上两步，直到收敛</p>
+<script type="math/tex; mode=display">
+\nabla f(x_i)=0</script></li>
 </ol>
 <h3 id="Kernel-Functions"><a href="#Kernel-Functions" class="headerlink" title="Kernel Functions"></a>Kernel Functions</h3><p>$K(x)$是一个非负函数，在$x$的所有值上相加为1。这些要求保证了核密度评估会产生概率密度函数。</p>
 <p>常用的核函数有：</p>
 <ul>
-<li><p>均匀（矩形）<br>$$<br>K(x)= \left\{</p>
-<pre><code> \begin{array}{lr}
-\frac12, &amp;|x|\leq 1\\
-0, &amp;otherwise
- \end{array}
-</code></pre><p>\right.<br>$$</p>
-</li>
-<li><p>高斯<br>$$<br>K(x)= \frac1{\sqrt{2\pi}}e^{-\frac1 2u^2}<br>$$</p>
-</li>
-<li><p>Epanechnikov（抛物线）<br>$$<br>K(x)= \left\{</p>
-<pre><code> \begin{array}{lr}
-\frac34(1-x^2), &amp;|x|\leq 1\\
-0, &amp;otherwise
- \end{array}
-</code></pre><p>\right.<br>$$</p>
-</li>
+<li><p>均匀（矩形）</p>
+<script type="math/tex; mode=display">
+K(x)= \left\{
+             \begin{array}{lr}
+            \frac12, &|x|\leq 1\\
+            0, &otherwise
+             \end{array}
+\right.</script></li>
+<li><p>高斯</p>
+<script type="math/tex; mode=display">
+K(x)= \frac1{\sqrt{2\pi}}e^{-\frac1 2u^2}</script></li>
+<li><p>Epanechnikov（抛物线）</p>
+<script type="math/tex; mode=display">
+K(x)= \left\{
+             \begin{array}{lr}
+            \frac34(1-x^2), &|x|\leq 1\\
+            0, &otherwise
+             \end{array}
+\right.</script></li>
 </ul>
 <h3 id="Mean-Shift-Conclusions"><a href="#Mean-Shift-Conclusions" class="headerlink" title="Mean-Shift Conclusions"></a>Mean-Shift Conclusions</h3><p>优点：</p>
 <ul>
@@ -473,13 +485,17 @@
 <p><strong>Occlusion</strong> 物体可能被遮挡，导致部分几何特征被隐藏。</p>
 <p><strong>Background cluster</strong> 由于背景相似，导致物体难以被识别，或者导致物体与同类看起来很不一样。</p>
 <p><strong>Intra-class variation</strong> 一类物体可能有很不同的形状。例如：沙发、板凳都属于椅子类。</p>
-<h2 id="K-nearest-neighbors"><a href="#K-nearest-neighbors" class="headerlink" title="K-nearest neighbors"></a>K-nearest neighbors</h2><h3 id="Supervised-learning"><a href="#Supervised-learning" class="headerlink" title="Supervised learning"></a>Supervised learning</h3><p>目标：用已有的数据集找到以下方程：<br>$$<br>y=f(x)<br>$$<br>其中，$y$是输出，$f$是预测函数，$x$是图像的特征集。</p>
+<h2 id="K-nearest-neighbors"><a href="#K-nearest-neighbors" class="headerlink" title="K-nearest neighbors"></a>K-nearest neighbors</h2><h3 id="Supervised-learning"><a href="#Supervised-learning" class="headerlink" title="Supervised learning"></a>Supervised learning</h3><p>目标：用已有的数据集找到以下方程：</p>
+<script type="math/tex; mode=display">
+y=f(x)</script><p>其中，$y$是输出，$f$是预测函数，$x$是图像的特征集。</p>
 <p>监督学习分训练与测试两个阶段。在第一阶段，使$f$与训练集$\{(x_1,y_1\}$相符。$f$可以用最小化预测误差来评估，即$y$与$f$之间的差异。</p>
 <p>在第二阶段，我们用测试集评估方程$y=f(x)$。</p>
 <p>任意决策规则将输入空间划分为由决策边界分割的决策区域。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/11.10.png" alt=""></p>
 <h3 id="Nearest-neighbor-classifier"><a href="#Nearest-neighbor-classifier" class="headerlink" title="Nearest neighbor classifier"></a>Nearest neighbor classifier</h3><p>最近邻分类器是基于最近的邻居给物体分类的算法。将测试点标记为最近邻居的标签。</p>
-<p>最近邻居通过特征间的欧几里德距离找到。设$X^n$和$X^m$分别是训练集中的第$n$和第$m$个数据点，则距离方程为：<br>$$<br>Dist(X^n,X^m)=||X^n-X^m||^2=\sqrt{\sum_i (X^n_i-X^m_i)^2}<br>$$<br>最近邻分类器的定义允许在训练集中的每个数据点周围形成复杂的决策边界。</p>
+<p>最近邻居通过特征间的欧几里德距离找到。设$X^n$和$X^m$分别是训练集中的第$n$和第$m$个数据点，则距离方程为：</p>
+<script type="math/tex; mode=display">
+Dist(X^n,X^m)=||X^n-X^m||^2=\sqrt{\sum_i (X^n_i-X^m_i)^2}</script><p>最近邻分类器的定义允许在训练集中的每个数据点周围形成复杂的决策边界。</p>
 <h3 id="K-nearest-neighbors-classifier"><a href="#K-nearest-neighbors-classifier" class="headerlink" title="K-nearest neighbors classifier"></a>K-nearest neighbors classifier</h3><p>K-最近邻分类器：计算K个最近的邻居，然后通过在最近邻集上计算一个分数，来标记新物体。常用的方法是用大多数邻居属于的类标记新物体。启发法被用于打破联系，并根据最有效的方法进行评估。</p>
 <p>例子：下图中”+”为待标记的数据，根据绿圈内的五个邻居占大多数的，这个点将被标记为绿”O”。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/11.2.png" alt=""></p>
@@ -884,7 +900,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

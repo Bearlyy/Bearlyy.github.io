@@ -86,19 +86,19 @@
 
 
 
-<meta name="description" content="如何评估一个学习算法评估假设函数将训练集以7：3分为训练集和测试集，m表示训练集总数，m(test)表示测试集总数。（注意随机选择） 评估步骤：  用70%的训练集算出θ  计算测试误差Jtest（θ）:a. 对于线性规划$$J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}_{test})">
+<meta name="description" content="如何评估一个学习算法评估假设函数将训练集以7：3分为训练集和测试集，m表示训练集总数，m(test)表示测试集总数。（注意随机选择） 评估步骤：  用70%的训练集算出θ  计算测试误差Jtest（θ）:a. 对于线性规划  J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}_{test})">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习 Week6">
 <meta property="og:url" content="http://yoursite.com/2017/09/08/机器学习-Week6/index.html">
 <meta property="og:site_name" content="Xiong&#39;s Blog">
-<meta property="og:description" content="如何评估一个学习算法评估假设函数将训练集以7：3分为训练集和测试集，m表示训练集总数，m(test)表示测试集总数。（注意随机选择） 评估步骤：  用70%的训练集算出θ  计算测试误差Jtest（θ）:a. 对于线性规划$$J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}_{test})">
+<meta property="og:description" content="如何评估一个学习算法评估假设函数将训练集以7：3分为训练集和测试集，m表示训练集总数，m(test)表示测试集总数。（注意随机选择） 评估步骤：  用70%的训练集算出θ  计算测试误差Jtest（θ）:a. 对于线性规划  J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}_{test})">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/nUACohi.png">
 <meta property="og:updated_time" content="2017-09-26T03:21:51.565Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习 Week6">
-<meta name="twitter:description" content="如何评估一个学习算法评估假设函数将训练集以7：3分为训练集和测试集，m表示训练集总数，m(test)表示测试集总数。（注意随机选择） 评估步骤：  用70%的训练集算出θ  计算测试误差Jtest（θ）:a. 对于线性规划$$J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}_{test})">
+<meta name="twitter:description" content="如何评估一个学习算法评估假设函数将训练集以7：3分为训练集和测试集，m表示训练集总数，m(test)表示测试集总数。（注意随机选择） 评估步骤：  用70%的训练集算出θ  计算测试误差Jtest（θ）:a. 对于线性规划  J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}_{test})">
 <meta name="twitter:image" content="https://i.imgur.com/nUACohi.png">
 
 
@@ -345,7 +345,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,241
+                  1,160
                 </span>
               
 
@@ -361,7 +361,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  4
                 </span>
               
             </div>
@@ -387,12 +387,15 @@
 <ol>
 <li><p>用70%的训练集算出θ</p>
 </li>
-<li><p>计算测试误差Jtest（θ）:a. 对于线性规划<br>$$<br>J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}_{test}) - y^{(i)}_{test})^2<br>$$<br>b.对于分类问题</p>
+<li><p>计算测试误差Jtest（θ）:a. 对于线性规划</p>
+<script type="math/tex; mode=display">
+J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}_{test}) - y^{(i)}_{test})^2</script><p>b.对于分类问题</p>
 </li>
 </ol>
-<p>$$<br>err(h_\Theta(x),y) = \begin{matrix} 1 &amp; \mbox{if } h_\Theta(x) \geq 0.5 and y = 0 or h_\Theta(x) &lt; 0.5 and y = 1\newline 0 &amp; \mbox otherwise \end{matrix}<br>$$</p>
-<p>​          err函数结果为1/0（&gt;=0.5则取1，1表示结果正确），接下来，计算平均误差<br>$$<br>\text{Test Error} = \dfrac{1}{m_{test}} \sum^{m_{test}}_{i=1} err(h_\Theta(x^{(i)}_{test}), y^{(i)}_{test})<br>$$</p>
-<h3 id="模型选择问题"><a href="#模型选择问题" class="headerlink" title="模型选择问题"></a>模型选择问题</h3><p>将数据集分为三部分：训练集 60% / 交叉验证集（CV，cross validation set） 20% / 测试集 20%</p>
+<script type="math/tex; mode=display">
+err(h_\Theta(x),y) = \begin{matrix} 1 & \mbox{if } h_\Theta(x) \geq 0.5\ and\ y = 0\ or\ h_\Theta(x) < 0.5\ and\ y = 1\newline 0 & \mbox otherwise \end{matrix}</script><p>​          err函数结果为1/0（&gt;=0.5则取1，1表示结果正确），接下来，计算平均误差</p>
+<script type="math/tex; mode=display">
+\text{Test Error} = \dfrac{1}{m_{test}} \sum^{m_{test}}_{i=1} err(h_\Theta(x^{(i)}_{test}), y^{(i)}_{test})</script><h3 id="模型选择问题"><a href="#模型选择问题" class="headerlink" title="模型选择问题"></a>模型选择问题</h3><p>将数据集分为三部分：训练集 60% / 交叉验证集（CV，cross validation set） 20% / 测试集 20%</p>
 <h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ol>
 <li>对每个多项式次数d通过训练集计算出Θ</li>
 <li>用交叉验证集找出test error最小的Θ</li>
@@ -415,12 +418,12 @@
 <li>高偏差：小多项式次数，欠拟合。随着m增大，Jcv与Jtrain逐渐接近，最后趋向直线。</li>
 </ul>
 <h3 id="决定下一步"><a href="#决定下一步" class="headerlink" title="决定下一步"></a>决定下一步</h3><ul>
-<li>取得更多样本 —-解决高方差</li>
-<li>减少特征数—-解决高方差</li>
-<li>增加特征数—-解决高偏差</li>
-<li>增加多项式特征（x1²，x2²，x1x2·····）—-解决高偏差</li>
-<li>增加λ —高偏差</li>
-<li>减少λ —高方差</li>
+<li>取得更多样本 ——解决高方差</li>
+<li>减少特征数——解决高方差</li>
+<li>增加特征数——解决高偏差</li>
+<li>增加多项式特征（x1²，x2²，x1x2·····）——解决高偏差</li>
+<li>增加λ —-高偏差</li>
+<li>减少λ —-高方差</li>
 </ul>
 <h3 id="与神经网络联系"><a href="#与神经网络联系" class="headerlink" title="与神经网络联系"></a>与神经网络联系</h3><p>过少单元的神经网络容易造成欠拟合的高偏差，反之，过多单元的神经网络容易造成过拟合的高方差。</p>
 <h2 id="建立一个垃圾邮件分类器"><a href="#建立一个垃圾邮件分类器" class="headerlink" title="建立一个垃圾邮件分类器"></a>建立一个垃圾邮件分类器</h2><h3 id="需要着重考虑的问题"><a href="#需要着重考虑的问题" class="headerlink" title="需要着重考虑的问题"></a>需要着重考虑的问题</h3><ol>
@@ -816,7 +819,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

@@ -355,7 +355,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,930
+                  1,716
                 </span>
               
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7
+                  6
                 </span>
               
             </div>
@@ -425,7 +425,11 @@
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/14.3.png" alt=""></p>
 <h3 id="Large-Scale-Image-Search"><a href="#Large-Scale-Image-Search" class="headerlink" title="Large-Scale Image Search"></a>Large-Scale Image Search</h3><p>词袋模型在大规模图像检索上十分有效。词袋模型可以帮助构造一个有效检索的数据集。首先，从数据中提取特征。接着用k-means（通常k=100000）构造一个词典。接下来我们为每个词计算一个权重。赋予权重可以帮助我们降低特定词的重要性。例如：把”is”, “are”之类的词降低权重。在图像中就是把无用特征赋予低权重。</p>
 <p>词频逆文档频率(Term Frequency Inverse Document Frequency, TF-IDF)通过单词在文件中的频率赋予权重。</p>
-<p>一个单词$j$的逆文档频率(IDF)为：<br>$$<br>IDF=log(\frac{Num\space Docs}{Num\space Docs_{j\space appears}})<br>$$<br>图像中bin $j$的值表示为：<br>$$<br>Bin_j=frequency_{j\space in\space I}*IDF<br>$$<br>我们可以对文档构造一个词映射的逆文档，以便于快速寻找新图像和数据集中所有图像的相似性。我们只考虑bins和新图像重叠的图像。</p>
+<p>一个单词$j$的逆文档频率(IDF)为：</p>
+<script type="math/tex; mode=display">
+IDF=log(\frac{Num\space Docs}{Num\space Docs_{j\space appears}})</script><p>图像中bin $j$的值表示为：</p>
+<script type="math/tex; mode=display">
+Bin_j=frequency_{j\space in\space I}*IDF</script><p>我们可以对文档构造一个词映射的逆文档，以便于快速寻找新图像和数据集中所有图像的相似性。我们只考虑bins和新图像重叠的图像。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/14.11.png" alt=""></p>
 <p>大规模数据检索的缺点在于算法的表现随着数据集的增大而削弱。因为量化误差和不完美的特征检测，词袋模型有时会产生噪声图像相似度。</p>
 <h2 id="Spatial-Pyramid-Matching"><a href="#Spatial-Pyramid-Matching" class="headerlink" title="Spatial Pyramid Matching"></a>Spatial Pyramid Matching</h2><h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>空间金字塔匹配(Spatial Pyramid Matching)可以将空间信息结合到模型中。</p>
@@ -438,10 +442,37 @@
 <h2 id="Naive-Bayes"><a href="#Naive-Bayes" class="headerlink" title="Naïve Bayes"></a>Naïve Bayes</h2><h3 id="Basic-Idea"><a href="#Basic-Idea" class="headerlink" title="Basic Idea"></a>Basic Idea</h3><p>一旦我们产生了一个视觉词直方图，我们可以用朴素贝叶斯(Naïve Bayes)来对直方图进行分类。我们简单的衡量一个给定的视觉词是否存在，然后假定一个视觉词的存在/缺失和给定类的每个视觉词条件独立。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/14.7.png" alt=""></p>
 <p>如上图，考虑一些视觉词直方图$X$，$x_i$是视觉词$i$在直方图中的总和。我们只在意视觉词$i$是否存在，即$x_i\in \{0,1\}$</p>
-<h3 id="Prior"><a href="#Prior" class="headerlink" title="Prior"></a>Prior</h3><p>$P(c)$是在所有类中出现类$c$的概率。所以对总共$m$个物体类，我们有<br>$$<br>\sum_{i=1}^m P(c)=1<br>$$<br>对于一个用直方图$x$表现的图像和一些物体类$c$，我们可以计算<br>$$<br>P(x|c)=\prod_{i=1}^m P(x_i|c)<br>$$</p>
-<h3 id="Posterior"><a href="#Posterior" class="headerlink" title="Posterior"></a>Posterior</h3><p>现在我们可以用贝叶斯理论(Bayes Theorem)来计算图像$x$属于类$c_j$的概率：<br>$$<br>P(c|x)=\frac{P(c)P(x|c)}{\sum_{c’} P(c’)P(x|c’)}<br>$$<br>$c’$表示所有类。拓展分子和分母，我们可以重写方程：<br>$$<br>P(c|x)=\frac{P(c)\prod_{i=1}^m P(x_i|c)}{\sum_{c’} P(c’)\prod_{i=1}^m P(x_i|c’)}<br>$$</p>
-<h3 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3><p>为了将用直方图$x$表现的图像分类，我们简单的找到能够最大化方程(6)的类$c^<em>$：<br>$$<br>c^</em>=\arg\max_c P(c|x)<br>$$<br>因为公式中含有大量的小概率累乘，所以可能会产生一个接近于0的不稳定值。因此，我们改用logs计算概率：<br>$$<br>c^<em>=\arg\max_clogP(c|x)<br>$$<br>现在我们考虑两个类$c_1$和$c_2$：<br>$$<br>P(c_1|x)=\frac{P(c_1)\prod_{i=1}^m P(x_i|c_1)}{\sum_{c’} P(c’)\prod_{i=1}^m P(x_i|c’)}<br>$$<br>和<br>$$<br>P(c_2|x)=\frac{P(c_2)\prod_{i=1}^m P(x_i|c_2)}{\sum_{c’} P(c’)\prod_{i=1}^m P(x_i|c’)}<br>$$<br>因为分母是固定的，所以我们计算最大值时可以忽视分母。即($\propto$是正比于的意思)<br>$$<br>P(c_1|x)\propto P(c_1)\prod_{i=1}^m P(x_i|c_1)<br>$$<br>和<br>$$<br>P(c_2|x)\propto P(c_2)\prod_{i=1}^m P(x_i|c_2)<br>$$<br>对于类$c$<br>$$<br>P(c|x)\propto P(c)\prod_{i=1}^m P(x_i|c)<br>$$<br>用上logs：<br>$$<br>logP(c|x)\propto logP(c)+\sum_{i=1}^m logP(x_i|c)<br>$$<br>现在，分类任务变成<br>$$<br>\begin{align</em>}<br>c^<em>&amp;=\arg\max_c P(c|x) \\<br>&amp;=\arg\max_c logP(c|x)\\<br>&amp;=\arg\max_c logP(c) +\sum_{i=1}^m logP(x_i|c)<br>\end{align</em>}<br>$$</p>
-
+<h3 id="Prior"><a href="#Prior" class="headerlink" title="Prior"></a>Prior</h3><p>$P(c)$是在所有类中出现类$c$的概率。所以对总共$m$个物体类，我们有</p>
+<script type="math/tex; mode=display">
+\sum_{i=1}^m P(c)=1</script><p>对于一个用直方图$x$表现的图像和一些物体类$c$，我们可以计算</p>
+<script type="math/tex; mode=display">
+P(x|c)=\prod_{i=1}^m P(x_i|c)</script><h3 id="Posterior"><a href="#Posterior" class="headerlink" title="Posterior"></a>Posterior</h3><p>现在我们可以用贝叶斯理论(Bayes Theorem)来计算图像$x$属于类$c_j$的概率：</p>
+<script type="math/tex; mode=display">
+P(c|x)=\frac{P(c)P(x|c)}{\sum_{c'} P(c')P(x|c')}</script><p>$c’$表示所有类。拓展分子和分母，我们可以重写方程：</p>
+<script type="math/tex; mode=display">
+P(c|x)=\frac{P(c)\prod_{i=1}^m P(x_i|c)}{\sum_{c'} P(c')\prod_{i=1}^m P(x_i|c')}</script><h3 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3><p>为了将用直方图$x$表现的图像分类，我们简单的找到能够最大化方程(6)的类$c^*$：</p>
+<script type="math/tex; mode=display">
+c^*=\arg\max_c P(c|x)</script><p>因为公式中含有大量的小概率累乘，所以可能会产生一个接近于0的不稳定值。因此，我们改用logs计算概率：</p>
+<script type="math/tex; mode=display">
+c^*=\arg\max_clogP(c|x)</script><p>现在我们考虑两个类$c_1$和$c_2$：</p>
+<script type="math/tex; mode=display">
+P(c_1|x)=\frac{P(c_1)\prod_{i=1}^m P(x_i|c_1)}{\sum_{c'} P(c')\prod_{i=1}^m P(x_i|c')}</script><p>和</p>
+<script type="math/tex; mode=display">
+P(c_2|x)=\frac{P(c_2)\prod_{i=1}^m P(x_i|c_2)}{\sum_{c'} P(c')\prod_{i=1}^m P(x_i|c')}</script><p>因为分母是固定的，所以我们计算最大值时可以忽视分母。即($\propto$是正比于的意思)</p>
+<script type="math/tex; mode=display">
+P(c_1|x)\propto P(c_1)\prod_{i=1}^m P(x_i|c_1)</script><p>和</p>
+<script type="math/tex; mode=display">
+P(c_2|x)\propto P(c_2)\prod_{i=1}^m P(x_i|c_2)</script><p>对于类$c$</p>
+<script type="math/tex; mode=display">
+P(c|x)\propto P(c)\prod_{i=1}^m P(x_i|c)</script><p>用上logs：</p>
+<script type="math/tex; mode=display">
+logP(c|x)\propto logP(c)+\sum_{i=1}^m logP(x_i|c)</script><p>现在，分类任务变成</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+c^*&=\arg\max_c P(c|x) \\
+&=\arg\max_c logP(c|x)\\
+&=\arg\max_c logP(c) +\sum_{i=1}^m logP(x_i|c)
+\end{align*}</script>
       
     </div>
     
@@ -805,7 +836,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

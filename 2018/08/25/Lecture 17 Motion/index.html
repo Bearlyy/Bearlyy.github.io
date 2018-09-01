@@ -357,7 +357,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,572
+                  2,255
                 </span>
               
 
@@ -373,7 +373,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  10
+                  8
                 </span>
               
             </div>
@@ -399,10 +399,24 @@
 <h3 id="Assumptions-and-Limitations"><a href="#Assumptions-and-Limitations" class="headerlink" title="Assumptions and Limitations"></a>Assumptions and Limitations</h3><h4 id="Apparent-Motion"><a href="#Apparent-Motion" class="headerlink" title="Apparent Motion"></a>Apparent Motion</h4><p>在二维图像中，光流只能呈现亮度模式的明显运动，意味着移动矢量是由各种行动产生的。例如：变化的光照可以使得静止的物体产生强运动矢量，但进入或者移出屏幕的运动无法被2D光流的运动矢量捕捉。光流处理问题的一个例子是孔径问题。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/17.1.png" alt=""></p>
 <p>孔径问题指光流无法代表边缘运动的结果，可能导致移动测量错误。例如图中线条实际上是向左下移动，但是由于孔径，看起来像是向右移动。</p>
-<h4 id="Brightness-Consistency"><a href="#Brightness-Consistency" class="headerlink" title="Brightness Consistency"></a>Brightness Consistency</h4><p>光流只能呈现明显的运动，为了正确的检测图中点的运动，我们必须假设这些点在帧之间的亮度相等。亮度一致性(Brightness Consistency)方程如下：<br>$$<br>I(x,y,t-1)=I(x+u(x,y),y+v(x,y),t)<br>$$<br>其中$u(x,y)$表示点的水平运动，$v(x,y)$表示点的垂直运动。</p>
-<h4 id="Small-Motion"><a href="#Small-Motion" class="headerlink" title="Small Motion"></a>Small Motion</h4><p>光流假设点在连续的图像之间不会移动太多。因为帧之间的时间极短，所以假设基本成立。但是在物体距离摄像机过远或过近的时候，这个假设不再成立。接下来我们用亮度一致性方程来证明假设的必要性。首先用泰勒展开式线性化等式右侧：<br>$$<br>I(x+u(x,y),y+v(x,y),t)\approx I(x,y,t-1) +I_x·u(x,y)+I_y·v(x,y)+I_t<br>$$<br>线性化允许我们解得运动向量$u$和$v$，但在这种情况下我们只包含泰勒展开式的第一项。当帧之间的运动幅度较大时，式子无法步骤整个运动情况，导致不精确的$u$和$v$，因此假设有必要。</p>
-<h4 id="Spatial-Coherence"><a href="#Spatial-Coherence" class="headerlink" title="Spatial Coherence"></a>Spatial Coherence</h4><p>空间相干性是一个关于相同物体内邻近的像素会移动到一起的假设。其必要性证明如下：<br>$$<br>\begin{align}<br>I(x+u(x,y),y+v(x,y),t)\approx I(x,y,t-1) +I_x·u(x,y)+I_y·v(x,y)+I_t \\<br>I(x+u(x,y),y+v(x,y),t)- I(x,y,t-1) =I_x·u(x,y)+I_y·v(x,y)+I_t<br>\end{align}<br>$$<br>可得到<br>$$<br>\begin{align}<br>I_x·u+I_y·v+I_t\approx 0\\<br>\nabla I·[u\space v]^T +I_t =0<br>\end{align}<br>$$<br>现在我们有足够的方程解每个单像素中的$u$和$v$。假设像素可以移动到一起允许我们用有相同的$[u\space v]$的多个公式，使得我们能够解出邻居像素的移动。</p>
-<h2 id="Lucas-Kanade"><a href="#Lucas-Kanade" class="headerlink" title="Lucas-Kanade"></a>Lucas-Kanade</h2><p>从上式中得到图像的移动，至少每个像素需要两个方程。Lucas-Kanade技术依赖于一个附加约束–空间相干性来完成图像追踪。</p>
+<h4 id="Brightness-Consistency"><a href="#Brightness-Consistency" class="headerlink" title="Brightness Consistency"></a>Brightness Consistency</h4><p>光流只能呈现明显的运动，为了正确的检测图中点的运动，我们必须假设这些点在帧之间的亮度相等。亮度一致性(Brightness Consistency)方程如下：</p>
+<script type="math/tex; mode=display">
+I(x,y,t-1)=I(x+u(x,y),y+v(x,y),t)</script><p>其中$u(x,y)$表示点的水平运动，$v(x,y)$表示点的垂直运动。</p>
+<h4 id="Small-Motion"><a href="#Small-Motion" class="headerlink" title="Small Motion"></a>Small Motion</h4><p>光流假设点在连续的图像之间不会移动太多。因为帧之间的时间极短，所以假设基本成立。但是在物体距离摄像机过远或过近的时候，这个假设不再成立。接下来我们用亮度一致性方程来证明假设的必要性。首先用泰勒展开式线性化等式右侧：</p>
+<script type="math/tex; mode=display">
+I(x+u(x,y),y+v(x,y),t)\approx I(x,y,t-1) +I_x·u(x,y)+I_y·v(x,y)+I_t</script><p>线性化允许我们解得运动向量$u$和$v$，但在这种情况下我们只包含泰勒展开式的第一项。当帧之间的运动幅度较大时，式子无法步骤整个运动情况，导致不精确的$u$和$v$，因此假设有必要。</p>
+<h4 id="Spatial-Coherence"><a href="#Spatial-Coherence" class="headerlink" title="Spatial Coherence"></a>Spatial Coherence</h4><p>空间相干性是一个关于相同物体内邻近的像素会移动到一起的假设。其必要性证明如下：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+I(x+u(x,y),y+v(x,y),t)\approx I(x,y,t-1) +I_x·u(x,y)+I_y·v(x,y)+I_t \\
+I(x+u(x,y),y+v(x,y),t)- I(x,y,t-1) =I_x·u(x,y)+I_y·v(x,y)+I_t
+\end{align}</script><p>可得到</p>
+<script type="math/tex; mode=display">
+\begin{align}
+I_x·u+I_y·v+I_t\approx 0\\
+\nabla I·[u\space v]^T +I_t =0
+\end{align}</script><p>现在我们有足够的方程解每个单像素中的$u$和$v$。假设像素可以移动到一起允许我们用有相同的$[u\space v]$的多个公式，使得我们能够解出邻居像素的移动。</p>
+<h2 id="Lucas-Kanade"><a href="#Lucas-Kanade" class="headerlink" title="Lucas-Kanade"></a>Lucas-Kanade</h2><p>从上式中得到图像的移动，至少每个像素需要两个方程。Lucas-Kanade技术依赖于一个附加约束—空间相干性来完成图像追踪。</p>
 <p>通过一个大小为$k\times k$的窗来对像素应用空间相干性约束。假设窗内的邻居像素有相同的$(u,v)$。例如，在$5\times5$窗内应用以下式子：</p>
 <p><img src="D:\Machine Learning\cs131\Lecture16_17\17.2.png" alt="17.2"></p>
 <p>这产生了一个$Ad=b$形式的线性方程的过约束系统。用最小二乘法解过拟合系统，我们减少了解$(A^TA)d=A^Tb$中的$d$的复杂度。更准确的说，需要求解的系统系统被简化至</p>
@@ -431,17 +445,39 @@
 <li>移动量过大或者随着时间不会逐渐改变</li>
 <li>未满足空间相干性，意味着相邻像素没有随之改变。这个可能是由不合适大小的窗造成的（即选择了不好的$k$）。</li>
 </ul>
-<h3 id="Improving-Accuracy"><a href="#Improving-Accuracy" class="headerlink" title="Improving Accuracy"></a>Improving Accuracy</h3><p>从上面所做的许多假设中，Lucas-Kanade可以通过包含之前在亮度一致方程的泰勒展开近似中得到的更高阶项来提高其准确性。这个放松了之前的假设。现在，待解决的问题是：<br>$$<br>I(x+u,y+v)=I(x,y)+I_xu+I_yv+higher\space order\space terms-I_{t-1}<br>$$<br>这是一个找多项式根的问题，可以用牛顿迭代方法解决。</p>
+<h3 id="Improving-Accuracy"><a href="#Improving-Accuracy" class="headerlink" title="Improving Accuracy"></a>Improving Accuracy</h3><p>从上面所做的许多假设中，Lucas-Kanade可以通过包含之前在亮度一致方程的泰勒展开近似中得到的更高阶项来提高其准确性。这个放松了之前的假设。现在，待解决的问题是：</p>
+<script type="math/tex; mode=display">
+I(x+u,y+v)=I(x,y)+I_xu+I_yv+higher\space order\space terms-I_{t-1}</script><p>这是一个找多项式根的问题，可以用牛顿迭代方法解决。</p>
 <p>总的来说，精确的迭代Lucas-Kanade算法可以被应用：</p>
 <ol>
 <li>解Lucas-Kanade方程，估计每个像素的速度</li>
 <li>用被估计的光流区域和图像变形技术，将$I(t-1)$变化到$I(t)$</li>
 <li>重复至收敛</li>
 </ol>
-<h2 id="Horn-Schunk"><a href="#Horn-Schunk" class="headerlink" title="Horn-Schunk"></a>Horn-Schunk</h2><h3 id="Horn-Schunk-Method-for-Optical-Flow"><a href="#Horn-Schunk-Method-for-Optical-Flow" class="headerlink" title="Horn-Schunk Method for Optical Flow"></a>Horn-Schunk Method for Optical Flow</h3><p>Horn-Schunk方法将光流公式化为以下全局能量函数，并尽量最小化$u(x,y)$和$v(x,y)$。<br>$$<br>E=\iint[(I_xu+I_yv+I_t)^2+\alpha^2(||\nabla u||^2+||\nabla v||^2)]dxdy<br>$$<br>上式第一项反应了光照恒定假设，根据假设$I_xu+I_yv+I_t$应该等于0。这项存在于式子中是为了保证这个值尽可能接近于0。</p>
+<h2 id="Horn-Schunk"><a href="#Horn-Schunk" class="headerlink" title="Horn-Schunk"></a>Horn-Schunk</h2><h3 id="Horn-Schunk-Method-for-Optical-Flow"><a href="#Horn-Schunk-Method-for-Optical-Flow" class="headerlink" title="Horn-Schunk Method for Optical Flow"></a>Horn-Schunk Method for Optical Flow</h3><p>Horn-Schunk方法将光流公式化为以下全局能量函数，并尽量最小化$u(x,y)$和$v(x,y)$。</p>
+<script type="math/tex; mode=display">
+E=\iint[(I_xu+I_yv+I_t)^2+\alpha^2(||\nabla u||^2+||\nabla v||^2)]dxdy</script><p>上式第一项反应了光照恒定假设，根据假设$I_xu+I_yv+I_t$应该等于0。这项存在于式子中是为了保证这个值尽可能接近于0。</p>
 <p>第二项反应了小移动假设。这项存在于式子中为了鼓励在位置改变较小的情况下，更加光滑的流。$\alpha$是正规化常数，用于控制光滑度，值越大流越光滑。</p>
-<p>为了最小化能量函数，我们对$u$和$v$求导并等于0。得到以下两个等式<br>$$<br>\begin{align}<br>I_x(I_xu+I_yv+I_t)+\alpha^2\Delta u=0\\<br>I_y(I_xu+I_yv+I_t)+\alpha^2\Delta v=0<br>\end{align}\\<br>\Delta=\frac{\partial}{\partial x^2}+\frac{\partial}{\partial y^2}<br>$$<br>其中$\Delta$为拉格朗日算子，在实际计算中为<br>$$<br>\Delta u(x,y)=\overline u(x,y)-u(x,y)<br>$$<br>其中$\overline u(x,y)$是$u$在$(x,y)$附近的加权平均。用(11)式带入得到：<br>$$<br>\begin{align}<br>(I_x^2+\alpha^2)u+I_xI_yv=\alpha^2\overline u-I_xI_t\\<br>(I_y^2+\alpha^2)u+I_xI_yu=\alpha^2\overline v-I_yI_t<br>\end{align}\\<br>$$<br>是一个关于$u$和$v$的线性方程。</p>
-<h3 id="Iterative-Horn-Schunk"><a href="#Iterative-Horn-Schunk" class="headerlink" title="Iterative Horn-Schunk"></a>Iterative Horn-Schunk</h3><p>因为$u$和$v$的值取决于$(x,y)$邻近的光流值，所以我们需要在每次邻居更新后，重新计算$u$和$v$：<br>$$<br>\begin{align}<br>u^{k+1}=\overline u^k-\frac{I_x(I_x\overline u^k+I_y\overline v^k+I_t)}{\alpha^2+I_x^2+I_y^2}\\<br>v^{k+1}=\overline v^k-\frac{I_y(I_x\overline u^k+I_y\overline v^k+I_t)}{\alpha^2+I_x^2+I_y^2}<br>\end{align}\\<br>$$<br>其中上标$k$代表迭代次数</p>
+<p>为了最小化能量函数，我们对$u$和$v$求导并等于0。得到以下两个等式</p>
+<script type="math/tex; mode=display">
+\begin{align}
+I_x(I_xu+I_yv+I_t)+\alpha^2\Delta u=0\\
+I_y(I_xu+I_yv+I_t)+\alpha^2\Delta v=0
+\end{align}\\
+\Delta=\frac{\partial}{\partial x^2}+\frac{\partial}{\partial y^2}</script><p>其中$\Delta$为拉格朗日算子，在实际计算中为</p>
+<script type="math/tex; mode=display">
+\Delta u(x,y)=\overline u(x,y)-u(x,y)</script><p>其中$\overline u(x,y)$是$u$在$(x,y)$附近的加权平均。用(11)式带入得到：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+(I_x^2+\alpha^2)u+I_xI_yv=\alpha^2\overline u-I_xI_t\\
+(I_y^2+\alpha^2)u+I_xI_yu=\alpha^2\overline v-I_yI_t
+\end{align}\\</script><p>是一个关于$u$和$v$的线性方程。</p>
+<h3 id="Iterative-Horn-Schunk"><a href="#Iterative-Horn-Schunk" class="headerlink" title="Iterative Horn-Schunk"></a>Iterative Horn-Schunk</h3><p>因为$u$和$v$的值取决于$(x,y)$邻近的光流值，所以我们需要在每次邻居更新后，重新计算$u$和$v$：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+u^{k+1}=\overline u^k-\frac{I_x(I_x\overline u^k+I_y\overline v^k+I_t)}{\alpha^2+I_x^2+I_y^2}\\
+v^{k+1}=\overline v^k-\frac{I_y(I_x\overline u^k+I_y\overline v^k+I_t)}{\alpha^2+I_x^2+I_y^2}
+\end{align}\\</script><p>其中上标$k$代表迭代次数</p>
 <h3 id="Smoothness-Regularization"><a href="#Smoothness-Regularization" class="headerlink" title="Smoothness Regularization"></a>Smoothness Regularization</h3><p>光滑度正规化项$||\nabla u||^2+||\nabla v||^2$推进最小化邻近点之间的光流变化。这样在边缘区域，点会流向最临近的点，解决孔径问题。</p>
 <h3 id="Dense-Optical-Flow-with-Michael-Black’s-Method"><a href="#Dense-Optical-Flow-with-Michael-Black’s-Method" class="headerlink" title="Dense Optical Flow with Michael Black’s Method"></a>Dense Optical Flow with Michael Black’s Method</h3><p>Michael Black拓展了Horn-Schunk方法。原来的正规化项$||\nabla u||^2+||\nabla v||^2$如下图，是一个二次函数。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/17.7.png" alt=""></p>
@@ -456,12 +492,21 @@
 <p>注意现在流向量大多数都指向同一方向，即树干整体移动方向一致。</p>
 <h2 id="Common-Fate"><a href="#Common-Fate" class="headerlink" title="Common Fate"></a>Common Fate</h2><p>我们可以通过图像中部分的共同性来获得更多信息，共同性即在图像给定的切割中，这部分像素移动方式都相似。我们的目标就是找出有共同性的分割或层。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/17.12.png" alt=""></p>
-<h3 id="Identify-Layers"><a href="#Identify-Layers" class="headerlink" title="Identify Layers"></a>Identify Layers</h3><p>我们通过将图像分割至块，并基于块之间放射运动因子的相似性，将块组合来计算图像的层。对于每个块，找到一个$\alpha$，对于所有在块中的像素$(x,y)$，能够最小化下式：<br>$$<br>Err(\alpha)=\sum[I_x(\alpha_1+\alpha_2x+\alpha_3y)+I_x(\alpha_4+\alpha_5x+\alpha_6y)+I_t]^2<br>$$<br>上面的方程由两部分推导而出：</p>
+<h3 id="Identify-Layers"><a href="#Identify-Layers" class="headerlink" title="Identify Layers"></a>Identify Layers</h3><p>我们通过将图像分割至块，并基于块之间放射运动因子的相似性，将块组合来计算图像的层。对于每个块，找到一个$\alpha$，对于所有在块中的像素$(x,y)$，能够最小化下式：</p>
+<script type="math/tex; mode=display">
+Err(\alpha)=\sum[I_x(\alpha_1+\alpha_2x+\alpha_3y)+I_x(\alpha_4+\alpha_5x+\alpha_6y)+I_t]^2</script><p>上面的方程由两部分推导而出：</p>
 <ol>
-<li><p>亮度一致方程<br>$$<br>I(x,y,t-1)=I(x+u(x,y),y+v(x,y),t)<br>$$</p>
-</li>
-<li><p>仿射运动成分<br>$$<br>I_xu(x,y)+I_xv(x,y)+I_t\approx0<br>$$<br>$I_x,I_y,I_t$是图像关于两个方向和实践的梯度。$u(x,y),v(x,y)$是仿射运动在两个方向上的成分<br>$$<br>\begin{align}<br>u(x,y)=\alpha_1+\alpha_2x+\alpha_3y\\<br>v(x,y)=\alpha_4+\alpha_5x+\alpha_6y<br>\end{align}<br>$$</p>
-</li>
+<li><p>亮度一致方程</p>
+<script type="math/tex; mode=display">
+I(x,y,t-1)=I(x+u(x,y),y+v(x,y),t)</script></li>
+<li><p>仿射运动成分</p>
+<script type="math/tex; mode=display">
+I_xu(x,y)+I_xv(x,y)+I_t\approx0</script><p>$I_x,I_y,I_t$是图像关于两个方向和实践的梯度。$u(x,y),v(x,y)$是仿射运动在两个方向上的成分</p>
+<script type="math/tex; mode=display">
+\begin{align}
+u(x,y)=\alpha_1+\alpha_2x+\alpha_3y\\
+v(x,y)=\alpha_4+\alpha_5x+\alpha_6y
+\end{align}</script></li>
 </ol>
 <p>从此，我们将因子向量$\alpha_i$映射到运动因子空间，并对仿射运动因子向量采用k-means聚类。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/17.13.png" alt=""></p>
@@ -830,7 +875,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

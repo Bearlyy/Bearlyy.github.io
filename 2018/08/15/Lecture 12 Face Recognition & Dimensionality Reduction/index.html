@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="#Lecture 12 Face Recognition &amp;amp; Dimensionality Reduction  Overview and MotivationOverview维度减少是用于减少特征数的一个过程，可以提高效率。主要有两种方法：奇异值分解(Singular Value Decomposition, SVD)和主成分分析(Principal Component Analysis">
+<meta name="description" content="Lecture 12 Face Recognition &amp;amp; Dimensionality ReductionOverview and MotivationOverview维度减少是用于减少特征数的一个过程，可以提高效率。主要有两种方法：奇异值分解(Singular Value Decomposition, SVD)和主成分分析(Principal Component Analysis, P">
 <meta name="keywords" content="计算机视觉,CS131">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS131 Lecture 12 Face Recognition &amp; Dimensionality Reduction">
 <meta property="og:url" content="http://yoursite.com/2018/08/15/Lecture 12 Face Recognition & Dimensionality Reduction/index.html">
 <meta property="og:site_name" content="Xiong&#39;s Blog">
-<meta property="og:description" content="#Lecture 12 Face Recognition &amp;amp; Dimensionality Reduction  Overview and MotivationOverview维度减少是用于减少特征数的一个过程，可以提高效率。主要有两种方法：奇异值分解(Singular Value Decomposition, SVD)和主成分分析(Principal Component Analysis">
+<meta property="og:description" content="Lecture 12 Face Recognition &amp;amp; Dimensionality ReductionOverview and MotivationOverview维度减少是用于减少特征数的一个过程，可以提高效率。主要有两种方法：奇异值分解(Singular Value Decomposition, SVD)和主成分分析(Principal Component Analysis, P">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/12.1.png">
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/12.2.png">
@@ -102,7 +102,7 @@
 <meta property="og:updated_time" content="2018-09-01T16:43:33.342Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS131 Lecture 12 Face Recognition &amp; Dimensionality Reduction">
-<meta name="twitter:description" content="#Lecture 12 Face Recognition &amp;amp; Dimensionality Reduction  Overview and MotivationOverview维度减少是用于减少特征数的一个过程，可以提高效率。主要有两种方法：奇异值分解(Singular Value Decomposition, SVD)和主成分分析(Principal Component Analysis">
+<meta name="twitter:description" content="Lecture 12 Face Recognition &amp;amp; Dimensionality ReductionOverview and MotivationOverview维度减少是用于减少特征数的一个过程，可以提高效率。主要有两种方法：奇异值分解(Singular Value Decomposition, SVD)和主成分分析(Principal Component Analysis, P">
 <meta name="twitter:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/12.1.png">
 
 
@@ -349,7 +349,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,379
+                  1,353
                 </span>
               
 
@@ -386,8 +386,7 @@
       
 
       
-        <p>#Lecture 12 Face Recognition &amp; Dimensionality Reduction </p>
-<h2 id="Overview-and-Motivation"><a href="#Overview-and-Motivation" class="headerlink" title="Overview and Motivation"></a>Overview and Motivation</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>维度减少是用于减少特征数的一个过程，可以提高效率。主要有两种方法：奇异值分解(Singular Value Decomposition, SVD)和主成分分析(Principal Component Analysis, PCA)。</p>
+        <h1 id="Lecture-12-Face-Recognition-amp-Dimensionality-Reduction"><a href="#Lecture-12-Face-Recognition-amp-Dimensionality-Reduction" class="headerlink" title="Lecture 12 Face Recognition &amp; Dimensionality Reduction"></a>Lecture 12 Face Recognition &amp; Dimensionality Reduction</h1><h2 id="Overview-and-Motivation"><a href="#Overview-and-Motivation" class="headerlink" title="Overview and Motivation"></a>Overview and Motivation</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>维度减少是用于减少特征数的一个过程，可以提高效率。主要有两种方法：奇异值分解(Singular Value Decomposition, SVD)和主成分分析(Principal Component Analysis, PCA)。</p>
 <h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><ol>
 <li>减少计算成本。减少不重要的特征，保留关键成分。</li>
 <li>减少“维度灾难”的影响。lecture 11中提及，维度增加，需要更多数据点，分析耗费的时间更多。因此，减少维度能够缓解维度灾难。</li>
@@ -425,13 +424,15 @@
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/12.3.png" alt=""></p>
 <p>在这个过程中，我们把矩阵$A$作为$U$的行的线性组合，如上图。但是，现实中我们可以只有$U$的几列来构造出一个$A$的好的近似。这是由于$\Sigma$的性质。$\Sigma$是一个最大值位于左上角，其余值由左上往右下递减的对角矩阵。因此，$U$的前列对$A$的贡献最大。这前几列就称为主成分。</p>
 <p>我们通过分析协方差矩阵，移除贡献小的维度。协方差矩阵的值并没有那么重要，但是值的符号很重要，正号代表正相关，负号代表负相关，0代表相互独立。</p>
-<h4 id="Covariance"><a href="#Covariance" class="headerlink" title="Covariance"></a>Covariance</h4><p>方差和协方差是一组点在质量中心（均值）的“扩散”的度量。方差：衡量一个维度上的点的偏差的度量，例如高度。协方差：衡量每个维度之间的差异的一种度量。在两个维度之间测量协方差，看看两个维度之间是否有关系，例如研究的小时数和获得的分数。一个维度和自身之间的协方差是方差。<br>$$<br>COV(x,y)=\frac{\sum^n_{i=1}(\overline x_i-x)(\overline y_i-y)}{n-1}<br>$$</p>
-<h3 id="Performing-PCA"><a href="#Performing-PCA" class="headerlink" title="Performing PCA"></a>Performing PCA</h3><p>PCA可以用sklearn package实现：<code>sklearn.decomposition.PCA</code>。非正式方法实现步骤如下：</p>
+<h4 id="Covariance"><a href="#Covariance" class="headerlink" title="Covariance"></a>Covariance</h4><p>方差和协方差是一组点在质量中心（均值）的“扩散”的度量。方差：衡量一个维度上的点的偏差的度量，例如高度。协方差：衡量每个维度之间的差异的一种度量。在两个维度之间测量协方差，看看两个维度之间是否有关系，例如研究的小时数和获得的分数。一个维度和自身之间的协方差是方差。</p>
+<script type="math/tex; mode=display">
+COV(x,y)=\frac{\sum^n_{i=1}(\overline x_i-x)(\overline y_i-y)}{n-1}</script><h3 id="Performing-PCA"><a href="#Performing-PCA" class="headerlink" title="Performing PCA"></a>Performing PCA</h3><p>PCA可以用sklearn package实现：<code>sklearn.decomposition.PCA</code>。非正式方法实现步骤如下：</p>
 <ol>
 <li><p>将数据转化为$m\times n$格式，$m$代表样本数，$n$表示特征数</p>
 </li>
-<li><p>使$X$置中<br>$$<br>\frac{X-平均值}{每行标准差}<br>$$</p>
-</li>
+<li><p>使$X$置中</p>
+<script type="math/tex; mode=display">
+\frac{X-平均值}{每行标准差}</script></li>
 <li><p>通过SVD对角化$X$：$X=U\Sigma V^T$</p>
 </li>
 <li><p>特征向量是主要方向，这些轴上的阴影是组成成分。这意味着最终我们要计算$XV$</p>
@@ -450,7 +451,7 @@
 <li><p>用于搜索引擎。搜索空间中有许多都与搜索关键词无关，所以搜索引擎常用PCA缩小搜索空间。这对即使搜索十分重要，也体现了SVD的能力。</p>
 </li>
 </ul>
-<p>实际上，PCA代表了样本作为不同成分的权重 – 允许用一个成分代表样本间的差异。这大大减少了数据冗余，使得算法更加高效有用。</p>
+<p>实际上，PCA代表了样本作为不同成分的权重 — 允许用一个成分代表样本间的差异。这大大减少了数据冗余，使得算法更加高效有用。</p>
 
       
     </div>
@@ -646,7 +647,7 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview-and-Motivation"><span class="nav-number">1.</span> <span class="nav-text">Overview and Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overview"><span class="nav-number">1.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation"><span class="nav-number">1.2.</span> <span class="nav-text">Motivation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Singular-Value-Decomposition-SVD"><span class="nav-number">2.</span> <span class="nav-text">Singular Value Decomposition (SVD)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overview-1"><span class="nav-number">2.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Technical-Details-of-Singular-Value-Decomposition"><span class="nav-number">2.2.</span> <span class="nav-text">Technical Details of Singular Value Decomposition</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Eigenvector-definition"><span class="nav-number">2.2.1.</span> <span class="nav-text">Eigenvector definition</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Applications-of-Singular-Value-Decomposition"><span class="nav-number">2.3.</span> <span class="nav-text">Applications of Singular Value Decomposition</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Principal-Component-Analysis-PCA"><span class="nav-number">3.</span> <span class="nav-text">Principal Component Analysis (PCA)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-are-Principal-Component"><span class="nav-number">3.1.</span> <span class="nav-text">What are Principal Component</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Covariance"><span class="nav-number">3.1.1.</span> <span class="nav-text">Covariance</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Performing-PCA"><span class="nav-number">3.2.</span> <span class="nav-text">Performing PCA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Applications-of-Principal-Component"><span class="nav-number">3.3.</span> <span class="nav-text">Applications of Principal Component</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-12-Face-Recognition-amp-Dimensionality-Reduction"><span class="nav-number">1.</span> <span class="nav-text">Lecture 12 Face Recognition &amp; Dimensionality Reduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview-and-Motivation"><span class="nav-number">1.1.</span> <span class="nav-text">Overview and Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overview"><span class="nav-number">1.1.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation"><span class="nav-number">1.1.2.</span> <span class="nav-text">Motivation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Singular-Value-Decomposition-SVD"><span class="nav-number">1.2.</span> <span class="nav-text">Singular Value Decomposition (SVD)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overview-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Technical-Details-of-Singular-Value-Decomposition"><span class="nav-number">1.2.2.</span> <span class="nav-text">Technical Details of Singular Value Decomposition</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Eigenvector-definition"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Eigenvector definition</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Applications-of-Singular-Value-Decomposition"><span class="nav-number">1.2.3.</span> <span class="nav-text">Applications of Singular Value Decomposition</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Principal-Component-Analysis-PCA"><span class="nav-number">1.3.</span> <span class="nav-text">Principal Component Analysis (PCA)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-are-Principal-Component"><span class="nav-number">1.3.1.</span> <span class="nav-text">What are Principal Component</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Covariance"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">Covariance</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Performing-PCA"><span class="nav-number">1.3.2.</span> <span class="nav-text">Performing PCA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Applications-of-Principal-Component"><span class="nav-number">1.3.3.</span> <span class="nav-text">Applications of Principal Component</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -815,7 +816,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

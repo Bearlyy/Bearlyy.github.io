@@ -406,7 +406,7 @@
 <p>​</p>
 </li>
 </ul>
-<ol start="2">
+<ol>
 <li>Which of the following statements are true? Check all that apply.</li>
 </ol>
 <ul>
@@ -428,7 +428,7 @@
 <p>​</p>
 </li>
 </ul>
-<ol start="3">
+<ol>
 <li><p>Which of the following are reasons for using feature scaling?<br>It speeds up gradient descent by making it require fewer iterations to get to a good solution.<br><em>【解析】Feature scaling speeds up gradient descent by avoiding many extra iterations that are required when one or more features take on much larger values than the rest. The cost function J(θ) for linear regression has no local optima.The magnitude of the feature values are insignificant in terms of computational cost.</em> </p>
 <p>​</p>
 </li>
@@ -456,7 +456,7 @@
 <p>If your model is under fitting the training set, then obtaining more data is likely to help.</p>
 </li>
 <li><p>Suppose you have a dataset with n = 10 features and m = 5000 examples. After training your logistic regression classifier with gradient descent, you find that it has underfit the training set and does not achieve the desired performance on the training or cross validation sets. Which of the following might be promising steps to take? Check all that apply.</p>
-<p>| Your Answer                              |             | Score | Explanation                              |<br>| —————————————- | :———: | :—: | :————————————— |<br>| Use a different optimization method since using gradient descent to train logistic regression might result in a local minimum. | Not Correct |   0   | The logistic regression cost function is convex, so gradient descent will always find the global minimum. |<br>| Try using a neural network with a large number of hidden units. |   Correct   |  0.5  | A neural network with many hidden units is a more complex (higher variance) model than logistic regression, so it is less likely to underfit the data. |<br>| Reduce the number of examples in the training set. | Not Correct |   0   | While you can improve accuracy on the training set by removing examples, doing so results in a worse model that will not generalize as well. |<br>| Use an SVM with a Gaussian Kernel.       |   Correct   |  0.5  | By using a Gaussian kernel, your model will have greater complexity and can avoid underfitting the data. |</p>
+<p>| Your Answer                              |             | Score | Explanation                              |<br>| ———————————————————— | :————-: | :—-: | :———————————————————- |<br>| Use a different optimization method since using gradient descent to train logistic regression might result in a local minimum. | Not Correct |   0   | The logistic regression cost function is convex, so gradient descent will always find the global minimum. |<br>| Try using a neural network with a large number of hidden units. |   Correct   |  0.5  | A neural network with many hidden units is a more complex (higher variance) model than logistic regression, so it is less likely to underfit the data. |<br>| Reduce the number of examples in the training set. | Not Correct |   0   | While you can improve accuracy on the training set by removing examples, doing so results in a worse model that will not generalize as well. |<br>| Use an SVM with a Gaussian Kernel.       |   Correct   |  0.5  | By using a Gaussian kernel, your model will have greater complexity and can avoid underfitting the data. |</p>
 </li>
 </ol>
 
@@ -796,7 +796,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

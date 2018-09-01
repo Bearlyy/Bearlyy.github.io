@@ -347,7 +347,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,145
+                  1,137
                 </span>
               
 
@@ -402,7 +402,9 @@
 <p>从图中我们可以看出，分类器需要区分的类越“细”（或越相似），分类错误就越多。例如：区分狗与鸟的错误率比区分鸟的种类要低。</p>
 <h2 id="Challenges-and-Solutions"><a href="#Challenges-and-Solutions" class="headerlink" title="Challenges and Solutions"></a>Challenges and Solutions</h2><h2 id="Semantic-Hierarchy"><a href="#Semantic-Hierarchy" class="headerlink" title="Semantic Hierarchy"></a>Semantic Hierarchy</h2><p>一个解决正确区分相似类的方法是语义层次(semantic hierarchy)。下图即为一个例子。我们创建了一个树结构，它的每个孩子都是父亲的子类。系统将尝试尽量识别到树的深处，即更精确的类。当类更精确时，不确定度也会增加。这个概念称作”hedging”——系统试图识别不确定树中的位置，根据位置做出猜测以得到足够信息，减少错误。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/16.2.png" alt=""></p>
-<p>为了正式定义这个问题，我们假设训练和测试集有同样的数据分布。另外，我们假设我们可以得到一个给出层次结构的后验概率的基本类$g$。接下来，定义一个奖励函数$R(f)$，它给在树更深处的类（更精确的类）更高的分数。再定义一个预计精度函数$A(f)$，它随着我们沿书向下移动（不确定性增加）而降低。我们的问题定义为<br>$$<br>\max_{A(f)\geq 1-\epsilon} R(f)<br>$$<br>其中$\epsilon$是预先设置的常数，表示对所有例子而言，分类器所允许误差。</p>
+<p>为了正式定义这个问题，我们假设训练和测试集有同样的数据分布。另外，我们假设我们可以得到一个给出层次结构的后验概率的基本类$g$。接下来，定义一个奖励函数$R(f)$，它给在树更深处的类（更精确的类）更高的分数。再定义一个预计精度函数$A(f)$，它随着我们沿书向下移动（不确定性增加）而降低。我们的问题定义为</p>
+<script type="math/tex; mode=display">
+\max_{A(f)\geq 1-\epsilon} R(f)</script><p>其中$\epsilon$是预先设置的常数，表示对所有例子而言，分类器所允许误差。</p>
 <p>为了保证最后方案是最优方案，我们定义一个全局的，固定的，标量参数$\lambda\geq 0$。对每个节点，我们将$\lambda$加入奖励值，然后正规化后验分布。流程如下：</p>
 <ol>
 <li>选择一个$\lambda$</li>
@@ -779,7 +781,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

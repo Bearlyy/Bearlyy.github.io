@@ -367,7 +367,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,031
+                  1,883
                 </span>
               
 
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  7
                 </span>
               
             </div>
@@ -418,7 +418,9 @@
 <li><p>除了函数方法，还有注意力模型之类更精巧的方法。</p>
 </li>
 </ol>
-<h2 id="Seam-Carving"><a href="#Seam-Carving" class="headerlink" title="Seam Carving"></a>Seam Carving</h2><h3 id="Basic-Idea"><a href="#Basic-Idea" class="headerlink" title="Basic Idea"></a>Basic Idea</h3><p>人类视觉对边缘更加敏感。因此一个简单而有效的方法是使用基于梯度的能量方程，将光滑区域的内容移除并保存信息量更大边缘。能量公式定义为<br>$$<br>E(I)=|\frac{\partial}{\partial x}I|+|\frac{\partial}{\partial y}I|<br>$$<br>不重要的内容即为能量公式值较小的像素。</p>
+<h2 id="Seam-Carving"><a href="#Seam-Carving" class="headerlink" title="Seam Carving"></a>Seam Carving</h2><h3 id="Basic-Idea"><a href="#Basic-Idea" class="headerlink" title="Basic Idea"></a>Basic Idea</h3><p>人类视觉对边缘更加敏感。因此一个简单而有效的方法是使用基于梯度的能量方程，将光滑区域的内容移除并保存信息量更大边缘。能量公式定义为</p>
+<script type="math/tex; mode=display">
+E(I)=|\frac{\partial}{\partial x}I|+|\frac{\partial}{\partial y}I|</script><p>不重要的内容即为能量公式值较小的像素。</p>
 <h3 id="Pixel-Removal"><a href="#Pixel-Removal" class="headerlink" title="Pixel Removal"></a>Pixel Removal</h3><p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.10.png" alt=""></p>
 <p>下图从左至右用了三种不同的像素移除方案：</p>
 <ol>
@@ -432,9 +434,13 @@
 <li><p>缝被定义为从头到尾（或从左到右）连接像素的通道。对于从头到尾的像素，我们需要从每列钟选取一个像素，数学定义为：</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.3.png" alt=""></p>
 </li>
-<li><p>最好的缝是基于像素梯度，能够最小化能量函数的缝。<br>$$<br>s^*=argmin_sE(s),\space where\space E(I)=|\frac{\partial}{\partial x}I|+|\frac{\partial}{\partial y}I|<br>$$<br><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.4.png" alt=""></p>
+<li><p>最好的缝是基于像素梯度，能够最小化能量函数的缝。</p>
+<script type="math/tex; mode=display">
+s^*=argmin_sE(s),\space where\space E(I)=|\frac{\partial}{\partial x}I|+|\frac{\partial}{\partial y}I|</script><p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.4.png" alt=""></p>
 </li>
-<li><p>可以用递归关系找到最佳缝。如果$M(i,j)$定义为经过像素$(i,j)$的缝的最小能量代价，那么其递归关系为：<br>$$<br>M(i,j)=E(i,j)+min(M(i-1,j-1),M(i-1,j),M(i-1,j+1))<br>$$<br>该递归关系可以通过$O(snm)$的动态程序解决，再原始算法钟$s=3$。下面为一个图像的能量函数值</p>
+<li><p>可以用递归关系找到最佳缝。如果$M(i,j)$定义为经过像素$(i,j)$的缝的最小能量代价，那么其递归关系为：</p>
+<script type="math/tex; mode=display">
+M(i,j)=E(i,j)+min(M(i-1,j-1),M(i-1,j),M(i-1,j+1))</script><p>该递归关系可以通过$O(snm)$的动态程序解决，再原始算法钟$s=3$。下面为一个图像的能量函数值</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.5.png" alt=""></p>
 <p>递归关系为</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.6.png" alt=""></p>
@@ -445,7 +451,10 @@
 </ol>
 <h3 id="Seam-Carving-Algorithms"><a href="#Seam-Carving-Algorithms" class="headerlink" title="Seam Carving Algorithms"></a>Seam Carving Algorithms</h3><p>算法耗费$O((n-n’)mn)$，每个循环更新$E,s,im$耗费$O(mn)$。如果要垂直调整大小，可以旋转图片用同一算法。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.8.png" alt=""></p>
-<p>图像的平均能量会随着缝剪裁算法移除低能量像素而提高。当调整大小时，我们需要移除横向和纵向的缝。如何动态同时删除横竖的缝？参考SIGGRAPH论文，利用再循环方程<br>$$<br>T(r,c)=min(T(r-1,c)+E(s^x(I_{n-r-1\times m-c})),T(r,c-1)+E(s^y(I_{n-r\times m-c-1})))\\<br>\min_{s^x,s^y,\alpha}\sum_{i=1}^kE(\alpha_is_i^x+(1-\alpha_i)s_i^y)<br>$$<br> 同时剪裁横竖缝，得到更多信息。</p>
+<p>图像的平均能量会随着缝剪裁算法移除低能量像素而提高。当调整大小时，我们需要移除横向和纵向的缝。如何动态同时删除横竖的缝？参考SIGGRAPH论文，利用再循环方程</p>
+<script type="math/tex; mode=display">
+T(r,c)=min(T(r-1,c)+E(s^x(I_{n-r-1\times m-c})),T(r,c-1)+E(s^y(I_{n-r\times m-c-1})))\\
+\min_{s^x,s^y,\alpha}\sum_{i=1}^kE(\alpha_is_i^x+(1-\alpha_i)s_i^y)</script><p> 同时剪裁横竖缝，得到更多信息。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.9.png" alt=""></p>
 <h2 id="Advanced-Seam-Carving"><a href="#Advanced-Seam-Carving" class="headerlink" title="Advanced Seam Carving"></a>Advanced Seam Carving</h2><h3 id="Image-Expansion"><a href="#Image-Expansion" class="headerlink" title="Image Expansion"></a>Image Expansion</h3><p>用相似的方法，我们可以提高图片大小。最原始的方法时迭代地找到能量最低的缝，并复制它们来拓展图片。但是，这种方法会形成下图：</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.11.png" alt=""></p>
@@ -466,7 +475,11 @@
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.16.png" alt=""></p>
 </li>
 </ol>
-<h3 id="Forward-Energy"><a href="#Forward-Energy" class="headerlink" title="Forward Energy"></a>Forward Energy</h3><p>如上文提及，缝剪裁会导致图片平均能量上升，产生锯齿状边缘。改进的方法是，不考虑移除最低能量的缝，而是移除插入最小能量到图像的缝。移除一个像素$P(i,j)$会有三种新的边缘情况，这些新边缘花费为<br>$$<br>C_L(i,j)=|I(i,j+1)-I(i,j-1)|+|I(i-1,j)-I(i,j-1)|\\<br>C_R(i,j)=|I(i,j+1)-I(i,j-1)|+|I(i-1,j)-I(i,j+1)|\\<br>C_V(i,j)=|I(i,j+1)-I(i,j-1)|<br>$$<br><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.17.png" alt=""></p>
+<h3 id="Forward-Energy"><a href="#Forward-Energy" class="headerlink" title="Forward Energy"></a>Forward Energy</h3><p>如上文提及，缝剪裁会导致图片平均能量上升，产生锯齿状边缘。改进的方法是，不考虑移除最低能量的缝，而是移除插入最小能量到图像的缝。移除一个像素$P(i,j)$会有三种新的边缘情况，这些新边缘花费为</p>
+<script type="math/tex; mode=display">
+C_L(i,j)=|I(i,j+1)-I(i,j-1)|+|I(i-1,j)-I(i,j-1)|\\
+C_R(i,j)=|I(i,j+1)-I(i,j-1)|+|I(i-1,j)-I(i,j+1)|\\
+C_V(i,j)=|I(i,j+1)-I(i,j-1)|</script><p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.17.png" alt=""></p>
 <p>这种方式称为”forward energy”，之前的方法称为”backward energy”。forward energy通过最小化添加的能量，保留了光滑的边缘。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.18.png" alt=""></p>
 <h3 id="Seam-Carving-in-Videos"><a href="#Seam-Carving-in-Videos" class="headerlink" title="Seam-Carving in Videos"></a>Seam-Carving in Videos</h3><p>比起图像，视频剪裁难度更大，有以下几个问题。</p>
@@ -852,7 +865,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="#Lecture 13 Face Recognition and LDA  Introduction to Facial RecognitionApplications 数字摄影：聚焦人脸 监视器 组织相册：将相同的人放在同一相册 人物追踪 动作和表情：构建基于心情互动的智能设备 安全和战争：检测特殊人物、敌军 电话会议：提供正在视频的人的信息  A Key Distinction: Detect">
+<meta name="description" content="Lecture 13 Face Recognition and LDAIntroduction to Facial RecognitionApplications 数字摄影：聚焦人脸 监视器 组织相册：将相同的人放在同一相册 人物追踪 动作和表情：构建基于心情互动的智能设备 安全和战争：检测特殊人物、敌军 电话会议：提供正在视频的人的信息  A Key Distinction: Detection">
 <meta name="keywords" content="计算机视觉,CS131">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS131 Lecture 13 Face Recognition and LDA">
 <meta property="og:url" content="http://yoursite.com/2018/08/16/Lecture 13 Face Recognition and LDA/index.html">
 <meta property="og:site_name" content="Xiong&#39;s Blog">
-<meta property="og:description" content="#Lecture 13 Face Recognition and LDA  Introduction to Facial RecognitionApplications 数字摄影：聚焦人脸 监视器 组织相册：将相同的人放在同一相册 人物追踪 动作和表情：构建基于心情互动的智能设备 安全和战争：检测特殊人物、敌军 电话会议：提供正在视频的人的信息  A Key Distinction: Detect">
+<meta property="og:description" content="Lecture 13 Face Recognition and LDAIntroduction to Facial RecognitionApplications 数字摄影：聚焦人脸 监视器 组织相册：将相同的人放在同一相册 人物追踪 动作和表情：构建基于心情互动的智能设备 安全和战争：检测特殊人物、敌军 电话会议：提供正在视频的人的信息  A Key Distinction: Detection">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/13.1.png">
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/12.6.png">
@@ -109,7 +109,7 @@
 <meta property="og:updated_time" content="2018-09-01T16:46:16.436Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS131 Lecture 13 Face Recognition and LDA">
-<meta name="twitter:description" content="#Lecture 13 Face Recognition and LDA  Introduction to Facial RecognitionApplications 数字摄影：聚焦人脸 监视器 组织相册：将相同的人放在同一相册 人物追踪 动作和表情：构建基于心情互动的智能设备 安全和战争：检测特殊人物、敌军 电话会议：提供正在视频的人的信息  A Key Distinction: Detect">
+<meta name="twitter:description" content="Lecture 13 Face Recognition and LDAIntroduction to Facial RecognitionApplications 数字摄影：聚焦人脸 监视器 组织相册：将相同的人放在同一相册 人物追踪 动作和表情：构建基于心情互动的智能设备 安全和战争：检测特殊人物、敌军 电话会议：提供正在视频的人的信息  A Key Distinction: Detection">
 <meta name="twitter:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/13.1.png">
 
 
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,557
+                  1,364
                 </span>
               
 
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  5
                 </span>
               
             </div>
@@ -393,8 +393,7 @@
       
 
       
-        <p>#Lecture 13 Face Recognition and LDA </p>
-<h2 id="Introduction-to-Facial-Recognition"><a href="#Introduction-to-Facial-Recognition" class="headerlink" title="Introduction to Facial Recognition"></a>Introduction to Facial Recognition</h2><h3 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h3><ul>
+        <h1 id="Lecture-13-Face-Recognition-and-LDA"><a href="#Lecture-13-Face-Recognition-and-LDA" class="headerlink" title="Lecture 13 Face Recognition and LDA"></a>Lecture 13 Face Recognition and LDA</h1><h2 id="Introduction-to-Facial-Recognition"><a href="#Introduction-to-Facial-Recognition" class="headerlink" title="Introduction to Facial Recognition"></a>Introduction to Facial Recognition</h2><h3 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h3><ul>
 <li>数字摄影：聚焦人脸</li>
 <li>监视器</li>
 <li>组织相册：将相同的人放在同一相册</li>
@@ -418,13 +417,17 @@
 <h3 id="Training-Algorithm"><a href="#Training-Algorithm" class="headerlink" title="Training Algorithm"></a>Training Algorithm</h3><ol>
 <li><p>排列训练图像：$x_1,…,x_n$</p>
 </li>
-<li><p>计算平均脸：<br>$$<br>\mu=\frac1N \sum x_i<br>$$</p>
-</li>
-<li><p>计算协方差矩阵：<br>$$<br>\Sigma=\frac1N X_cX_c^T<br>$$</p>
-</li>
+<li><p>计算平均脸：</p>
+<script type="math/tex; mode=display">
+\mu=\frac1N \sum x_i</script></li>
+<li><p>计算协方差矩阵：</p>
+<script type="math/tex; mode=display">
+\Sigma=\frac1N X_cX_c^T</script></li>
 <li><p>用PCA计算协方差矩阵$\Sigma$的特征向量</p>
 </li>
-<li><p>计算每个训练图像$x_i$的投影<br>$$<br>x_i\rightarrow (x_i^c·\phi_1,x_i^c·\phi_2,…,x_i^c·\phi_k)\equiv(a_1,a_2,…,a_k)<br>$$<br>其中$\phi_i$是第$i$个特征向量。</p>
+<li><p>计算每个训练图像$x_i$的投影</p>
+<script type="math/tex; mode=display">
+x_i\rightarrow (x_i^c·\phi_1,x_i^c·\phi_2,...,x_i^c·\phi_k)\equiv(a_1,a_2,...,a_k)</script><p>其中$\phi_i$是第$i$个特征向量。</p>
 </li>
 <li><p>重构的脸$x_i\approx \mu+a_1·\phi_1+…+a_k·\phi_k$</p>
 </li>
@@ -437,8 +440,9 @@
 <h3 id="Testing-Algorithm"><a href="#Testing-Algorithm" class="headerlink" title="Testing Algorithm"></a>Testing Algorithm</h3><ol>
 <li><p>取查询图像$t$</p>
 </li>
-<li><p>映射至特征向量：<br>$$<br>t\rightarrow((t-\mu)·\phi_1,(t-\mu)·\phi_2,…,(t-\mu)·\phi_k)\equiv(w_1,w_2,..,w_k)<br>$$</p>
-</li>
+<li><p>映射至特征向量：</p>
+<script type="math/tex; mode=display">
+t\rightarrow((t-\mu)·\phi_1,(t-\mu)·\phi_2,...,(t-\mu)·\phi_k)\equiv(w_1,w_2,..,w_k)</script></li>
 <li><p>比较投影$w$和所有$N$个训练投影。用欧几里德距离和KNN算法输出标签。</p>
 </li>
 </ol>
@@ -477,17 +481,43 @@
 <h3 id="General-Idea"><a href="#General-Idea" class="headerlink" title="General Idea"></a>General Idea</h3><p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/13.6.png" alt=""></p>
 <p>LDA用两个值运行：类间散度、类内散度。类间散度指不同类之间的距离，类内散度指类内点之间的距离。LDA最大化类间散度，最小化类内散度。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/13.3.png" alt=""></p>
-<h3 id="Mathematical-Formulation-of-LDA-with-2-Variables"><a href="#Mathematical-Formulation-of-LDA-with-2-Variables" class="headerlink" title="Mathematical Formulation of LDA with 2 Variables"></a>Mathematical Formulation of LDA with 2 Variables</h3><p>我们想要找到一个投影$w$在$x\in R^n$空间中映射出0和1的点到一个新的空间$z\in R^m$，例如$z=w^Tx$。其中，$m&lt;n$，且投影必须最大化以下公式：<br>$$<br>J(w)=\frac{S_B\space when\space projected\space onto\space w}{S_W\space when\space projected\space onto\space w}<br>$$<br>公式中，$S_B$代表类间散度，$S_W$代表类内散度。接下来定义一个代表类内点的平均的变量$\mu_i$：<br>$$<br>\mu_i=E_{X|Y}[X|Y=i]<br>$$<br>定义变量$\Sigma_i$代表类的协方差矩阵：<br>$$<br>\Sigma_i=E_{X|Y}[(X-\mu_i)(X-\mu_i)^T|Y=i]<br>$$<br>用以上变量，可以定义$S_B$和$S_W$：<br>$$<br>S_B=(\mu_1-\mu_0)^2=(\mu_1-\mu_0)(\mu_1-\mu_0)^T\\<br>S_W=(\Sigma_1+\Sigma_0)<br>$$<br>将变量放回原式$J(w)$可得：<br>$$<br>J(w)=\frac{w^T(\mu_1-\mu_0)(\mu_1-\mu_0)^Tw}{w^T(\Sigma_1+\Sigma_0)w}<br>$$<br>我们要最大化$J(w)$，即最大化分子，保持分母为常数：<br>$$<br>\max_{w^T(\Sigma_1+\Sigma_0)w=K}w^T(\mu_1-\mu_0)(\mu_1-\mu_0)^Tw<br>$$<br>用拉格朗日乘数法，我们定义拉格朗日算子为：<br>$$<br>L=w^TS_Bw-\lambda(w^TS_Ww-K)=w^T(S_B-\lambda S_W)w+K<br>$$<br>我们必须最大化$L$对$\lambda$和$w$的值。我们可以通过用其关于$w$的梯度和找到关键点的位置：<br>$$<br>\nabla_wL=2(S_B-\lambda S_W)w=0<br>$$<br>用这个公式，我们可以得到关键点位置：<br>$$<br>S_Bw=\lambda S_Ww<br>$$<br>这是一个广义的特征向量问题。在$S_W^{-1}=(\Sigma_1+\Sigma_0)^{-1}$存在的情况下，我们得到：<br>$$<br>S_W^{-1}S_Bw=\lambda w<br>$$<br>代入$S_B$得：<br>$$<br>S_W^{-1}(\mu_1-\mu_0)=\frac\lambda\alpha w<br>$$<br>$w$的大小并不重要，所以我们可以得到映射$w$：<br>$$<br>w*=S_W^{-1}(\mu_1-\mu_0)=(\Sigma_1-\Sigma_0)^{-1}(\mu_1-\mu_0)<br>$$</p>
-<h3 id="LDA-with-N-Variables-and-C-Classes"><a href="#LDA-with-N-Variables-and-C-Classes" class="headerlink" title="LDA with N Variables and C Classes"></a>LDA with N Variables and C Classes</h3><h4 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h4><p><strong>Variables:</strong></p>
+<h3 id="Mathematical-Formulation-of-LDA-with-2-Variables"><a href="#Mathematical-Formulation-of-LDA-with-2-Variables" class="headerlink" title="Mathematical Formulation of LDA with 2 Variables"></a>Mathematical Formulation of LDA with 2 Variables</h3><p>我们想要找到一个投影$w$在$x\in R^n$空间中映射出0和1的点到一个新的空间$z\in R^m$，例如$z=w^Tx$。其中，$m&lt;n$，且投影必须最大化以下公式：</p>
+<script type="math/tex; mode=display">
+J(w)=\frac{S_B\space when\space projected\space onto\space w}{S_W\space when\space projected\space onto\space w}</script><p>公式中，$S_B$代表类间散度，$S_W$代表类内散度。接下来定义一个代表类内点的平均的变量$\mu_i$：</p>
+<script type="math/tex; mode=display">
+\mu_i=E_{X|Y}[X|Y=i]</script><p>定义变量$\Sigma_i$代表类的协方差矩阵：</p>
+<script type="math/tex; mode=display">
+\Sigma_i=E_{X|Y}[(X-\mu_i)(X-\mu_i)^T|Y=i]</script><p>用以上变量，可以定义$S_B$和$S_W$：</p>
+<script type="math/tex; mode=display">
+S_B=(\mu_1-\mu_0)^2=(\mu_1-\mu_0)(\mu_1-\mu_0)^T\\
+S_W=(\Sigma_1+\Sigma_0)</script><p>将变量放回原式$J(w)$可得：</p>
+<script type="math/tex; mode=display">
+J(w)=\frac{w^T(\mu_1-\mu_0)(\mu_1-\mu_0)^Tw}{w^T(\Sigma_1+\Sigma_0)w}</script><p>我们要最大化$J(w)$，即最大化分子，保持分母为常数：</p>
+<script type="math/tex; mode=display">
+\max_{w^T(\Sigma_1+\Sigma_0)w=K}w^T(\mu_1-\mu_0)(\mu_1-\mu_0)^Tw</script><p>用拉格朗日乘数法，我们定义拉格朗日算子为：</p>
+<script type="math/tex; mode=display">
+L=w^TS_Bw-\lambda(w^TS_Ww-K)=w^T(S_B-\lambda S_W)w+K</script><p>我们必须最大化$L$对$\lambda$和$w$的值。我们可以通过用其关于$w$的梯度和找到关键点的位置：</p>
+<script type="math/tex; mode=display">
+\nabla_wL=2(S_B-\lambda S_W)w=0</script><p>用这个公式，我们可以得到关键点位置：</p>
+<script type="math/tex; mode=display">
+S_Bw=\lambda S_Ww</script><p>这是一个广义的特征向量问题。在$S_W^{-1}=(\Sigma_1+\Sigma_0)^{-1}$存在的情况下，我们得到：</p>
+<script type="math/tex; mode=display">
+S_W^{-1}S_Bw=\lambda w</script><p>代入$S_B$得：</p>
+<script type="math/tex; mode=display">
+S_W^{-1}(\mu_1-\mu_0)=\frac\lambda\alpha w</script><p>$w$的大小并不重要，所以我们可以得到映射$w$：</p>
+<script type="math/tex; mode=display">
+w*=S_W^{-1}(\mu_1-\mu_0)=(\Sigma_1-\Sigma_0)^{-1}(\mu_1-\mu_0)</script><h3 id="LDA-with-N-Variables-and-C-Classes"><a href="#LDA-with-N-Variables-and-C-Classes" class="headerlink" title="LDA with N Variables and C Classes"></a>LDA with N Variables and C Classes</h3><h4 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h4><p><strong>Variables:</strong></p>
 <ul>
 <li><p>N个样本：$\{x_1,…,x_N\}$</p>
 </li>
 <li><p>C个类:$\{Y_1,Y_2,…,Y_C\}$。每一类都有N个样本。</p>
 </li>
-<li><p>每个类的平均：类$i$的平均为<br>$$<br>\mu_i=\frac 1{N_i}\sum_{x_k\in Y_i}x_k<br>$$</p>
-</li>
-<li><p>所有数据的平均：<br>$$<br>\mu=\frac 1N\sum_{k=1}^N x_k<br>$$</p>
-</li>
+<li><p>每个类的平均：类$i$的平均为</p>
+<script type="math/tex; mode=display">
+\mu_i=\frac 1{N_i}\sum_{x_k\in Y_i}x_k</script></li>
+<li><p>所有数据的平均：</p>
+<script type="math/tex; mode=display">
+\mu=\frac 1N\sum_{k=1}^N x_k</script></li>
 </ul>
 <p><strong>Scatter Matrices:</strong></p>
 <ul>
@@ -495,7 +525,9 @@
 <li>类内散度：$S_w=\sum^{c}_{i=1}S_i$</li>
 <li>类间散度：$S_b=\sum_{i=1}^cN_i(\mu_i-\mu)(\mu_i-\mu)^T$</li>
 </ul>
-<h4 id="Mathematical-Formulation"><a href="#Mathematical-Formulation" class="headerlink" title="Mathematical Formulation"></a>Mathematical Formulation</h4><p>我们需要一个将所有点从$x\in R^m$映射到$z\in R^n$的投影：<br>$$<br>z=w^Tx,x\in R^m,z\in R^n<br>$$<br><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/13.5.png" alt=""></p>
+<h4 id="Mathematical-Formulation"><a href="#Mathematical-Formulation" class="headerlink" title="Mathematical Formulation"></a>Mathematical Formulation</h4><p>我们需要一个将所有点从$x\in R^m$映射到$z\in R^n$的投影：</p>
+<script type="math/tex; mode=display">
+z=w^Tx,x\in R^m,z\in R^n</script><p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/13.5.png" alt=""></p>
 <h3 id="Results-Eigenface-PCA-vs-Fisherface-LDA"><a href="#Results-Eigenface-PCA-vs-Fisherface-LDA" class="headerlink" title="Results: Eigenface(PCA) vs. Fisherface(LDA)"></a>Results: Eigenface(PCA) vs. Fisherface(LDA)</h3><p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/13.4.png" alt=""></p>
 
       
@@ -692,7 +724,7 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-to-Facial-Recognition"><span class="nav-number">1.</span> <span class="nav-text">Introduction to Facial Recognition</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Applications"><span class="nav-number">1.1.</span> <span class="nav-text">Applications</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Key-Distinction-Detection-vs-Recognition"><span class="nav-number">1.2.</span> <span class="nav-text">A Key Distinction: Detection vs. Recognition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Space-of-Faces"><span class="nav-number">1.3.</span> <span class="nav-text">Space of Faces</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Eigenfaces-Algorithm"><span class="nav-number">2.</span> <span class="nav-text">The Eigenfaces Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Ideas-and-Assumptions"><span class="nav-number">2.1.</span> <span class="nav-text">Key Ideas and Assumptions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#What-are-eigenfaces"><span class="nav-number">2.1.1.</span> <span class="nav-text">What are eigenfaces?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training-Algorithm"><span class="nav-number">2.2.</span> <span class="nav-text">Training Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Why-can-we-do-this"><span class="nav-number">2.2.1.</span> <span class="nav-text">Why can we do this?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reconstruction-and-Error"><span class="nav-number">2.2.2.</span> <span class="nav-text">Reconstruction and Error</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Testing-Algorithm"><span class="nav-number">2.3.</span> <span class="nav-text">Testing Algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advantages-and-Disadvantages"><span class="nav-number">2.4.</span> <span class="nav-text">Advantages and Disadvantages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Beyond-Facial-Recognition-Expressions-and-Emotions"><span class="nav-number">2.5.</span> <span class="nav-text">Beyond Facial Recognition: Expressions and Emotions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-Discriminant-Analysis-LDA"><span class="nav-number">3.</span> <span class="nav-text">Linear Discriminant Analysis (LDA)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PCA-vs-LDA"><span class="nav-number">3.1.</span> <span class="nav-text">PCA vs. LDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Idea"><span class="nav-number">3.2.</span> <span class="nav-text">General Idea</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mathematical-Formulation-of-LDA-with-2-Variables"><span class="nav-number">3.3.</span> <span class="nav-text">Mathematical Formulation of LDA with 2 Variables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LDA-with-N-Variables-and-C-Classes"><span class="nav-number">3.4.</span> <span class="nav-text">LDA with N Variables and C Classes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Preliminaries"><span class="nav-number">3.4.1.</span> <span class="nav-text">Preliminaries</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mathematical-Formulation"><span class="nav-number">3.4.2.</span> <span class="nav-text">Mathematical Formulation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Results-Eigenface-PCA-vs-Fisherface-LDA"><span class="nav-number">3.5.</span> <span class="nav-text">Results: Eigenface(PCA) vs. Fisherface(LDA)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-13-Face-Recognition-and-LDA"><span class="nav-number">1.</span> <span class="nav-text">Lecture 13 Face Recognition and LDA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-to-Facial-Recognition"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction to Facial Recognition</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Applications"><span class="nav-number">1.1.1.</span> <span class="nav-text">Applications</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Key-Distinction-Detection-vs-Recognition"><span class="nav-number">1.1.2.</span> <span class="nav-text">A Key Distinction: Detection vs. Recognition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Space-of-Faces"><span class="nav-number">1.1.3.</span> <span class="nav-text">Space of Faces</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Eigenfaces-Algorithm"><span class="nav-number">1.2.</span> <span class="nav-text">The Eigenfaces Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Ideas-and-Assumptions"><span class="nav-number">1.2.1.</span> <span class="nav-text">Key Ideas and Assumptions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#What-are-eigenfaces"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">What are eigenfaces?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training-Algorithm"><span class="nav-number">1.2.2.</span> <span class="nav-text">Training Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Why-can-we-do-this"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Why can we do this?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reconstruction-and-Error"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Reconstruction and Error</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Testing-Algorithm"><span class="nav-number">1.2.3.</span> <span class="nav-text">Testing Algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advantages-and-Disadvantages"><span class="nav-number">1.2.4.</span> <span class="nav-text">Advantages and Disadvantages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Beyond-Facial-Recognition-Expressions-and-Emotions"><span class="nav-number">1.2.5.</span> <span class="nav-text">Beyond Facial Recognition: Expressions and Emotions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-Discriminant-Analysis-LDA"><span class="nav-number">1.3.</span> <span class="nav-text">Linear Discriminant Analysis (LDA)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PCA-vs-LDA"><span class="nav-number">1.3.1.</span> <span class="nav-text">PCA vs. LDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Idea"><span class="nav-number">1.3.2.</span> <span class="nav-text">General Idea</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mathematical-Formulation-of-LDA-with-2-Variables"><span class="nav-number">1.3.3.</span> <span class="nav-text">Mathematical Formulation of LDA with 2 Variables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LDA-with-N-Variables-and-C-Classes"><span class="nav-number">1.3.4.</span> <span class="nav-text">LDA with N Variables and C Classes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Preliminaries"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">Preliminaries</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mathematical-Formulation"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">Mathematical Formulation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Results-Eigenface-PCA-vs-Fisherface-LDA"><span class="nav-number">1.3.5.</span> <span class="nav-text">Results: Eigenface(PCA) vs. Fisherface(LDA)</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -861,7 +893,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

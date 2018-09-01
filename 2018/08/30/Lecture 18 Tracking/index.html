@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/18.3.png">
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/18.4.png">
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/18.5.png">
-<meta property="og:updated_time" content="2018-09-01T16:53:48.960Z">
+<meta property="og:updated_time" content="2018-09-01T17:17:44.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS131 Lecture 18 Tracking">
 <meta name="twitter:description" content="Lecture 18 TrackingIntroduction: What is tracking?Definition定位在连续时间下移动的物体的过程 Objective在连续视频帧下关联目标物体并评估目标状态 Applications 人机互动 安全 AR 交通 医疗图像  Challenges因为视频的大量数据，耗时较长。并依赖于物体识别算法，在以下情况可能会失败：  几何改变，例如物体的尺">
@@ -349,7 +349,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,644
+                  1,325
                 </span>
               
 
@@ -365,7 +365,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7
+                  5
                 </span>
               
             </div>
@@ -439,12 +439,69 @@
 <li>射影变换（例如，移动相机）</li>
 </ul>
 <h3 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h3><p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/18.5.png" alt=""></p>
-<p>平移运动是一个点平移到另一个点。假设我们有一个在左边$(x,y)$的点$m$。应用平移运动将$m$从点$(x,y)$移动到$(x’,y’)$<br>$$<br>x’=x+b_1\\<br>y’=y+b_2<br>$$<br>可以写成用其次坐标的矩阵变换：<br>$$<br>\left(\begin{matrix}<br>x’\\<br>y’<br>\end{matrix}\right)<br>=\left(\begin{matrix}<br>1&amp;0&amp;b_1\\<br>0&amp;1&amp;b_2<br>\end{matrix}\right)<br>\left(\begin{matrix}<br>x\\<br>y\\<br>1<br>\end{matrix}\right)<br>$$<br>定义$W$<br>$$<br>W(x;p)=\left(\begin{matrix}<br>1&amp;0&amp;b_1\\<br>0&amp;1&amp;b_2<br>\end{matrix}\right)<br>$$<br>其中因子向量$p=\left(\begin{matrix}<br>b_1\\<br>b_2<br>\end{matrix}\right)$</p>
-<p>则$W$对$p$的偏导数为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>1&amp;0\\<br>0&amp;1<br>\end{matrix}\right)<br>$$<br>上式被称作雅克比行列式(Jacobian)</p>
+<p>平移运动是一个点平移到另一个点。假设我们有一个在左边$(x,y)$的点$m$。应用平移运动将$m$从点$(x,y)$移动到$(x’,y’)$</p>
+<script type="math/tex; mode=display">
+x'=x+b_1\\
+y'=y+b_2</script><p>可以写成用其次坐标的矩阵变换：</p>
+<script type="math/tex; mode=display">
+\left(\begin{matrix}
+x'\\
+y'
+\end{matrix}\right)
+=\left(\begin{matrix}
+1&0&b_1\\
+0&1&b_2
+\end{matrix}\right)
+\left(\begin{matrix}
+x\\
+y\\
+1
+\end{matrix}\right)</script><p>定义$W$</p>
+<script type="math/tex; mode=display">
+W(x;p)=\left(\begin{matrix}
+1&0&b_1\\
+0&1&b_2
+\end{matrix}\right)</script><p>其中因子向量$p=\left(\begin{matrix}<br>b_1\\<br>b_2<br>\end{matrix}\right)$</p>
+<p>则$W$对$p$的偏导数为</p>
+<script type="math/tex; mode=display">
+\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}
+1&0\\
+0&1
+\end{matrix}\right)</script><p>上式被称作雅克比行列式(Jacobian)</p>
 <h3 id="Similarity-Motion"><a href="#Similarity-Motion" class="headerlink" title="Similarity Motion"></a>Similarity Motion</h3><p>相似运动是一种刚体运动，包括缩放和平移。</p>
-<p>我们可以定义相似性为<br>$$<br>x’=ax+b_1\\<br>y’=ay+b_2<br>$$<br>定义$W,p$<br>$$<br>W=\left(\begin{matrix}<br>a&amp;0&amp;b_1\\<br>0&amp;a&amp;b_2<br>\end{matrix}\right)\\<br>p=\left(\begin{matrix}<br>a&amp;b_1&amp;b_2<br>\end{matrix}\right)^T<br>$$<br>则$W$对$p$的偏导数，即雅克比行列式(Jacobian)为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>x&amp;1&amp;0\\<br>y&amp;0&amp;1<br>\end{matrix}\right)<br>$$</p>
-<h3 id="Affine-motion"><a href="#Affine-motion" class="headerlink" title="Affine motion"></a>Affine motion</h3><p>仿射运动包括放缩，旋转，平移。我们可以表达为<br>$$<br>x’=a_1x+a_2y+b_1\\<br>y’=a_3x+a_4y+b_1<br>$$<br>定义$W,p$<br>$$<br>W=\left(\begin{matrix}<br>a_1&amp;a_2&amp;b_1\\<br>a_3&amp;a_4&amp;b_2<br>\end{matrix}\right)\\<br>p=\left(\begin{matrix}<br>a_1&amp;a_2&amp;b_1&amp;a_3&amp;a_4&amp;b_2<br>\end{matrix}\right)^T<br>$$<br>则$W$对$p$的偏导数，即雅克比行列式(Jacobian)为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>x&amp;y&amp;1&amp;0&amp;0&amp;0\\<br>0&amp;0&amp;0&amp;x&amp;y&amp;1<br>\end{matrix}\right)<br>$$</p>
-<h2 id="Iterative-KLT-tracker"><a href="#Iterative-KLT-tracker" class="headerlink" title="Iterative KLT tracker"></a>Iterative KLT tracker</h2><h3 id="Problem-formulation"><a href="#Problem-formulation" class="headerlink" title="Problem formulation"></a>Problem formulation</h3><p>给定视频顺序，找到对应每帧相连的变化顺序。要求能够处理任意类型的运动。</p>
+<p>我们可以定义相似性为</p>
+<script type="math/tex; mode=display">
+x'=ax+b_1\\
+y'=ay+b_2</script><p>定义$W,p$</p>
+<script type="math/tex; mode=display">
+W=\left(\begin{matrix}
+a&0&b_1\\
+0&a&b_2
+\end{matrix}\right)\\
+p=\left(\begin{matrix}
+a&b_1&b_2
+\end{matrix}\right)^T</script><p>则$W$对$p$的偏导数，即雅克比行列式(Jacobian)为</p>
+<script type="math/tex; mode=display">
+\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}
+x&1&0\\
+y&0&1
+\end{matrix}\right)</script><h3 id="Affine-motion"><a href="#Affine-motion" class="headerlink" title="Affine motion"></a>Affine motion</h3><p>仿射运动包括放缩，旋转，平移。我们可以表达为</p>
+<script type="math/tex; mode=display">
+x'=a_1x+a_2y+b_1\\
+y'=a_3x+a_4y+b_1</script><p>定义$W,p$</p>
+<script type="math/tex; mode=display">
+W=\left(\begin{matrix}
+a_1&a_2&b_1\\
+a_3&a_4&b_2
+\end{matrix}\right)\\
+p=\left(\begin{matrix}
+a_1&a_2&b_1&a_3&a_4&b_2
+\end{matrix}\right)^T</script><p>则$W$对$p$的偏导数，即雅克比行列式(Jacobian)为</p>
+<script type="math/tex; mode=display">
+\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}
+x&y&1&0&0&0\\
+0&0&0&x&y&1
+\end{matrix}\right)</script><h2 id="Iterative-KLT-tracker"><a href="#Iterative-KLT-tracker" class="headerlink" title="Iterative KLT tracker"></a>Iterative KLT tracker</h2><h3 id="Problem-formulation"><a href="#Problem-formulation" class="headerlink" title="Problem formulation"></a>Problem formulation</h3><p>给定视频顺序，找到对应每帧相连的变化顺序。要求能够处理任意类型的运动。</p>
 <h3 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h3><p>与KLT追踪器不同之处在于连接帧的方式：用特征数据和线性相似直接解决相关的变换，而不是用光流连接运动向量并追踪运动。这种方式允许我们处理更加复杂（例如，仿射和投射）转换，并更加稳健的连接物体。</p>
 <p>步骤：</p>
 <ol>
@@ -452,16 +509,35 @@
 </li>
 <li><p>对于每个在位置$x=[x,y]^T$的特征：选择一个特征描述子，并用这个描述子创建一个特征的初始模板（常用附近的像素）：$T(x)$</p>
 </li>
-<li><p>求出一个$p$，能够最小化下一帧中在$x_2=W(x;p)$周围（假设是在特征的新位置）的特征描述的错误。用公式描述则是<br>$$<br>\sum_x[T(W(x;p))-T(x)]^2<br>$$</p>
-</li>
+<li><p>求出一个$p$，能够最小化下一帧中在$x_2=W(x;p)$周围（假设是在特征的新位置）的特征描述的错误。用公式描述则是</p>
+<script type="math/tex; mode=display">
+\sum_x[T(W(x;p))-T(x)]^2</script></li>
 <li><p>迭代的重复以上步骤，将帧之间相连接，随着转换的不断应用，储存特征的坐标。这样能够得到关于物体如何在帧之间移动的测量。</p>
 </li>
 <li><p>像之前一样，每10-15帧引入一个新Harris corner来加入新特征，去除之前不好的特征。</p>
 </li>
 </ol>
 <h3 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h3><p>在上面第三步中，我们实际上可以近似计算$p$。假设有一个关于$p,p_0$的初始猜测，其中$p=p_0+\Delta p$</p>
-<p>现在<br>$$<br>E=\sum_x[T(W(x;p))-T(x)]^2=\sum_x[T(W(x;p_0+\Delta p))-T(x)]^2<br>$$<br>使用泰勒逼近，我们可以看出错误项约等于<br>$$<br>E\approx \sum_x[T(W(x;p_0))+\nabla T\frac{\partial W}{\partial p}\Delta p-T(x)]^2<br>$$<br>为了最小化此项，我们对$p_0$求偏导，并设为0，求出$p_0$<br>$$<br>\frac{\partial E}{\partial p}\approx\sum_x[\nabla T(\frac{\partial W}{\partial p})^T][T(W(x;p_0))+\nabla T\frac{\partial W}{\partial p}\Delta p-T(x)]=0\\<br>\Delta p=H^{-1}\sum_x[\nabla T(\frac{\partial W}{\partial p})^T][T(x)-T(W(x;p_0))]\\<br>H=\sum_x[\nabla T\frac{\partial W}{\partial p}]^T[\nabla T\frac{\partial W}{\partial p}]<br>$$<br>迭代地设置$p_0=p_0+\Delta p$，我们可以最终收敛于一个精确的、最小化错误值的$p$，告诉我们转换的类型。</p>
-<h3 id="Link-to-Harris-Corner-Detection"><a href="#Link-to-Harris-Corner-Detection" class="headerlink" title="Link to Harris Corner Detection"></a>Link to Harris Corner Detection</h3><p>对平移运动，<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>1&amp;0\\<br>0&amp;1<br>\end{matrix}\right)<br>$$<br>容易得到，<br>$$<br>H=\left(\begin{matrix}<br>I_x^2&amp;I_xI_y\\<br>I_xI_y&amp;I_y^2<br>\end{matrix}\right)<br>$$<br>但是，Harris corner检测器假设只要$H​$有大特征值（即稳定可逆），那么该点就是一个角。因此，角可能是一个用于计算平移的好特征，恰恰因为角计算出的矩阵是稳定可逆的。</p>
+<p>现在</p>
+<script type="math/tex; mode=display">
+E=\sum_x[T(W(x;p))-T(x)]^2=\sum_x[T(W(x;p_0+\Delta p))-T(x)]^2</script><p>使用泰勒逼近，我们可以看出错误项约等于</p>
+<script type="math/tex; mode=display">
+E\approx \sum_x[T(W(x;p_0))+\nabla T\frac{\partial W}{\partial p}\Delta p-T(x)]^2</script><p>为了最小化此项，我们对$p_0$求偏导，并设为0，求出$p_0$</p>
+<script type="math/tex; mode=display">
+\frac{\partial E}{\partial p}\approx\sum_x[\nabla T(\frac{\partial W}{\partial p})^T][T(W(x;p_0))+\nabla T\frac{\partial W}{\partial p}\Delta p-T(x)]=0\\
+\Delta p=H^{-1}\sum_x[\nabla T(\frac{\partial W}{\partial p})^T][T(x)-T(W(x;p_0))]\\
+H=\sum_x[\nabla T\frac{\partial W}{\partial p}]^T[\nabla T\frac{\partial W}{\partial p}]</script><p>迭代地设置$p_0=p_0+\Delta p$，我们可以最终收敛于一个精确的、最小化错误值的$p$，告诉我们转换的类型。</p>
+<h3 id="Link-to-Harris-Corner-Detection"><a href="#Link-to-Harris-Corner-Detection" class="headerlink" title="Link to Harris Corner Detection"></a>Link to Harris Corner Detection</h3><p>对平移运动，</p>
+<script type="math/tex; mode=display">
+\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}
+1&0\\
+0&1
+\end{matrix}\right)</script><p>容易得到，</p>
+<script type="math/tex; mode=display">
+H=\left(\begin{matrix}
+I_x^2&I_xI_y\\
+I_xI_y&I_y^2
+\end{matrix}\right)</script><p>但是，Harris corner检测器假设只要$H​$有大特征值（即稳定可逆），那么该点就是一个角。因此，角可能是一个用于计算平移的好特征，恰恰因为角计算出的矩阵是稳定可逆的。</p>
 
       
     </div>
@@ -822,7 +898,7 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -875,6 +951,43 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

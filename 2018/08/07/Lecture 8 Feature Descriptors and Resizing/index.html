@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,868
+                  1,860
                 </span>
               
 
@@ -401,7 +401,9 @@
 <p>在每两张图中，我们可以独立的检测区域极值作为关键点。对应区域极值的窗大小（上图$s_1$和$s_2$）反映了两张图片之间的尺度不同。</p>
 <h4 id="Average-intensity"><a href="#Average-intensity" class="headerlink" title="Average intensity"></a>Average intensity</h4><p>第一种方法，用窗内像素的平均强度作为$f(window)$，因为平均强度不随尺度变化而变化。但是，平均强度不能很好的捕捉窗内的对比度改变。要捕捉对比度，我们需要加入导数。</p>
 <h4 id="Difference-of-Gaussians-DoG"><a href="#Difference-of-Gaussians-DoG" class="headerlink" title="Difference of Gaussians (DoG)"></a>Difference of Gaussians (DoG)</h4><p>第二种方法，用高斯差分。</p>
-<p>考虑一个图片$I$。首先，我们将$I$与有不同$\sigma$的高斯滤波器卷积。接下来，我们用尺度收缩的$I$重复第一步的卷积工作。至此我们得到了有不同的$\sigma$和图片尺度的高斯金字塔（如图三左），接着将临近的高斯卷积图像相减得到高斯差分(Difference of Gaussians)，如图三右：<br>$$<br>DOG(\sigma)=(G(k\sigma)-G(\sigma))*I<br>$$<br><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/8.3.png" alt=""></p>
+<p>考虑一个图片$I$。首先，我们将$I$与有不同$\sigma$的高斯滤波器卷积。接下来，我们用尺度收缩的$I$重复第一步的卷积工作。至此我们得到了有不同的$\sigma$和图片尺度的高斯金字塔（如图三左），接着将临近的高斯卷积图像相减得到高斯差分(Difference of Gaussians)，如图三右：</p>
+<script type="math/tex; mode=display">
+DOG(\sigma)=(G(k\sigma)-G(\sigma))*I</script><p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/8.3.png" alt=""></p>
 <p>直观来讲，高斯差分捕捉了$I$在不同尺度下的细节，也即保留了$\sigma_1$和$\sigma_2$之间不同的细节。$\sigma$越大，高斯差分捕捉到的细节越粗糙。如下图</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/8.6.png" alt=""></p>
 <p>有了x-y尺度空间上的高斯差分金字塔， 现在我们可以在3D空间上检测局部极值以检测关键点和相关尺度。为了检测局部极值，我们将一个坐标和它的26个邻居（3D空间上，见下图），若该坐标大于或者小于26个邻居，则为局部极值。</p>
@@ -846,7 +848,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

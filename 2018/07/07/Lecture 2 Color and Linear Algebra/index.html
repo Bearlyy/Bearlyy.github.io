@@ -467,7 +467,7 @@
 <p><strong>General P Norm</strong> $||x||_{p}=(\sum\limits_{i=1}^{n}x_{i}^{p})^{1/p}$</p>
 <p><strong>Matrix Norm</strong>  $||A||_{F}=\sqrt{\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}A^{2}_{ij}}=\sqrt{tr(A^{T}A)}$</p>
 <p><strong>Inner or Dot Product</strong> 内积或点乘，返回 <strong>Projection</strong>。如果B是一个单位向量，则A·B返回A在B方向上的长度</p>
-<p><strong>Determinant</strong> $det(A)$返回一个标量，$A=\left [ \begin{matrix} a &amp; b \ c &amp; d \end{matrix} \right ]  $ 则$det(A)=ad-bc$</p>
+<p><strong>Determinant</strong> $det(A)$返回一个标量，$A=\left [ \begin{matrix} a &amp; b \\ c &amp; d \end{matrix} \right ]  $ 则$det(A)=ad-bc$</p>
 <p>性质：</p>
 <ul>
 <li>$det(A^{-1})=1/det(A)$</li>
@@ -844,7 +844,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

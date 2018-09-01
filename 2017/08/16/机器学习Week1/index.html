@@ -386,7 +386,7 @@
       
         <h2 id="课程中的一些缩写："><a href="#课程中的一些缩写：" class="headerlink" title="课程中的一些缩写："></a>课程中的一些缩写：</h2><p>m：训练集中样本的数目<br>x’s：输入变量/特称变量<br>y’s：输出变量/目标变量<br>（x(i),y(i)）:第i个变量<br>h:hypothesis（假设），表示算法输出的函数。一个特有名词，没有为什么，没有。</p>
 <h2 id="机器学习的定义"><a href="#机器学习的定义" class="headerlink" title="机器学习的定义"></a>机器学习的定义</h2><p>A computer program is said to learn from experience E with respect to some task T and some performance measure P if its performance on T, as measured by P, improves with experience E.<br>Suppose we feed a learning algorithm a lot of historical weather<br>data, and have it learn to predict weather.</p>
-<p>T–需要解决的任务，E–大量的数据（经验），P–性能度量值（评判标准）</p>
+<p>T—需要解决的任务，E—大量的数据（经验），P—性能度量值（评判标准）</p>
 <h2 id="监督学习（Supervised-Learning）"><a href="#监督学习（Supervised-Learning）" class="headerlink" title="监督学习（Supervised Learning）"></a>监督学习（Supervised Learning）</h2><p>对于数据集中的每个数据， 都有相应的正确答案，（训练集） 算法就是基于这些来做出预测。分为<strong> 回归问题（Regression） </strong>和<strong> 分类问题（Classification） </strong><br>回归问题：根据大量数据推测其他具体数据的情况<br>分类问题：是与否，例如：predict whether or not it will be raining at 5pm<br>tomorrow. </p>
 <h2 id="无监督学习（Unsupervised-Learning）"><a href="#无监督学习（Unsupervised-Learning）" class="headerlink" title="无监督学习（Unsupervised Learning）"></a>无监督学习（Unsupervised Learning）</h2><p>只有一个一样数据集，没有属性或者标签，通过无监督学习可以判定该数据集所属的聚类（cluster）</p>
 <h2 id="代价函数（Cost-Function）与梯度下降算法（Gradient-Descent）"><a href="#代价函数（Cost-Function）与梯度下降算法（Gradient-Descent）" class="headerlink" title="代价函数（Cost Function）与梯度下降算法（Gradient Descent）"></a>代价函数（Cost Function）与梯度下降算法（Gradient Descent）</h2><h3 id="代价函数（Cost-Function）"><a href="#代价函数（Cost-Function）" class="headerlink" title="代价函数（Cost Function）"></a>代价函数（Cost Function）</h3><p><img src="http://i.imgur.com/PMEpNDb.png" alt=""><br>目标即为求出最小参数值</p>
@@ -754,7 +754,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

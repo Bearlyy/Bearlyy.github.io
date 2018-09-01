@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="Lecture 3 Linear Algebra Primer Part 2Transformation Matrices矩阵可以用多种方式将向量转换，最简单的例子是缩放： $\left [ \begin{matrix} s_{x} &amp;amp; 0 \ 0 &amp;amp; s_{y} \end{matrix} \right ]  $ x $\left [ \begin{matrix} x \ y \e">
+<meta name="description" content="Lecture 3 Linear Algebra Primer Part 2Transformation Matrices矩阵可以用多种方式将向量转换，最简单的例子是缩放： $\left [ \begin{matrix} s_{x} &amp;amp; 0 \\ 0 &amp;amp; s_{y} \end{matrix} \right ]  $ x $\left [ \begin{matrix} x \\ y">
 <meta name="keywords" content="计算机视觉,CS131">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS131 Lecture 3 Linear Algebra Primer Part 2">
 <meta property="og:url" content="http://yoursite.com/2018/07/08/Lecture 3 Linear Algebra Primer Part 2/index.html">
 <meta property="og:site_name" content="Xiong&#39;s Blog">
-<meta property="og:description" content="Lecture 3 Linear Algebra Primer Part 2Transformation Matrices矩阵可以用多种方式将向量转换，最简单的例子是缩放： $\left [ \begin{matrix} s_{x} &amp;amp; 0 \ 0 &amp;amp; s_{y} \end{matrix} \right ]  $ x $\left [ \begin{matrix} x \ y \e">
+<meta property="og:description" content="Lecture 3 Linear Algebra Primer Part 2Transformation Matrices矩阵可以用多种方式将向量转换，最简单的例子是缩放： $\left [ \begin{matrix} s_{x} &amp;amp; 0 \\ 0 &amp;amp; s_{y} \end{matrix} \right ]  $ x $\left [ \begin{matrix} x \\ y">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/3.2.png">
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/3.3.png">
@@ -102,7 +102,7 @@
 <meta property="og:updated_time" content="2018-09-01T15:44:23.669Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS131 Lecture 3 Linear Algebra Primer Part 2">
-<meta name="twitter:description" content="Lecture 3 Linear Algebra Primer Part 2Transformation Matrices矩阵可以用多种方式将向量转换，最简单的例子是缩放： $\left [ \begin{matrix} s_{x} &amp;amp; 0 \ 0 &amp;amp; s_{y} \end{matrix} \right ]  $ x $\left [ \begin{matrix} x \ y \e">
+<meta name="twitter:description" content="Lecture 3 Linear Algebra Primer Part 2Transformation Matrices矩阵可以用多种方式将向量转换，最简单的例子是缩放： $\left [ \begin{matrix} s_{x} &amp;amp; 0 \\ 0 &amp;amp; s_{y} \end{matrix} \right ]  $ x $\left [ \begin{matrix} x \\ y">
 <meta name="twitter:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/3.2.png">
 
 
@@ -387,15 +387,15 @@
 
       
         <h1 id="Lecture-3-Linear-Algebra-Primer-Part-2"><a href="#Lecture-3-Linear-Algebra-Primer-Part-2" class="headerlink" title="Lecture 3 Linear Algebra Primer Part 2"></a>Lecture 3 Linear Algebra Primer Part 2</h1><h2 id="Transformation-Matrices"><a href="#Transformation-Matrices" class="headerlink" title="Transformation Matrices"></a>Transformation Matrices</h2><p>矩阵可以用多种方式将向量转换，最简单的例子是缩放：</p>
-<p>$\left [ \begin{matrix} s_{x} &amp; 0 \ 0 &amp; s_{y} \end{matrix} \right ]  $ x $\left [ \begin{matrix} x \ y \end{matrix} \right ]$ = $\left [ \begin{matrix} s_{x} x \  s_{y}y \end{matrix} \right ]$</p>
+<p>$\left [ \begin{matrix} s_{x} &amp; 0 \\ 0 &amp; s_{y} \end{matrix} \right ]  $ x $\left [ \begin{matrix} x \\ y \end{matrix} \right ]$ = $\left [ \begin{matrix} s_{x} x \\  s_{y}y \end{matrix} \right ]$</p>
 <h3 id="Rotate-旋转"><a href="#Rotate-旋转" class="headerlink" title="Rotate 旋转"></a>Rotate 旋转</h3><p>也可以用矩阵来逆时针旋转向量$\theta$角：</p>
-<p>$x’=cos\theta x-sin\theta y\ y’=cos\theta y+sin\theta x\ R=\left [ \begin{matrix} cos\theta &amp; -sin\theta \ sin\theta &amp; cos\theta \end{matrix} \right ]  $</p>
+<p>$x’=cos\theta x-sin\theta y\\ y’=cos\theta y+sin\theta x\\ R=\left [ \begin{matrix} cos\theta &amp; -sin\theta \\ sin\theta &amp; cos\theta \end{matrix} \right ]  $</p>
 <h3 id="Scaling-缩放"><a href="#Scaling-缩放" class="headerlink" title="Scaling 缩放"></a>Scaling 缩放</h3><p><strong>Homogeneous Coordinates</strong> 齐次坐标，简而言之，用$N+1$维向量表示$N$维向量。</p>
 <p><strong>Cartesian</strong> 笛卡尔坐标，也就是常说的xy坐标系</p>
 <p>笛卡尔坐标于齐次坐标的转换：$(x,y,w)=(x/w,y/w)$</p>
 <p>所以，为了向原有向量添加常数，以下运用到齐次坐标的原理</p>
-<p>$P=\left [ \begin{matrix} x \ y \\1 \end{matrix} \right ],S= \left [ \begin{matrix} s_{x}&amp;0&amp;0 \ 0&amp; s_{y} &amp;0 \\0&amp;0&amp;1 \end{matrix} \right ] \ P’=S·P$</p>
-<h3 id="Translating-移动"><a href="#Translating-移动" class="headerlink" title="Translating 移动"></a>Translating 移动</h3><p>$P=\left [ \begin{matrix} x \ y \\1 \end{matrix} \right ],T= \left [ \begin{matrix} 1&amp;0&amp;t_{x} \ 0&amp; 1 &amp;t_{y} \\0&amp;0&amp;1 \end{matrix} \right ] \ P’=T·P$</p>
+<p>$P=\left [ \begin{matrix} x \\ y \\1 \end{matrix} \right ],S= \left [ \begin{matrix} s_{x}&amp;0&amp;0 \\ 0&amp; s_{y} &amp;0 \\0&amp;0&amp;1 \end{matrix} \right ] \\ P’=S·P$</p>
+<h3 id="Translating-移动"><a href="#Translating-移动" class="headerlink" title="Translating 移动"></a>Translating 移动</h3><p>$P=\left [ \begin{matrix} x \\ y \\1 \end{matrix} \right ],T= \left [ \begin{matrix} 1&amp;0&amp;t_{x} \\ 0&amp; 1 &amp;t_{y} \\0&amp;0&amp;1 \end{matrix} \right ] \\ P’=T·P$</p>
 <p>以上旋转、缩放、移动可以同时应用，即$P’=T·R·S·P$。作用顺序从右往左（可以交换），前式表示先移动后旋转再缩放。</p>
 <h2 id="Matrix-Inverse-逆"><a href="#Matrix-Inverse-逆" class="headerlink" title="Matrix Inverse(逆)"></a>Matrix Inverse(逆)</h2><ul>
 <li>$AA^{-1}=I$</li>
@@ -810,7 +810,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

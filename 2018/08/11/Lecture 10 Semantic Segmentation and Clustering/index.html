@@ -357,7 +357,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,994
+                  2,869
                 </span>
               
 
@@ -373,7 +373,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  11
+                  10
                 </span>
               
             </div>
@@ -406,8 +406,16 @@
 <h2 id="Agglomerative-Clustering"><a href="#Agglomerative-Clustering" class="headerlink" title="Agglomerative Clustering"></a>Agglomerative Clustering</h2><p>聚类是一种非监督学习：多个数据点$x_1,…,x_n\in R^D$，在不知道正确标签/类别的情况下，将它们组合成一类。凝聚聚类(Agglomerative Clustering)是聚类的一种常用算法。</p>
 <p>凝聚聚类的基本思想是通过检测点之间的相似度，决定这些点如何以明智的方式组合。首先，我们需要决定如何检测相似度。</p>
 <h3 id="Distance-Measures"><a href="#Distance-Measures" class="headerlink" title="Distance Measures"></a>Distance Measures</h3><p>有许多的距离公式，但很难决定什么公式能形成好的距离矩阵。所以我们只列出两个标准、经过研究的距离矩阵。</p>
-<h4 id="Euclidean-Distance"><a href="#Euclidean-Distance" class="headerlink" title="Euclidean Distance"></a>Euclidean Distance</h4><p>欧几里德距离考虑两个点$x,x’$的角度和大小来计算距离。<br>$$<br>sim(x,x’)=x^Tx’<br>$$<br>这种距离测量没有将矢量正规化，所以它们的大小是相似度计算的一个因素。</p>
-<h4 id="Cosine-Similarity-Measure"><a href="#Cosine-Similarity-Measure" class="headerlink" title="Cosine Similarity Measure"></a>Cosine Similarity Measure</h4><p>这种距离计算只考虑两个点之间的角度。注意，和欧几里德距离不同，余弦相似度测量只体现相似度，而不体现距离。且点和自身之间的余弦相似度等于1.<br>$$<br>\begin{align}<br>sim(x,x’)&amp;=cos(\theta)\\<br>&amp;=\frac{x^Tx’}{||x||·||x’||}\\<br>&amp;=\frac{x^Tx’}{\sqrt{x^Tx}\sqrt{x’^Tx’}}<br>\end{align}<br>$$<br>根据矢量大小的划分导致距离矩阵的正规化，并且保证了测量只取决于两个物体间的角度。</p>
+<h4 id="Euclidean-Distance"><a href="#Euclidean-Distance" class="headerlink" title="Euclidean Distance"></a>Euclidean Distance</h4><p>欧几里德距离考虑两个点$x,x’$的角度和大小来计算距离。</p>
+<script type="math/tex; mode=display">
+sim(x,x')=x^Tx'</script><p>这种距离测量没有将矢量正规化，所以它们的大小是相似度计算的一个因素。</p>
+<h4 id="Cosine-Similarity-Measure"><a href="#Cosine-Similarity-Measure" class="headerlink" title="Cosine Similarity Measure"></a>Cosine Similarity Measure</h4><p>这种距离计算只考虑两个点之间的角度。注意，和欧几里德距离不同，余弦相似度测量只体现相似度，而不体现距离。且点和自身之间的余弦相似度等于1.</p>
+<script type="math/tex; mode=display">
+\begin{align}
+sim(x,x')&=cos(\theta)\\
+&=\frac{x^Tx'}{||x||·||x'||}\\
+&=\frac{x^Tx'}{\sqrt{x^Tx}\sqrt{x'^Tx'}}
+\end{align}</script><p>根据矢量大小的划分导致距离矩阵的正规化，并且保证了测量只取决于两个物体间的角度。</p>
 <h3 id="Desirable-Clustering-Properties"><a href="#Desirable-Clustering-Properties" class="headerlink" title="Desirable Clustering Properties"></a>Desirable Clustering Properties</h3><p>当我们选择特定的聚类算法时，需要考虑以下几个性质：</p>
 <ol>
 <li>可拓展性 - 在计算能力和容量方面</li>
@@ -436,16 +444,22 @@
 </ol>
 <h3 id="Different-measures-of-nearest-clusters"><a href="#Different-measures-of-nearest-clusters" class="headerlink" title="Different measures of nearest clusters"></a>Different measures of nearest clusters</h3><p>当我们分割数据集时，有三个主要的模型可以用来决定集群中点之间的距离：</p>
 <ol>
-<li><p>Single link<br>$$<br>d(C_i,C_j)=\min_{x\in C_i,x’\in C_j}d(x,x’)<br>$$<br>通过单链接，我们利用两个集群中点之间的最小距离来实现聚类。</p>
+<li><p>Single link</p>
+<script type="math/tex; mode=display">
+d(C_i,C_j)=\min_{x\in C_i,x'\in C_j}d(x,x')</script><p>通过单链接，我们利用两个集群中点之间的最小距离来实现聚类。</p>
 <p>这种方法被称为最小生成树。</p>
 <p>我们可以在集群之间的距离超过阈值时停止聚类。这种算法通常生成长、瘦的类（因为我们只考虑集群中有最小距离的点，所以很容易将距离较远的点连接到同一集群中）。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/10.6.PNG" alt=""></p>
 </li>
-<li><p>Complete link<br>$$<br>d(C_i,C_j)=\max_{x\in C_i,x’\in C_j}d(x,x’)<br>$$<br>通过完整链接，我们利用两个集群中点之间的最大距离来实现聚类。</p>
+<li><p>Complete link</p>
+<script type="math/tex; mode=display">
+d(C_i,C_j)=\max_{x\in C_i,x'\in C_j}d(x,x')</script><p>通过完整链接，我们利用两个集群中点之间的最大距离来实现聚类。</p>
 <p>这种算法通常生成紧凑、密集的集群（因为它偏向把所有点放在一起）。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/10.7.PNG" alt=""></p>
 </li>
-<li><p>Average link<br>$$<br>d(C_i,C_j)=\frac{\sum_{x\in C_i,x’\in C_j}d(x,x’)}{|C_i|·|C_j|}<br>$$<br>通过平均链接，我们利用两个集群中点之间的平均距离来实现聚类。</p>
+<li><p>Average link</p>
+<script type="math/tex; mode=display">
+d(C_i,C_j)=\frac{\sum_{x\in C_i,x'\in C_j}d(x,x')}{|C_i|·|C_j|}</script><p>通过平均链接，我们利用两个集群中点之间的平均距离来实现聚类。</p>
 <p>这种模型对噪音具有强健性，因为距离不像单连接和完整连接一样，只取决于单独的一对点。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/10.8.PNG" alt=""></p>
 </li>
@@ -467,7 +481,9 @@
 <h2 id="K-Means-Clustering"><a href="#K-Means-Clustering" class="headerlink" title="K-Means Clustering"></a>K-Means Clustering</h2><p>K-means聚类：确定一定数量固定的集群中心，将每个点标记到距离最近的集群中。k-means聚类和凝聚聚类最大的不同在于，k-means要求输入集群数目。</p>
 <h3 id="Image-Segmentation-Example"><a href="#Image-Segmentation-Example" class="headerlink" title="Image Segmentation Example"></a>Image Segmentation Example</h3><p>下图上方可以简单的通过像素密度不同分割，但是下方因为包含噪音，所以我们要用K-means分割。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/10.9.PNG" alt=""></p>
-<p>用K-means的目的是找到三个集群中心作为强度代表，并将每个像素标记到最接近的集群。最佳的集群中心要能够最小化所有点和最近集群中心$c_i$之间的距离平方和(Sum of Square Distance, SSD)：<br>$$<br>SSD=\sum_{i\in clusters} \sum_{x\in cluster_i}(x-c_i)^2<br>$$<br>当我们用k-means处理数据集时，我们的目标是最小化每个集群中所有数据点的方差。我们想用一定数目的集群提供尽可能多的信息。可以用以下方程描述：</p>
+<p>用K-means的目的是找到三个集群中心作为强度代表，并将每个像素标记到最接近的集群。最佳的集群中心要能够最小化所有点和最近集群中心$c_i$之间的距离平方和(Sum of Square Distance, SSD)：</p>
+<script type="math/tex; mode=display">
+SSD=\sum_{i\in clusters} \sum_{x\in cluster_i}(x-c_i)^2</script><p>当我们用k-means处理数据集时，我们的目标是最小化每个集群中所有数据点的方差。我们想用一定数目的集群提供尽可能多的信息。可以用以下方程描述：</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/10.10.PNG" alt=""></p>
 <h3 id="Algorithm-1"><a href="#Algorithm-1" class="headerlink" title="Algorithm"></a>Algorithm</h3><p>我们从随机初始化k个集群开始。接着我们运行一个迭代过程，该过程会计算集群成员和集群中心，直到达到最大迭代次数或集群中心值收敛。该过程如下：</p>
 <ol>
@@ -477,10 +493,12 @@
 <li>或者对$k$进行贪婪选择，最小化剩余。</li>
 </ul>
 </li>
-<li><p>计算$\delta^t$：将每个点聚集到最近的中心点。像在凝聚聚类中一样，我们可以用欧几里德距离或者余弦距离来计算。<br>$$<br>\delta^t=\min_\delta \frac{1}{N}\sum^N_j \sum^K_i \delta^{t-1}_{ij}(c^{t-1}_i-x_j)^2<br>$$</p>
-</li>
-<li><p>计算$c^t$：更新集群中心为每个集群的均值点。<br>$$<br>c^t=\min_c \frac{1}{N}\sum^N_j \sum^K_i \delta^{t-1}_{ij}(c^{t-1}_i-x_j)^2<br>$$</p>
-</li>
+<li><p>计算$\delta^t$：将每个点聚集到最近的中心点。像在凝聚聚类中一样，我们可以用欧几里德距离或者余弦距离来计算。</p>
+<script type="math/tex; mode=display">
+\delta^t=\min_\delta \frac{1}{N}\sum^N_j \sum^K_i \delta^{t-1}_{ij}(c^{t-1}_i-x_j)^2</script></li>
+<li><p>计算$c^t$：更新集群中心为每个集群的均值点。</p>
+<script type="math/tex; mode=display">
+c^t=\min_c \frac{1}{N}\sum^N_j \sum^K_i \delta^{t-1}_{ij}(c^{t-1}_i-x_j)^2</script></li>
 <li><p>$t=t+1$，重复2-3，直到集群中心点$c^t$停止改变（收敛）或者算法达到最大迭代次数。</p>
 </li>
 </ol>
@@ -890,7 +908,24 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
