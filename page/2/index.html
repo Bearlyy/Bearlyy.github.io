@@ -269,217 +269,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/22/机器学习Week3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LY Xiong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xiong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/22/机器学习Week3/" itemprop="url">机器学习Week3</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T00:00:00+08:00">
-                2017-08-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  756
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="分类问题（classification-problems）"><a href="#分类问题（classification-problems）" class="headerlink" title="分类问题（classification problems）"></a>分类问题（classification problems）</h2><p>y=0 or 1</p>
-<h3 id="回归分析-逻辑分析-logistic-regression"><a href="#回归分析-逻辑分析-logistic-regression" class="headerlink" title="回归分析/逻辑分析(logistic regression):"></a>回归分析/逻辑分析(logistic regression):</h3><p>目标：令h(x)位于[0,1]之间</p>
-<h4 id="逻辑函数-S型函数"><a href="#逻辑函数-S型函数" class="headerlink" title="逻辑函数/S型函数:"></a>逻辑函数/S型函数:</h4><p><img src="http://i.imgur.com/ZjWOYQy.png" alt=""></p>
-<p>图像:</p>
-<p><img src="http://i.imgur.com/flCI9zQ.png" alt=""></p>
-<p>x=0，y=0.5；x=正无穷，y=1；x=负无穷，y=0；</p>
-<p>概率角度：P(y=0|x;θ)+P(y=1|x;θ)=1，P(y=1|x;θ)表示在给定x数值时y=1的概率。</p>
-<p>由图可知，要使得h&gt;0(y=1),就要z&gt;0，所以是theta定义了决策边界，而训练集用于拟合参数theta</p>
-<h3 id="一对多问题（One-vs-all）"><a href="#一对多问题（One-vs-all）" class="headerlink" title="一对多问题（One-vs-all）"></a>一对多问题（One-vs-all）</h3><p>若有个分类，则将问题分成n个1/0简单分类问题。每个简单分类问题中，1代表n类中的一类，0代表剩余的n-1类。</p>
-<p>计算出每个简单分类问题y=1的概率，最终概率即为n个概率中该分类概率最大的。</p>
-<p><img src="http://i.imgur.com/TxtyNGW.png" alt=""></p>
-<h2 id="高级优化算法-Advanced-Optimization"><a href="#高级优化算法-Advanced-Optimization" class="headerlink" title="高级优化算法(Advanced Optimization)"></a>高级优化算法(Advanced Optimization)</h2><p>如：BFGS（变尺度法）、L-BFGS（限制变尺度法）、Conjugate gradient(共轭梯度法)</p>
-<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>不用手动选择α，内部有智能的线性搜索算法（line search）,可以自动尝试各种α</li>
-<li>速度比梯度下降法快</li>
-<li>缺点只有复杂</li>
-</ul>
-<h3 id="在Matlab使用高级优化算法"><a href="#在Matlab使用高级优化算法" class="headerlink" title="在Matlab使用高级优化算法"></a>在Matlab使用高级优化算法</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[jVal, gradient]</span> = <span class="title">costFunction</span><span class="params">(theta)</span></span></span><br><span class="line">  jVal = [...code to compute J(theta)...];</span><br><span class="line">  gradient = [...code to compute derivative of J(theta)...]; <span class="comment">%J(theta)对theta偏导数</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">options = optimset(<span class="string">'GradObj'</span>, <span class="string">'on'</span>, <span class="string">'MaxIter'</span>, <span class="number">100</span>); <span class="comment">%储存option的数据结构，'GradObj', 'on'设置梯度目标参数为on打开，'MaxIter', 100最大迭代次数。</span></span><br><span class="line">initialTheta = <span class="built_in">zeros</span>(<span class="number">2</span>,<span class="number">1</span>); <span class="comment">%theta的最初猜想值</span></span><br><span class="line">   [optTheta, functionVal, exitFlag] = fminunc(@costFunction, initialTheta, options); <span class="comment">%fminunc是无约束最小化函数，@为指向costFunction的指针。</span></span><br></pre></td></tr></table></figure>
-<p>运行结果中exitFlag=1表示已经收敛，此时functionVal的值接近0</p>
-<p><em>θ必须是二维及以上列向量</em></p>
-<h2 id="过度拟合-overfitting"><a href="#过度拟合-overfitting" class="headerlink" title="过度拟合(overfitting)"></a>过度拟合(overfitting)</h2><p><img src="http://i.imgur.com/sYHIu2V.png" alt=""></p>
-<p>图一表示未拟合(underfitting)或者HIgh bios(高偏差)；图三表示表示过度拟合或者高方差(hegh variance)。</p>
-<p>定义：在有很多数据的情况下，曲线可能很好的拟合已有曲线。但是无法泛化(generate)新数据。</p>
-<p>解决：1.减少选取的变量数。人工选取更重要的变量或者用模型选择算法自动选择变量。</p>
-<p>2.正规化(regularization)</p>
-<p>保存所有变量，不过减少数量级或者θ(j)的大小</p>
-<h3 id="正规化"><a href="#正规化" class="headerlink" title="正规化"></a>正规化</h3><p>通过’惩罚’某些参数，可以使得曲线更加接近合适的曲线。为了使正规化更好的运行，需要选择合适的λ参数。</p>
-<p><img src="http://i.imgur.com/wwybISj.png" alt=""></p>
-<p>同样，正规化改变了J(θ)，也要改变梯度下降和正规方程算法中θ的递归式。在正规方程算法中，只要λ&gt;0，则矩阵可逆。</p>
-<hr>
-<p>正文结束</p>
-<hr>
-<p>一点吐槽：用了chrome和印象笔记快两年了，今天才发现印象笔记剪藏chrome插件有多好用，coursera上的文本基本都能一键收藏啊，还不用每次为了做笔记辛苦弄公式传图片。</p>
-<p>大概以后就可以少写很多笔记了吧（各种偷懒）。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/22/机器学习错题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -680,6 +469,217 @@
 <p>| Your Answer                              |             | Score | Explanation                              |<br>| —————————————- | :———: | :—: | :————————————— |<br>| Use a different optimization method since using gradient descent to train logistic regression might result in a local minimum. | Not Correct |   0   | The logistic regression cost function is convex, so gradient descent will always find the global minimum. |<br>| Try using a neural network with a large number of hidden units. |   Correct   |  0.5  | A neural network with many hidden units is a more complex (higher variance) model than logistic regression, so it is less likely to underfit the data. |<br>| Reduce the number of examples in the training set. | Not Correct |   0   | While you can improve accuracy on the training set by removing examples, doing so results in a worse model that will not generalize as well. |<br>| Use an SVM with a Gaussian Kernel.       |   Correct   |  0.5  | By using a Gaussian kernel, your model will have greater complexity and can avoid underfitting the data. |</p>
 </li>
 </ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/22/机器学习Week3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LY Xiong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/22/机器学习Week3/" itemprop="url">机器学习Week3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T00:00:00+08:00">
+                2017-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  756
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="分类问题（classification-problems）"><a href="#分类问题（classification-problems）" class="headerlink" title="分类问题（classification problems）"></a>分类问题（classification problems）</h2><p>y=0 or 1</p>
+<h3 id="回归分析-逻辑分析-logistic-regression"><a href="#回归分析-逻辑分析-logistic-regression" class="headerlink" title="回归分析/逻辑分析(logistic regression):"></a>回归分析/逻辑分析(logistic regression):</h3><p>目标：令h(x)位于[0,1]之间</p>
+<h4 id="逻辑函数-S型函数"><a href="#逻辑函数-S型函数" class="headerlink" title="逻辑函数/S型函数:"></a>逻辑函数/S型函数:</h4><p><img src="http://i.imgur.com/ZjWOYQy.png" alt=""></p>
+<p>图像:</p>
+<p><img src="http://i.imgur.com/flCI9zQ.png" alt=""></p>
+<p>x=0，y=0.5；x=正无穷，y=1；x=负无穷，y=0；</p>
+<p>概率角度：P(y=0|x;θ)+P(y=1|x;θ)=1，P(y=1|x;θ)表示在给定x数值时y=1的概率。</p>
+<p>由图可知，要使得h&gt;0(y=1),就要z&gt;0，所以是theta定义了决策边界，而训练集用于拟合参数theta</p>
+<h3 id="一对多问题（One-vs-all）"><a href="#一对多问题（One-vs-all）" class="headerlink" title="一对多问题（One-vs-all）"></a>一对多问题（One-vs-all）</h3><p>若有个分类，则将问题分成n个1/0简单分类问题。每个简单分类问题中，1代表n类中的一类，0代表剩余的n-1类。</p>
+<p>计算出每个简单分类问题y=1的概率，最终概率即为n个概率中该分类概率最大的。</p>
+<p><img src="http://i.imgur.com/TxtyNGW.png" alt=""></p>
+<h2 id="高级优化算法-Advanced-Optimization"><a href="#高级优化算法-Advanced-Optimization" class="headerlink" title="高级优化算法(Advanced Optimization)"></a>高级优化算法(Advanced Optimization)</h2><p>如：BFGS（变尺度法）、L-BFGS（限制变尺度法）、Conjugate gradient(共轭梯度法)</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>不用手动选择α，内部有智能的线性搜索算法（line search）,可以自动尝试各种α</li>
+<li>速度比梯度下降法快</li>
+<li>缺点只有复杂</li>
+</ul>
+<h3 id="在Matlab使用高级优化算法"><a href="#在Matlab使用高级优化算法" class="headerlink" title="在Matlab使用高级优化算法"></a>在Matlab使用高级优化算法</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[jVal, gradient]</span> = <span class="title">costFunction</span><span class="params">(theta)</span></span></span><br><span class="line">  jVal = [...code to compute J(theta)...];</span><br><span class="line">  gradient = [...code to compute derivative of J(theta)...]; <span class="comment">%J(theta)对theta偏导数</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">options = optimset(<span class="string">'GradObj'</span>, <span class="string">'on'</span>, <span class="string">'MaxIter'</span>, <span class="number">100</span>); <span class="comment">%储存option的数据结构，'GradObj', 'on'设置梯度目标参数为on打开，'MaxIter', 100最大迭代次数。</span></span><br><span class="line">initialTheta = <span class="built_in">zeros</span>(<span class="number">2</span>,<span class="number">1</span>); <span class="comment">%theta的最初猜想值</span></span><br><span class="line">   [optTheta, functionVal, exitFlag] = fminunc(@costFunction, initialTheta, options); <span class="comment">%fminunc是无约束最小化函数，@为指向costFunction的指针。</span></span><br></pre></td></tr></table></figure>
+<p>运行结果中exitFlag=1表示已经收敛，此时functionVal的值接近0</p>
+<p><em>θ必须是二维及以上列向量</em></p>
+<h2 id="过度拟合-overfitting"><a href="#过度拟合-overfitting" class="headerlink" title="过度拟合(overfitting)"></a>过度拟合(overfitting)</h2><p><img src="http://i.imgur.com/sYHIu2V.png" alt=""></p>
+<p>图一表示未拟合(underfitting)或者HIgh bios(高偏差)；图三表示表示过度拟合或者高方差(hegh variance)。</p>
+<p>定义：在有很多数据的情况下，曲线可能很好的拟合已有曲线。但是无法泛化(generate)新数据。</p>
+<p>解决：1.减少选取的变量数。人工选取更重要的变量或者用模型选择算法自动选择变量。</p>
+<p>2.正规化(regularization)</p>
+<p>保存所有变量，不过减少数量级或者θ(j)的大小</p>
+<h3 id="正规化"><a href="#正规化" class="headerlink" title="正规化"></a>正规化</h3><p>通过’惩罚’某些参数，可以使得曲线更加接近合适的曲线。为了使正规化更好的运行，需要选择合适的λ参数。</p>
+<p><img src="http://i.imgur.com/wwybISj.png" alt=""></p>
+<p>同样，正规化改变了J(θ)，也要改变梯度下降和正规方程算法中θ的递归式。在正规方程算法中，只要λ&gt;0，则矩阵可逆。</p>
+<hr>
+<p>正文结束</p>
+<hr>
+<p>一点吐槽：用了chrome和印象笔记快两年了，今天才发现印象笔记剪藏chrome插件有多好用，coursera上的文本基本都能一键收藏啊，还不用每次为了做笔记辛苦弄公式传图片。</p>
+<p>大概以后就可以少写很多笔记了吧（各种偷懒）。</p>
 
           
         
@@ -1405,10 +1405,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
-                
+                </a>
               </div>
             
 
@@ -1416,10 +1416,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 
