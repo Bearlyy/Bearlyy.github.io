@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -146,7 +146,7 @@
 
 
 
-  <title>CS131 Lecture 13 Face Recognition and LDA | Xiong's Blog</title>
+  <title>CS131 Lecture 13 Face Recognition and LDA | Xiong's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -165,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -477,12 +477,12 @@
 <h3 id="General-Idea"><a href="#General-Idea" class="headerlink" title="General Idea"></a>General Idea</h3><p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/13.6.png" alt=""></p>
 <p>LDA用两个值运行：类间散度、类内散度。类间散度指不同类之间的距离，类内散度指类内点之间的距离。LDA最大化类间散度，最小化类内散度。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/13.3.png" alt=""></p>
-<h3 id="Mathematical-Formulation-of-LDA-with-2-Variables"><a href="#Mathematical-Formulation-of-LDA-with-2-Variables" class="headerlink" title="Mathematical Formulation of LDA with 2 Variables"></a>Mathematical Formulation of LDA with 2 Variables</h3><p>我们想要找到一个投影$w$在$x\in R^n$空间中映射出0和1的点到一个新的空间$z\in R^m$，例如$z=w^Tx$。其中，$m&lt;n$，且投影必须最大化以下公式：<br>$$<br>J(w)=\frac{S_B\space when\space projected\space onto\space w}{S_W\space when\space projected\space onto\space w}<br>$$<br>公式中，$S_B$代表类间散度，$S_W$代表类内散度。接下来定义一个代表类内点的平均的变量$\mu_i$：<br>$$<br>\mu_i=E_{X|Y}[X|Y=i]<br>$$<br>定义变量$\Sigma_i$代表类的协方差矩阵：<br>$$<br>\Sigma_i=E_{X|Y}[(X-\mu_i)(X-\mu_i)^T|Y=i]<br>$$<br>用以上变量，可以定义$S_B$和$S_W$：<br>$$<br>S_B=(\mu_1-\mu_0)^2=(\mu_1-\mu_0)(\mu_1-\mu_0)^T\<br>S_W=(\Sigma_1+\Sigma_0)<br>$$<br>将变量放回原式$J(w)$可得：<br>$$<br>J(w)=\frac{w^T(\mu_1-\mu_0)(\mu_1-\mu_0)^Tw}{w^T(\Sigma_1+\Sigma_0)w}<br>$$<br>我们要最大化$J(w)$，即最大化分子，保持分母为常数：<br>$$<br>\max_{w^T(\Sigma_1+\Sigma_0)w=K}w^T(\mu_1-\mu_0)(\mu_1-\mu_0)^Tw<br>$$<br>用拉格朗日乘数法，我们定义拉格朗日算子为：<br>$$<br>L=w^TS_Bw-\lambda(w^TS_Ww-K)=w^T(S_B-\lambda S_W)w+K<br>$$<br>我们必须最大化$L$对$\lambda$和$w$的值。我们可以通过用其关于$w$的梯度和找到关键点的位置：<br>$$<br>\nabla_wL=2(S_B-\lambda S_W)w=0<br>$$<br>用这个公式，我们可以得到关键点位置：<br>$$<br>S_Bw=\lambda S_Ww<br>$$<br>这是一个广义的特征向量问题。在$S_W^{-1}=(\Sigma_1+\Sigma_0)^{-1}$存在的情况下，我们得到：<br>$$<br>S_W^{-1}S_Bw=\lambda w<br>$$<br>代入$S_B$得：<br>$$<br>S_W^{-1}(\mu_1-\mu_0)=\frac\lambda\alpha w<br>$$<br>$w$的大小并不重要，所以我们可以得到映射$w$：<br>$$<br>w*=S_W^{-1}(\mu_1-\mu_0)=(\Sigma_1-\Sigma_0)^{-1}(\mu_1-\mu_0)<br>$$</p>
+<h3 id="Mathematical-Formulation-of-LDA-with-2-Variables"><a href="#Mathematical-Formulation-of-LDA-with-2-Variables" class="headerlink" title="Mathematical Formulation of LDA with 2 Variables"></a>Mathematical Formulation of LDA with 2 Variables</h3><p>我们想要找到一个投影$w$在$x\in R^n$空间中映射出0和1的点到一个新的空间$z\in R^m$，例如$z=w^Tx$。其中，$m&lt;n$，且投影必须最大化以下公式：<br>$$<br>J(w)=\frac{S_B\space when\space projected\space onto\space w}{S_W\space when\space projected\space onto\space w}<br>$$<br>公式中，$S_B$代表类间散度，$S_W$代表类内散度。接下来定义一个代表类内点的平均的变量$\mu_i$：<br>$$<br>\mu_i=E_{X|Y}[X|Y=i]<br>$$<br>定义变量$\Sigma_i$代表类的协方差矩阵：<br>$$<br>\Sigma_i=E_{X|Y}[(X-\mu_i)(X-\mu_i)^T|Y=i]<br>$$<br>用以上变量，可以定义$S_B$和$S_W$：<br>$$<br>S_B=(\mu_1-\mu_0)^2=(\mu_1-\mu_0)(\mu_1-\mu_0)^T\\<br>S_W=(\Sigma_1+\Sigma_0)<br>$$<br>将变量放回原式$J(w)$可得：<br>$$<br>J(w)=\frac{w^T(\mu_1-\mu_0)(\mu_1-\mu_0)^Tw}{w^T(\Sigma_1+\Sigma_0)w}<br>$$<br>我们要最大化$J(w)$，即最大化分子，保持分母为常数：<br>$$<br>\max_{w^T(\Sigma_1+\Sigma_0)w=K}w^T(\mu_1-\mu_0)(\mu_1-\mu_0)^Tw<br>$$<br>用拉格朗日乘数法，我们定义拉格朗日算子为：<br>$$<br>L=w^TS_Bw-\lambda(w^TS_Ww-K)=w^T(S_B-\lambda S_W)w+K<br>$$<br>我们必须最大化$L$对$\lambda$和$w$的值。我们可以通过用其关于$w$的梯度和找到关键点的位置：<br>$$<br>\nabla_wL=2(S_B-\lambda S_W)w=0<br>$$<br>用这个公式，我们可以得到关键点位置：<br>$$<br>S_Bw=\lambda S_Ww<br>$$<br>这是一个广义的特征向量问题。在$S_W^{-1}=(\Sigma_1+\Sigma_0)^{-1}$存在的情况下，我们得到：<br>$$<br>S_W^{-1}S_Bw=\lambda w<br>$$<br>代入$S_B$得：<br>$$<br>S_W^{-1}(\mu_1-\mu_0)=\frac\lambda\alpha w<br>$$<br>$w$的大小并不重要，所以我们可以得到映射$w$：<br>$$<br>w*=S_W^{-1}(\mu_1-\mu_0)=(\Sigma_1-\Sigma_0)^{-1}(\mu_1-\mu_0)<br>$$</p>
 <h3 id="LDA-with-N-Variables-and-C-Classes"><a href="#LDA-with-N-Variables-and-C-Classes" class="headerlink" title="LDA with N Variables and C Classes"></a>LDA with N Variables and C Classes</h3><h4 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h4><p><strong>Variables:</strong></p>
 <ul>
-<li><p>N个样本：${x_1,…,x_N}$</p>
+<li><p>N个样本：$\{x_1,…,x_N\}$</p>
 </li>
-<li><p>C个类:${Y_1,Y_2,…,Y_C}$。每一类都有N个样本。</p>
+<li><p>C个类:$\{Y_1,Y_2,…,Y_C\}$。每一类都有N个样本。</p>
 </li>
 <li><p>每个类的平均：类$i$的平均为<br>$$<br>\mu_i=\frac 1{N_i}\sum_{x_k\in Y_i}x_k<br>$$</p>
 </li>
@@ -861,7 +861,7 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

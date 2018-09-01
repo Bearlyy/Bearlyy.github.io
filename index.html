@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -131,7 +131,7 @@
 
 
 
-  <title>Xiong's Blog</title>
+  <title>Xiong's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -150,7 +150,7 @@
     
   
 
-  <div class="container sidebar-position-left 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -436,11 +436,11 @@
 <li>射影变换（例如，移动相机）</li>
 </ul>
 <h3 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h3><p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/18.5.png" alt=""></p>
-<p>平移运动是一个点平移到另一个点。假设我们有一个在左边$(x,y)$的点$m$。应用平移运动将$m$从点$(x,y)$移动到$(x’,y’)$<br>$$<br>x’=x+b_1\<br>y’=y+b_2<br>$$<br>可以写成用其次坐标的矩阵变换：<br>$$<br>\left(\begin{matrix}<br>x’\<br>y’<br>\end{matrix}\right)<br>=\left(\begin{matrix}<br>1&amp;0&amp;b_1\<br>0&amp;1&amp;b_2<br>\end{matrix}\right)<br>\left(\begin{matrix}<br>x\<br>y\<br>1<br>\end{matrix}\right)<br>$$<br>定义$W$<br>$$<br>W(x;p)=\left(\begin{matrix}<br>1&amp;0&amp;b_1\<br>0&amp;1&amp;b_2<br>\end{matrix}\right)<br>$$<br>其中因子向量$p=\left(\begin{matrix}<br>b_1\<br>b_2<br>\end{matrix}\right)$</p>
-<p>则$W$对$p$的偏导数为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>1&amp;0\<br>0&amp;1<br>\end{matrix}\right)<br>$$<br>上式被称作雅克比行列式(Jacobian)</p>
+<p>平移运动是一个点平移到另一个点。假设我们有一个在左边$(x,y)$的点$m$。应用平移运动将$m$从点$(x,y)$移动到$(x’,y’)$<br>$$<br>x’=x+b_1\\<br>y’=y+b_2<br>$$<br>可以写成用其次坐标的矩阵变换：<br>$$<br>\left(\begin{matrix}<br>x’\\<br>y’<br>\end{matrix}\right)<br>=\left(\begin{matrix}<br>1&amp;0&amp;b_1\\<br>0&amp;1&amp;b_2<br>\end{matrix}\right)<br>\left(\begin{matrix}<br>x\\<br>y\\<br>1<br>\end{matrix}\right)<br>$$<br>定义$W$<br>$$<br>W(x;p)=\left(\begin{matrix}<br>1&amp;0&amp;b_1\\<br>0&amp;1&amp;b_2<br>\end{matrix}\right)<br>$$<br>其中因子向量$p=\left(\begin{matrix}<br>b_1\\<br>b_2<br>\end{matrix}\right)$</p>
+<p>则$W$对$p$的偏导数为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>1&amp;0\\<br>0&amp;1<br>\end{matrix}\right)<br>$$<br>上式被称作雅克比行列式(Jacobian)</p>
 <h3 id="Similarity-Motion"><a href="#Similarity-Motion" class="headerlink" title="Similarity Motion"></a>Similarity Motion</h3><p>相似运动是一种刚体运动，包括缩放和平移。</p>
-<p>我们可以定义相似性为<br>$$<br>x’=ax+b_1\<br>y’=ay+b_2<br>$$<br>定义$W,p$<br>$$<br>W=\left(\begin{matrix}<br>a&amp;0&amp;b_1\<br>0&amp;a&amp;b_2<br>\end{matrix}\right)\<br>p=\left(\begin{matrix}<br>a&amp;b_1&amp;b_2<br>\end{matrix}\right)^T<br>$$<br>则$W$对$p$的偏导数，即雅克比行列式(Jacobian)为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>x&amp;1&amp;0\<br>y&amp;0&amp;1<br>\end{matrix}\right)<br>$$</p>
-<h3 id="Affine-motion"><a href="#Affine-motion" class="headerlink" title="Affine motion"></a>Affine motion</h3><p>仿射运动包括放缩，旋转，平移。我们可以表达为<br>$$<br>x’=a_1x+a_2y+b_1\<br>y’=a_3x+a_4y+b_1<br>$$<br>定义$W,p$<br>$$<br>W=\left(\begin{matrix}<br>a_1&amp;a_2&amp;b_1\<br>a_3&amp;a_4&amp;b_2<br>\end{matrix}\right)\<br>p=\left(\begin{matrix}<br>a_1&amp;a_2&amp;b_1&amp;a_3&amp;a_4&amp;b_2<br>\end{matrix}\right)^T<br>$$<br>则$W$对$p$的偏导数，即雅克比行列式(Jacobian)为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>x&amp;y&amp;1&amp;0&amp;0&amp;0\<br>0&amp;0&amp;0&amp;x&amp;y&amp;1<br>\end{matrix}\right)<br>$$</p>
+<p>我们可以定义相似性为<br>$$<br>x’=ax+b_1\\<br>y’=ay+b_2<br>$$<br>定义$W,p$<br>$$<br>W=\left(\begin{matrix}<br>a&amp;0&amp;b_1\\<br>0&amp;a&amp;b_2<br>\end{matrix}\right)\\<br>p=\left(\begin{matrix}<br>a&amp;b_1&amp;b_2<br>\end{matrix}\right)^T<br>$$<br>则$W$对$p$的偏导数，即雅克比行列式(Jacobian)为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>x&amp;1&amp;0\\<br>y&amp;0&amp;1<br>\end{matrix}\right)<br>$$</p>
+<h3 id="Affine-motion"><a href="#Affine-motion" class="headerlink" title="Affine motion"></a>Affine motion</h3><p>仿射运动包括放缩，旋转，平移。我们可以表达为<br>$$<br>x’=a_1x+a_2y+b_1\\<br>y’=a_3x+a_4y+b_1<br>$$<br>定义$W,p$<br>$$<br>W=\left(\begin{matrix}<br>a_1&amp;a_2&amp;b_1\\<br>a_3&amp;a_4&amp;b_2<br>\end{matrix}\right)\\<br>p=\left(\begin{matrix}<br>a_1&amp;a_2&amp;b_1&amp;a_3&amp;a_4&amp;b_2<br>\end{matrix}\right)^T<br>$$<br>则$W$对$p$的偏导数，即雅克比行列式(Jacobian)为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>x&amp;y&amp;1&amp;0&amp;0&amp;0\\<br>0&amp;0&amp;0&amp;x&amp;y&amp;1<br>\end{matrix}\right)<br>$$</p>
 <h2 id="Iterative-KLT-tracker"><a href="#Iterative-KLT-tracker" class="headerlink" title="Iterative KLT tracker"></a>Iterative KLT tracker</h2><h3 id="Problem-formulation"><a href="#Problem-formulation" class="headerlink" title="Problem formulation"></a>Problem formulation</h3><p>给定视频顺序，找到对应每帧相连的变化顺序。要求能够处理任意类型的运动。</p>
 <h3 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h3><p>与KLT追踪器不同之处在于连接帧的方式：用特征数据和线性相似直接解决相关的变换，而不是用光流连接运动向量并追踪运动。这种方式允许我们处理更加复杂（例如，仿射和投射）转换，并更加稳健的连接物体。</p>
 <p>步骤：</p>
@@ -457,8 +457,8 @@
 </li>
 </ol>
 <h3 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h3><p>在上面第三步中，我们实际上可以近似计算$p$。假设有一个关于$p,p_0$的初始猜测，其中$p=p_0+\Delta p$</p>
-<p>现在<br>$$<br>E=\sum_x[T(W(x;p))-T(x)]^2=\sum_x[T(W(x;p_0+\Delta p))-T(x)]^2<br>$$<br>使用泰勒逼近，我们可以看出错误项约等于<br>$$<br>E\approx \sum_x[T(W(x;p_0))+\nabla T\frac{\partial W}{\partial p}\Delta p-T(x)]^2<br>$$<br>为了最小化此项，我们对$p_0$求偏导，并设为0，求出$p_0$<br>$$<br>\frac{\partial E}{\partial p}\approx\sum_x[\nabla T(\frac{\partial W}{\partial p})^T][T(W(x;p_0))+\nabla T\frac{\partial W}{\partial p}\Delta p-T(x)]=0\<br>\Delta p=H^{-1}\sum_x[\nabla T(\frac{\partial W}{\partial p})^T][T(x)-T(W(x;p_0))]\<br>H=\sum_x[\nabla T\frac{\partial W}{\partial p}]^T[\nabla T\frac{\partial W}{\partial p}]<br>$$<br>迭代地设置$p_0=p_0+\Delta p$，我们可以最终收敛于一个精确的、最小化错误值的$p$，告诉我们转换的类型。</p>
-<h3 id="Link-to-Harris-Corner-Detection"><a href="#Link-to-Harris-Corner-Detection" class="headerlink" title="Link to Harris Corner Detection"></a>Link to Harris Corner Detection</h3><p>对平移运动，<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>1&amp;0\<br>0&amp;1<br>\end{matrix}\right)<br>$$<br>容易得到，<br>$$<br>H=\left(\begin{matrix}<br>I_x^2&amp;I_xI_y\<br>I_xI_y&amp;I_y^2<br>\end{matrix}\right)<br>$$<br>但是，Harris corner检测器假设只要$H​$有大特征值（即稳定可逆），那么该点就是一个角。因此，角可能是一个用于计算平移的好特征，恰恰因为角计算出的矩阵是稳定可逆的。</p>
+<p>现在<br>$$<br>E=\sum_x[T(W(x;p))-T(x)]^2=\sum_x[T(W(x;p_0+\Delta p))-T(x)]^2<br>$$<br>使用泰勒逼近，我们可以看出错误项约等于<br>$$<br>E\approx \sum_x[T(W(x;p_0))+\nabla T\frac{\partial W}{\partial p}\Delta p-T(x)]^2<br>$$<br>为了最小化此项，我们对$p_0$求偏导，并设为0，求出$p_0$<br>$$<br>\frac{\partial E}{\partial p}\approx\sum_x[\nabla T(\frac{\partial W}{\partial p})^T][T(W(x;p_0))+\nabla T\frac{\partial W}{\partial p}\Delta p-T(x)]=0\\<br>\Delta p=H^{-1}\sum_x[\nabla T(\frac{\partial W}{\partial p})^T][T(x)-T(W(x;p_0))]\\<br>H=\sum_x[\nabla T\frac{\partial W}{\partial p}]^T[\nabla T\frac{\partial W}{\partial p}]<br>$$<br>迭代地设置$p_0=p_0+\Delta p$，我们可以最终收敛于一个精确的、最小化错误值的$p$，告诉我们转换的类型。</p>
+<h3 id="Link-to-Harris-Corner-Detection"><a href="#Link-to-Harris-Corner-Detection" class="headerlink" title="Link to Harris Corner Detection"></a>Link to Harris Corner Detection</h3><p>对平移运动，<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>1&amp;0\\<br>0&amp;1<br>\end{matrix}\right)<br>$$<br>容易得到，<br>$$<br>H=\left(\begin{matrix}<br>I_x^2&amp;I_xI_y\\<br>I_xI_y&amp;I_y^2<br>\end{matrix}\right)<br>$$<br>但是，Harris corner检测器假设只要$H​$有大特征值（即稳定可逆），那么该点就是一个角。因此，角可能是一个用于计算平移的好特征，恰恰因为角计算出的矩阵是稳定可逆的。</p>
 
           
         
@@ -642,7 +642,7 @@
 <p>孔径问题指光流无法代表边缘运动的结果，可能导致移动测量错误。例如图中线条实际上是向左下移动，但是由于孔径，看起来像是向右移动。</p>
 <h4 id="Brightness-Consistency"><a href="#Brightness-Consistency" class="headerlink" title="Brightness Consistency"></a>Brightness Consistency</h4><p>光流只能呈现明显的运动，为了正确的检测图中点的运动，我们必须假设这些点在帧之间的亮度相等。亮度一致性(Brightness Consistency)方程如下：<br>$$<br>I(x,y,t-1)=I(x+u(x,y),y+v(x,y),t)<br>$$<br>其中$u(x,y)$表示点的水平运动，$v(x,y)$表示点的垂直运动。</p>
 <h4 id="Small-Motion"><a href="#Small-Motion" class="headerlink" title="Small Motion"></a>Small Motion</h4><p>光流假设点在连续的图像之间不会移动太多。因为帧之间的时间极短，所以假设基本成立。但是在物体距离摄像机过远或过近的时候，这个假设不再成立。接下来我们用亮度一致性方程来证明假设的必要性。首先用泰勒展开式线性化等式右侧：<br>$$<br>I(x+u(x,y),y+v(x,y),t)\approx I(x,y,t-1) +I_x·u(x,y)+I_y·v(x,y)+I_t<br>$$<br>线性化允许我们解得运动向量$u$和$v$，但在这种情况下我们只包含泰勒展开式的第一项。当帧之间的运动幅度较大时，式子无法步骤整个运动情况，导致不精确的$u$和$v$，因此假设有必要。</p>
-<h4 id="Spatial-Coherence"><a href="#Spatial-Coherence" class="headerlink" title="Spatial Coherence"></a>Spatial Coherence</h4><p>空间相干性是一个关于相同物体内邻近的像素会移动到一起的假设。其必要性证明如下：<br>$$<br>\begin{align}<br>I(x+u(x,y),y+v(x,y),t)\approx I(x,y,t-1) +I_x·u(x,y)+I_y·v(x,y)+I_t \<br>I(x+u(x,y),y+v(x,y),t)- I(x,y,t-1) =I_x·u(x,y)+I_y·v(x,y)+I_t<br>\end{align}<br>$$<br>可得到<br>$$<br>\begin{align}<br>I_x·u+I_y·v+I_t\approx 0\<br>\nabla I·[u\space v]^T +I_t =0<br>\end{align}<br>$$<br>现在我们有足够的方程解每个单像素中的$u$和$v$。假设像素可以移动到一起允许我们用有相同的$[u\space v]$的多个公式，使得我们能够解出邻居像素的移动。</p>
+<h4 id="Spatial-Coherence"><a href="#Spatial-Coherence" class="headerlink" title="Spatial Coherence"></a>Spatial Coherence</h4><p>空间相干性是一个关于相同物体内邻近的像素会移动到一起的假设。其必要性证明如下：<br>$$<br>\begin{align}<br>I(x+u(x,y),y+v(x,y),t)\approx I(x,y,t-1) +I_x·u(x,y)+I_y·v(x,y)+I_t \\<br>I(x+u(x,y),y+v(x,y),t)- I(x,y,t-1) =I_x·u(x,y)+I_y·v(x,y)+I_t<br>\end{align}<br>$$<br>可得到<br>$$<br>\begin{align}<br>I_x·u+I_y·v+I_t\approx 0\\<br>\nabla I·[u\space v]^T +I_t =0<br>\end{align}<br>$$<br>现在我们有足够的方程解每个单像素中的$u$和$v$。假设像素可以移动到一起允许我们用有相同的$[u\space v]$的多个公式，使得我们能够解出邻居像素的移动。</p>
 <h2 id="Lucas-Kanade"><a href="#Lucas-Kanade" class="headerlink" title="Lucas-Kanade"></a>Lucas-Kanade</h2><p>从上式中得到图像的移动，至少每个像素需要两个方程。Lucas-Kanade技术依赖于一个附加约束–空间相干性来完成图像追踪。</p>
 <p>通过一个大小为$k\times k$的窗来对像素应用空间相干性约束。假设窗内的邻居像素有相同的$(u,v)$。例如，在$5\times5$窗内应用以下式子：</p>
 <p><img src="D:\Machine Learning\cs131\Lecture16_17\17.2.png" alt="17.2"></p>
@@ -681,8 +681,8 @@
 </ol>
 <h2 id="Horn-Schunk"><a href="#Horn-Schunk" class="headerlink" title="Horn-Schunk"></a>Horn-Schunk</h2><h3 id="Horn-Schunk-Method-for-Optical-Flow"><a href="#Horn-Schunk-Method-for-Optical-Flow" class="headerlink" title="Horn-Schunk Method for Optical Flow"></a>Horn-Schunk Method for Optical Flow</h3><p>Horn-Schunk方法将光流公式化为以下全局能量函数，并尽量最小化$u(x,y)$和$v(x,y)$。<br>$$<br>E=\iint[(I_xu+I_yv+I_t)^2+\alpha^2(||\nabla u||^2+||\nabla v||^2)]dxdy<br>$$<br>上式第一项反应了光照恒定假设，根据假设$I_xu+I_yv+I_t$应该等于0。这项存在于式子中是为了保证这个值尽可能接近于0。</p>
 <p>第二项反应了小移动假设。这项存在于式子中为了鼓励在位置改变较小的情况下，更加光滑的流。$\alpha$是正规化常数，用于控制光滑度，值越大流越光滑。</p>
-<p>为了最小化能量函数，我们对$u$和$v$求导并等于0。得到以下两个等式<br>$$<br>\begin{align}<br>I_x(I_xu+I_yv+I_t)+\alpha^2\Delta u=0\<br>I_y(I_xu+I_yv+I_t)+\alpha^2\Delta v=0<br>\end{align}\<br>\Delta=\frac{\partial}{\partial x^2}+\frac{\partial}{\partial y^2}<br>$$<br>其中$\Delta$为拉格朗日算子，在实际计算中为<br>$$<br>\Delta u(x,y)=\overline u(x,y)-u(x,y)<br>$$<br>其中$\overline u(x,y)$是$u$在$(x,y)$附近的加权平均。用(11)式带入得到：<br>$$<br>\begin{align}<br>(I_x^2+\alpha^2)u+I_xI_yv=\alpha^2\overline u-I_xI_t\<br>(I_y^2+\alpha^2)u+I_xI_yu=\alpha^2\overline v-I_yI_t<br>\end{align}\<br>$$<br>是一个关于$u$和$v$的线性方程。</p>
-<h3 id="Iterative-Horn-Schunk"><a href="#Iterative-Horn-Schunk" class="headerlink" title="Iterative Horn-Schunk"></a>Iterative Horn-Schunk</h3><p>因为$u$和$v$的值取决于$(x,y)$邻近的光流值，所以我们需要在每次邻居更新后，重新计算$u$和$v$：<br>$$<br>\begin{align}<br>u^{k+1}=\overline u^k-\frac{I_x(I_x\overline u^k+I_y\overline v^k+I_t)}{\alpha^2+I_x^2+I_y^2}\<br>v^{k+1}=\overline v^k-\frac{I_y(I_x\overline u^k+I_y\overline v^k+I_t)}{\alpha^2+I_x^2+I_y^2}<br>\end{align}\<br>$$<br>其中上标$k$代表迭代次数</p>
+<p>为了最小化能量函数，我们对$u$和$v$求导并等于0。得到以下两个等式<br>$$<br>\begin{align}<br>I_x(I_xu+I_yv+I_t)+\alpha^2\Delta u=0\\<br>I_y(I_xu+I_yv+I_t)+\alpha^2\Delta v=0<br>\end{align}\\<br>\Delta=\frac{\partial}{\partial x^2}+\frac{\partial}{\partial y^2}<br>$$<br>其中$\Delta$为拉格朗日算子，在实际计算中为<br>$$<br>\Delta u(x,y)=\overline u(x,y)-u(x,y)<br>$$<br>其中$\overline u(x,y)$是$u$在$(x,y)$附近的加权平均。用(11)式带入得到：<br>$$<br>\begin{align}<br>(I_x^2+\alpha^2)u+I_xI_yv=\alpha^2\overline u-I_xI_t\\<br>(I_y^2+\alpha^2)u+I_xI_yu=\alpha^2\overline v-I_yI_t<br>\end{align}\\<br>$$<br>是一个关于$u$和$v$的线性方程。</p>
+<h3 id="Iterative-Horn-Schunk"><a href="#Iterative-Horn-Schunk" class="headerlink" title="Iterative Horn-Schunk"></a>Iterative Horn-Schunk</h3><p>因为$u$和$v$的值取决于$(x,y)$邻近的光流值，所以我们需要在每次邻居更新后，重新计算$u$和$v$：<br>$$<br>\begin{align}<br>u^{k+1}=\overline u^k-\frac{I_x(I_x\overline u^k+I_y\overline v^k+I_t)}{\alpha^2+I_x^2+I_y^2}\\<br>v^{k+1}=\overline v^k-\frac{I_y(I_x\overline u^k+I_y\overline v^k+I_t)}{\alpha^2+I_x^2+I_y^2}<br>\end{align}\\<br>$$<br>其中上标$k$代表迭代次数</p>
 <h3 id="Smoothness-Regularization"><a href="#Smoothness-Regularization" class="headerlink" title="Smoothness Regularization"></a>Smoothness Regularization</h3><p>光滑度正规化项$||\nabla u||^2+||\nabla v||^2$推进最小化邻近点之间的光流变化。这样在边缘区域，点会流向最临近的点，解决孔径问题。</p>
 <h3 id="Dense-Optical-Flow-with-Michael-Black’s-Method"><a href="#Dense-Optical-Flow-with-Michael-Black’s-Method" class="headerlink" title="Dense Optical Flow with Michael Black’s Method"></a>Dense Optical Flow with Michael Black’s Method</h3><p>Michael Black拓展了Horn-Schunk方法。原来的正规化项$||\nabla u||^2+||\nabla v||^2$如下图，是一个二次函数。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/17.7.png" alt=""></p>
@@ -701,7 +701,7 @@
 <ol>
 <li><p>亮度一致方程<br>$$<br>I(x,y,t-1)=I(x+u(x,y),y+v(x,y),t)<br>$$</p>
 </li>
-<li><p>仿射运动成分<br>$$<br>I_xu(x,y)+I_xv(x,y)+I_t\approx0<br>$$<br>$I_x,I_y,I_t$是图像关于两个方向和实践的梯度。$u(x,y),v(x,y)$是仿射运动在两个方向上的成分<br>$$<br>\begin{align}<br>u(x,y)=\alpha_1+\alpha_2x+\alpha_3y\<br>v(x,y)=\alpha_4+\alpha_5x+\alpha_6y<br>\end{align}<br>$$</p>
+<li><p>仿射运动成分<br>$$<br>I_xu(x,y)+I_xv(x,y)+I_t\approx0<br>$$<br>$I_x,I_y,I_t$是图像关于两个方向和实践的梯度。$u(x,y),v(x,y)$是仿射运动在两个方向上的成分<br>$$<br>\begin{align}<br>u(x,y)=\alpha_1+\alpha_2x+\alpha_3y\\<br>v(x,y)=\alpha_4+\alpha_5x+\alpha_6y<br>\end{align}<br>$$</p>
 </li>
 </ol>
 <p>从此，我们将因子向量$\alpha_i$映射到运动因子空间，并对仿射运动因子向量采用k-means聚类。</p>
@@ -1422,10 +1422,10 @@
 <h3 id="Some-results"><a href="#Some-results" class="headerlink" title="Some results"></a>Some results</h3><p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/14.6.png" alt=""></p>
 <h2 id="Naive-Bayes"><a href="#Naive-Bayes" class="headerlink" title="Naïve Bayes"></a>Naïve Bayes</h2><h3 id="Basic-Idea"><a href="#Basic-Idea" class="headerlink" title="Basic Idea"></a>Basic Idea</h3><p>一旦我们产生了一个视觉词直方图，我们可以用朴素贝叶斯(Naïve Bayes)来对直方图进行分类。我们简单的衡量一个给定的视觉词是否存在，然后假定一个视觉词的存在/缺失和给定类的每个视觉词条件独立。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/14.7.png" alt=""></p>
-<p>如上图，考虑一些视觉词直方图$X$，$x_i$是视觉词$i$在直方图中的总和。我们只在意视觉词$i$是否存在，即$x_i\in {0,1}$</p>
+<p>如上图，考虑一些视觉词直方图$X$，$x_i$是视觉词$i$在直方图中的总和。我们只在意视觉词$i$是否存在，即$x_i\in \{0,1\}$</p>
 <h3 id="Prior"><a href="#Prior" class="headerlink" title="Prior"></a>Prior</h3><p>$P(c)$是在所有类中出现类$c$的概率。所以对总共$m$个物体类，我们有<br>$$<br>\sum_{i=1}^m P(c)=1<br>$$<br>对于一个用直方图$x$表现的图像和一些物体类$c$，我们可以计算<br>$$<br>P(x|c)=\prod_{i=1}^m P(x_i|c)<br>$$</p>
 <h3 id="Posterior"><a href="#Posterior" class="headerlink" title="Posterior"></a>Posterior</h3><p>现在我们可以用贝叶斯理论(Bayes Theorem)来计算图像$x$属于类$c_j$的概率：<br>$$<br>P(c|x)=\frac{P(c)P(x|c)}{\sum_{c’} P(c’)P(x|c’)}<br>$$<br>$c’$表示所有类。拓展分子和分母，我们可以重写方程：<br>$$<br>P(c|x)=\frac{P(c)\prod_{i=1}^m P(x_i|c)}{\sum_{c’} P(c’)\prod_{i=1}^m P(x_i|c’)}<br>$$</p>
-<h3 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3><p>为了将用直方图$x$表现的图像分类，我们简单的找到能够最大化方程(6)的类$c^<em>$：<br>$$<br>c^</em>=\arg\max_c P(c|x)<br>$$<br>因为公式中含有大量的小概率累乘，所以可能会产生一个接近于0的不稳定值。因此，我们改用logs计算概率：<br>$$<br>c^<em>=\arg\max_clogP(c|x)<br>$$<br>现在我们考虑两个类$c_1$和$c_2$：<br>$$<br>P(c_1|x)=\frac{P(c_1)\prod_{i=1}^m P(x_i|c_1)}{\sum_{c’} P(c’)\prod_{i=1}^m P(x_i|c’)}<br>$$<br>和<br>$$<br>P(c_2|x)=\frac{P(c_2)\prod_{i=1}^m P(x_i|c_2)}{\sum_{c’} P(c’)\prod_{i=1}^m P(x_i|c’)}<br>$$<br>因为分母是固定的，所以我们计算最大值时可以忽视分母。即($\propto$是正比于的意思)<br>$$<br>P(c_1|x)\propto P(c_1)\prod_{i=1}^m P(x_i|c_1)<br>$$<br>和<br>$$<br>P(c_2|x)\propto P(c_2)\prod_{i=1}^m P(x_i|c_2)<br>$$<br>对于类$c$<br>$$<br>P(c|x)\propto P(c)\prod_{i=1}^m P(x_i|c)<br>$$<br>用上logs：<br>$$<br>logP(c|x)\propto logP(c)+\sum_{i=1}^m logP(x_i|c)<br>$$<br>现在，分类任务变成<br>$$<br>\begin{align</em>}<br>c^<em>&amp;=\arg\max_c P(c|x) \<br>&amp;=\arg\max_c logP(c|x)\<br>&amp;=\arg\max_c logP(c) +\sum_{i=1}^m logP(x_i|c)<br>\end{align</em>}<br>$$</p>
+<h3 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3><p>为了将用直方图$x$表现的图像分类，我们简单的找到能够最大化方程(6)的类$c^<em>$：<br>$$<br>c^</em>=\arg\max_c P(c|x)<br>$$<br>因为公式中含有大量的小概率累乘，所以可能会产生一个接近于0的不稳定值。因此，我们改用logs计算概率：<br>$$<br>c^<em>=\arg\max_clogP(c|x)<br>$$<br>现在我们考虑两个类$c_1$和$c_2$：<br>$$<br>P(c_1|x)=\frac{P(c_1)\prod_{i=1}^m P(x_i|c_1)}{\sum_{c’} P(c’)\prod_{i=1}^m P(x_i|c’)}<br>$$<br>和<br>$$<br>P(c_2|x)=\frac{P(c_2)\prod_{i=1}^m P(x_i|c_2)}{\sum_{c’} P(c’)\prod_{i=1}^m P(x_i|c’)}<br>$$<br>因为分母是固定的，所以我们计算最大值时可以忽视分母。即($\propto$是正比于的意思)<br>$$<br>P(c_1|x)\propto P(c_1)\prod_{i=1}^m P(x_i|c_1)<br>$$<br>和<br>$$<br>P(c_2|x)\propto P(c_2)\prod_{i=1}^m P(x_i|c_2)<br>$$<br>对于类$c$<br>$$<br>P(c|x)\propto P(c)\prod_{i=1}^m P(x_i|c)<br>$$<br>用上logs：<br>$$<br>logP(c|x)\propto logP(c)+\sum_{i=1}^m logP(x_i|c)<br>$$<br>现在，分类任务变成<br>$$<br>\begin{align</em>}<br>c^<em>&amp;=\arg\max_c P(c|x) \\<br>&amp;=\arg\max_c logP(c|x)\\<br>&amp;=\arg\max_c logP(c) +\sum_{i=1}^m logP(x_i|c)<br>\end{align</em>}<br>$$</p>
 
           
         
@@ -1686,12 +1686,12 @@
 <h3 id="General-Idea"><a href="#General-Idea" class="headerlink" title="General Idea"></a>General Idea</h3><p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/13.6.png" alt=""></p>
 <p>LDA用两个值运行：类间散度、类内散度。类间散度指不同类之间的距离，类内散度指类内点之间的距离。LDA最大化类间散度，最小化类内散度。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/13.3.png" alt=""></p>
-<h3 id="Mathematical-Formulation-of-LDA-with-2-Variables"><a href="#Mathematical-Formulation-of-LDA-with-2-Variables" class="headerlink" title="Mathematical Formulation of LDA with 2 Variables"></a>Mathematical Formulation of LDA with 2 Variables</h3><p>我们想要找到一个投影$w$在$x\in R^n$空间中映射出0和1的点到一个新的空间$z\in R^m$，例如$z=w^Tx$。其中，$m&lt;n$，且投影必须最大化以下公式：<br>$$<br>J(w)=\frac{S_B\space when\space projected\space onto\space w}{S_W\space when\space projected\space onto\space w}<br>$$<br>公式中，$S_B$代表类间散度，$S_W$代表类内散度。接下来定义一个代表类内点的平均的变量$\mu_i$：<br>$$<br>\mu_i=E_{X|Y}[X|Y=i]<br>$$<br>定义变量$\Sigma_i$代表类的协方差矩阵：<br>$$<br>\Sigma_i=E_{X|Y}[(X-\mu_i)(X-\mu_i)^T|Y=i]<br>$$<br>用以上变量，可以定义$S_B$和$S_W$：<br>$$<br>S_B=(\mu_1-\mu_0)^2=(\mu_1-\mu_0)(\mu_1-\mu_0)^T\<br>S_W=(\Sigma_1+\Sigma_0)<br>$$<br>将变量放回原式$J(w)$可得：<br>$$<br>J(w)=\frac{w^T(\mu_1-\mu_0)(\mu_1-\mu_0)^Tw}{w^T(\Sigma_1+\Sigma_0)w}<br>$$<br>我们要最大化$J(w)$，即最大化分子，保持分母为常数：<br>$$<br>\max_{w^T(\Sigma_1+\Sigma_0)w=K}w^T(\mu_1-\mu_0)(\mu_1-\mu_0)^Tw<br>$$<br>用拉格朗日乘数法，我们定义拉格朗日算子为：<br>$$<br>L=w^TS_Bw-\lambda(w^TS_Ww-K)=w^T(S_B-\lambda S_W)w+K<br>$$<br>我们必须最大化$L$对$\lambda$和$w$的值。我们可以通过用其关于$w$的梯度和找到关键点的位置：<br>$$<br>\nabla_wL=2(S_B-\lambda S_W)w=0<br>$$<br>用这个公式，我们可以得到关键点位置：<br>$$<br>S_Bw=\lambda S_Ww<br>$$<br>这是一个广义的特征向量问题。在$S_W^{-1}=(\Sigma_1+\Sigma_0)^{-1}$存在的情况下，我们得到：<br>$$<br>S_W^{-1}S_Bw=\lambda w<br>$$<br>代入$S_B$得：<br>$$<br>S_W^{-1}(\mu_1-\mu_0)=\frac\lambda\alpha w<br>$$<br>$w$的大小并不重要，所以我们可以得到映射$w$：<br>$$<br>w*=S_W^{-1}(\mu_1-\mu_0)=(\Sigma_1-\Sigma_0)^{-1}(\mu_1-\mu_0)<br>$$</p>
+<h3 id="Mathematical-Formulation-of-LDA-with-2-Variables"><a href="#Mathematical-Formulation-of-LDA-with-2-Variables" class="headerlink" title="Mathematical Formulation of LDA with 2 Variables"></a>Mathematical Formulation of LDA with 2 Variables</h3><p>我们想要找到一个投影$w$在$x\in R^n$空间中映射出0和1的点到一个新的空间$z\in R^m$，例如$z=w^Tx$。其中，$m&lt;n$，且投影必须最大化以下公式：<br>$$<br>J(w)=\frac{S_B\space when\space projected\space onto\space w}{S_W\space when\space projected\space onto\space w}<br>$$<br>公式中，$S_B$代表类间散度，$S_W$代表类内散度。接下来定义一个代表类内点的平均的变量$\mu_i$：<br>$$<br>\mu_i=E_{X|Y}[X|Y=i]<br>$$<br>定义变量$\Sigma_i$代表类的协方差矩阵：<br>$$<br>\Sigma_i=E_{X|Y}[(X-\mu_i)(X-\mu_i)^T|Y=i]<br>$$<br>用以上变量，可以定义$S_B$和$S_W$：<br>$$<br>S_B=(\mu_1-\mu_0)^2=(\mu_1-\mu_0)(\mu_1-\mu_0)^T\\<br>S_W=(\Sigma_1+\Sigma_0)<br>$$<br>将变量放回原式$J(w)$可得：<br>$$<br>J(w)=\frac{w^T(\mu_1-\mu_0)(\mu_1-\mu_0)^Tw}{w^T(\Sigma_1+\Sigma_0)w}<br>$$<br>我们要最大化$J(w)$，即最大化分子，保持分母为常数：<br>$$<br>\max_{w^T(\Sigma_1+\Sigma_0)w=K}w^T(\mu_1-\mu_0)(\mu_1-\mu_0)^Tw<br>$$<br>用拉格朗日乘数法，我们定义拉格朗日算子为：<br>$$<br>L=w^TS_Bw-\lambda(w^TS_Ww-K)=w^T(S_B-\lambda S_W)w+K<br>$$<br>我们必须最大化$L$对$\lambda$和$w$的值。我们可以通过用其关于$w$的梯度和找到关键点的位置：<br>$$<br>\nabla_wL=2(S_B-\lambda S_W)w=0<br>$$<br>用这个公式，我们可以得到关键点位置：<br>$$<br>S_Bw=\lambda S_Ww<br>$$<br>这是一个广义的特征向量问题。在$S_W^{-1}=(\Sigma_1+\Sigma_0)^{-1}$存在的情况下，我们得到：<br>$$<br>S_W^{-1}S_Bw=\lambda w<br>$$<br>代入$S_B$得：<br>$$<br>S_W^{-1}(\mu_1-\mu_0)=\frac\lambda\alpha w<br>$$<br>$w$的大小并不重要，所以我们可以得到映射$w$：<br>$$<br>w*=S_W^{-1}(\mu_1-\mu_0)=(\Sigma_1-\Sigma_0)^{-1}(\mu_1-\mu_0)<br>$$</p>
 <h3 id="LDA-with-N-Variables-and-C-Classes"><a href="#LDA-with-N-Variables-and-C-Classes" class="headerlink" title="LDA with N Variables and C Classes"></a>LDA with N Variables and C Classes</h3><h4 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h4><p><strong>Variables:</strong></p>
 <ul>
-<li><p>N个样本：${x_1,…,x_N}$</p>
+<li><p>N个样本：$\{x_1,…,x_N\}$</p>
 </li>
-<li><p>C个类:${Y_1,Y_2,…,Y_C}$。每一类都有N个样本。</p>
+<li><p>C个类:$\{Y_1,Y_2,…,Y_C\}$。每一类都有N个样本。</p>
 </li>
 <li><p>每个类的平均：类$i$的平均为<br>$$<br>\mu_i=\frac 1{N_i}\sum_{x_k\in Y_i}x_k<br>$$</p>
 </li>
@@ -2137,7 +2137,7 @@
 </ol>
 <p>需要权衡$r$和$c$值，因为值越小，越少附近点被加入，计算量增加。但值小也减少了错误率，提高了精度。</p>
 <h3 id="Technical-Details"><a href="#Technical-Details" class="headerlink" title="Technical Details"></a>Technical Details</h3><p>为了正确移动窗，我们需要确定一个有最高密度的邻近地区，来计算移动向量。这里我们使用多变量核密度估计(the multivariate kernel density estimate)，是估计一个随机变量的概率密度函数的方法。</p>
-<p>给定$n$个数据点$x\in R^d$，使用径向对称核(radially symmetric kernel)$K(x)$，多变量核密度估计被定义为：<br>$$<br>\hat{f}<em>K=\frac{1}{nh^d}\sum</em>{i=1}^nK(\frac{x-x_i}{h})<br>$$<br>其中，$h$是带宽(bandwidth)参数，定义了核的半径。径向对称核$K(x)$定义为<br>$$<br>K(x)=c_kk(||x||^2)<br>$$<br>其中，$c_k$代表标准化常数。</p>
+<p>给定$n$个数据点$x\in R^d$，使用径向对称核(radially symmetric kernel)$K(x)$，多变量核密度估计被定义为：<br>$$<br>\hat{f}_K=\frac{1}{nh^d}\sum_{i=1}^nK(\frac{x-x_i}{h})<br>$$<br>其中，$h$是带宽(bandwidth)参数，定义了核的半径。径向对称核$K(x)$定义为<br>$$<br>K(x)=c_kk(||x||^2)<br>$$<br>其中，$c_k$代表标准化常数。</p>
 <p>选择合适的$h$对精确密度估计十分重要。$h$过小导致半径过小，使得数据受到噪音影响。$h$过大导致包括太多偏远点，集群数减少。</p>
 <p>多变量核密度估计的导数为<br>$$<br>\nabla\hat{f}(x)=\frac{2c_{k,d}}{nh^{d+2}}[\sum_{i=1}^ng(||\frac{x-x_i}{h}||^2)][\frac{\sum_{i=1}^{n}x_ig(||\frac{x-x_i}{h}||^2)}{\sum_{i=1}^{n}g(||\frac{x-x_i}{h}||^2)}-x]<br>$$<br>其中$g(x)=-K’(x)$，代表被选择的核剖面的导数。</p>
 <p>第一项$\frac{2c_{k,d}}{nh^{d+2}}[\sum_{i=1}^ng(||\frac{x-x_i}{h}||^2)]$，与$x$的密度估计成正比。第二项$[\frac{\sum_{i=1}^{n}x_ig(||\frac{x-x_i}{h}||^2)}{\sum_{i=1}^{n}g(||\frac{x-x_i}{h}||^2)}-x]$，是指向最大密度的均值-偏移矢量。</p>
@@ -2153,7 +2153,7 @@
 <h3 id="Kernel-Functions"><a href="#Kernel-Functions" class="headerlink" title="Kernel Functions"></a>Kernel Functions</h3><p>$K(x)$是一个非负函数，在$x$的所有值上相加为1。这些要求保证了核密度评估会产生概率密度函数。</p>
 <p>常用的核函数有：</p>
 <ul>
-<li><p>均匀（矩形）<br>$$<br>K(x)= \left{</p>
+<li><p>均匀（矩形）<br>$$<br>K(x)= \left\{</p>
 <pre><code> \begin{array}{lr}
 \frac12, &amp;|x|\leq 1\\
 0, &amp;otherwise
@@ -2162,7 +2162,7 @@
 </li>
 <li><p>高斯<br>$$<br>K(x)= \frac1{\sqrt{2\pi}}e^{-\frac1 2u^2}<br>$$</p>
 </li>
-<li><p>Epanechnikov（抛物线）<br>$$<br>K(x)= \left{</p>
+<li><p>Epanechnikov（抛物线）<br>$$<br>K(x)= \left\{</p>
 <pre><code> \begin{array}{lr}
 \frac34(1-x^2), &amp;|x|\leq 1\\
 0, &amp;otherwise
@@ -2205,7 +2205,7 @@
 <p><strong>Background cluster</strong> 由于背景相似，导致物体难以被识别，或者导致物体与同类看起来很不一样。</p>
 <p><strong>Intra-class variation</strong> 一类物体可能有很不同的形状。例如：沙发、板凳都属于椅子类。</p>
 <h2 id="K-nearest-neighbors"><a href="#K-nearest-neighbors" class="headerlink" title="K-nearest neighbors"></a>K-nearest neighbors</h2><h3 id="Supervised-learning"><a href="#Supervised-learning" class="headerlink" title="Supervised learning"></a>Supervised learning</h3><p>目标：用已有的数据集找到以下方程：<br>$$<br>y=f(x)<br>$$<br>其中，$y$是输出，$f$是预测函数，$x$是图像的特征集。</p>
-<p>监督学习分训练与测试两个阶段。在第一阶段，使$f$与训练集${(x_1,y_1}$相符。$f$可以用最小化预测误差来评估，即$y$与$f$之间的差异。</p>
+<p>监督学习分训练与测试两个阶段。在第一阶段，使$f$与训练集$\{(x_1,y_1\}$相符。$f$可以用最小化预测误差来评估，即$y$与$f$之间的差异。</p>
 <p>在第二阶段，我们用测试集评估方程$y=f(x)$。</p>
 <p>任意决策规则将输入空间划分为由决策边界分割的决策区域。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/11.10.png" alt=""></p>
@@ -2440,7 +2440,7 @@
 <p>凝聚聚类的基本思想是通过检测点之间的相似度，决定这些点如何以明智的方式组合。首先，我们需要决定如何检测相似度。</p>
 <h3 id="Distance-Measures"><a href="#Distance-Measures" class="headerlink" title="Distance Measures"></a>Distance Measures</h3><p>有许多的距离公式，但很难决定什么公式能形成好的距离矩阵。所以我们只列出两个标准、经过研究的距离矩阵。</p>
 <h4 id="Euclidean-Distance"><a href="#Euclidean-Distance" class="headerlink" title="Euclidean Distance"></a>Euclidean Distance</h4><p>欧几里德距离考虑两个点$x,x’$的角度和大小来计算距离。<br>$$<br>sim(x,x’)=x^Tx’<br>$$<br>这种距离测量没有将矢量正规化，所以它们的大小是相似度计算的一个因素。</p>
-<h4 id="Cosine-Similarity-Measure"><a href="#Cosine-Similarity-Measure" class="headerlink" title="Cosine Similarity Measure"></a>Cosine Similarity Measure</h4><p>这种距离计算只考虑两个点之间的角度。注意，和欧几里德距离不同，余弦相似度测量只体现相似度，而不体现距离。且点和自身之间的余弦相似度等于1.<br>$$<br>\begin{align}<br>sim(x,x’)&amp;=cos(\theta)\<br>&amp;=\frac{x^Tx’}{||x||·||x’||}\<br>&amp;=\frac{x^Tx’}{\sqrt{x^Tx}\sqrt{x’^Tx’}}<br>\end{align}<br>$$<br>根据矢量大小的划分导致距离矩阵的正规化，并且保证了测量只取决于两个物体间的角度。</p>
+<h4 id="Cosine-Similarity-Measure"><a href="#Cosine-Similarity-Measure" class="headerlink" title="Cosine Similarity Measure"></a>Cosine Similarity Measure</h4><p>这种距离计算只考虑两个点之间的角度。注意，和欧几里德距离不同，余弦相似度测量只体现相似度，而不体现距离。且点和自身之间的余弦相似度等于1.<br>$$<br>\begin{align}<br>sim(x,x’)&amp;=cos(\theta)\\<br>&amp;=\frac{x^Tx’}{||x||·||x’||}\\<br>&amp;=\frac{x^Tx’}{\sqrt{x^Tx}\sqrt{x’^Tx’}}<br>\end{align}<br>$$<br>根据矢量大小的划分导致距离矩阵的正规化，并且保证了测量只取决于两个物体间的角度。</p>
 <h3 id="Desirable-Clustering-Properties"><a href="#Desirable-Clustering-Properties" class="headerlink" title="Desirable Clustering Properties"></a>Desirable Clustering Properties</h3><p>当我们选择特定的聚类算法时，需要考虑以下几个性质：</p>
 <ol>
 <li>可拓展性 - 在计算能力和容量方面</li>
@@ -2776,7 +2776,7 @@
 </ol>
 <h3 id="Seam-Carving-Algorithms"><a href="#Seam-Carving-Algorithms" class="headerlink" title="Seam Carving Algorithms"></a>Seam Carving Algorithms</h3><p>算法耗费$O((n-n’)mn)$，每个循环更新$E,s,im$耗费$O(mn)$。如果要垂直调整大小，可以旋转图片用同一算法。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.8.png" alt=""></p>
-<p>图像的平均能量会随着缝剪裁算法移除低能量像素而提高。当调整大小时，我们需要移除横向和纵向的缝。如何动态同时删除横竖的缝？参考SIGGRAPH论文，利用再循环方程<br>$$<br>T(r,c)=min(T(r-1,c)+E(s^x(I_{n-r-1\times m-c})),T(r,c-1)+E(s^y(I_{n-r\times m-c-1})))\<br>\min_{s^x,s^y,\alpha}\sum_{i=1}^kE(\alpha_is_i^x+(1-\alpha_i)s_i^y)<br>$$<br> 同时剪裁横竖缝，得到更多信息。</p>
+<p>图像的平均能量会随着缝剪裁算法移除低能量像素而提高。当调整大小时，我们需要移除横向和纵向的缝。如何动态同时删除横竖的缝？参考SIGGRAPH论文，利用再循环方程<br>$$<br>T(r,c)=min(T(r-1,c)+E(s^x(I_{n-r-1\times m-c})),T(r,c-1)+E(s^y(I_{n-r\times m-c-1})))\\<br>\min_{s^x,s^y,\alpha}\sum_{i=1}^kE(\alpha_is_i^x+(1-\alpha_i)s_i^y)<br>$$<br> 同时剪裁横竖缝，得到更多信息。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.9.png" alt=""></p>
 <h2 id="Advanced-Seam-Carving"><a href="#Advanced-Seam-Carving" class="headerlink" title="Advanced Seam Carving"></a>Advanced Seam Carving</h2><h3 id="Image-Expansion"><a href="#Image-Expansion" class="headerlink" title="Image Expansion"></a>Image Expansion</h3><p>用相似的方法，我们可以提高图片大小。最原始的方法时迭代地找到能量最低的缝，并复制它们来拓展图片。但是，这种方法会形成下图：</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.11.png" alt=""></p>
@@ -2797,7 +2797,7 @@
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.16.png" alt=""></p>
 </li>
 </ol>
-<h3 id="Forward-Energy"><a href="#Forward-Energy" class="headerlink" title="Forward Energy"></a>Forward Energy</h3><p>如上文提及，缝剪裁会导致图片平均能量上升，产生锯齿状边缘。改进的方法是，不考虑移除最低能量的缝，而是移除插入最小能量到图像的缝。移除一个像素$P(i,j)$会有三种新的边缘情况，这些新边缘花费为<br>$$<br>C_L(i,j)=|I(i,j+1)-I(i,j-1)|+|I(i-1,j)-I(i,j-1)|\<br>C_R(i,j)=|I(i,j+1)-I(i,j-1)|+|I(i-1,j)-I(i,j+1)|\<br>C_V(i,j)=|I(i,j+1)-I(i,j-1)|<br>$$<br><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.17.png" alt=""></p>
+<h3 id="Forward-Energy"><a href="#Forward-Energy" class="headerlink" title="Forward Energy"></a>Forward Energy</h3><p>如上文提及，缝剪裁会导致图片平均能量上升，产生锯齿状边缘。改进的方法是，不考虑移除最低能量的缝，而是移除插入最小能量到图像的缝。移除一个像素$P(i,j)$会有三种新的边缘情况，这些新边缘花费为<br>$$<br>C_L(i,j)=|I(i,j+1)-I(i,j-1)|+|I(i-1,j)-I(i,j-1)|\\<br>C_R(i,j)=|I(i,j+1)-I(i,j-1)|+|I(i-1,j)-I(i,j+1)|\\<br>C_V(i,j)=|I(i,j+1)-I(i,j-1)|<br>$$<br><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.17.png" alt=""></p>
 <p>这种方式称为”forward energy”，之前的方法称为”backward energy”。forward energy通过最小化添加的能量，保留了光滑的边缘。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.18.png" alt=""></p>
 <h3 id="Seam-Carving-in-Videos"><a href="#Seam-Carving-in-Videos" class="headerlink" title="Seam-Carving in Videos"></a>Seam-Carving in Videos</h3><p>比起图像，视频剪裁难度更大，有以下几个问题。</p>
@@ -3120,7 +3120,7 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -147,7 +147,7 @@
 
 
 
-  <title>CS131 Lecture 10 Semantic Segmentation and Clustering | Xiong's Blog</title>
+  <title>CS131 Lecture 10 Semantic Segmentation and Clustering | Xiong's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -166,7 +166,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -407,7 +407,7 @@
 <p>凝聚聚类的基本思想是通过检测点之间的相似度，决定这些点如何以明智的方式组合。首先，我们需要决定如何检测相似度。</p>
 <h3 id="Distance-Measures"><a href="#Distance-Measures" class="headerlink" title="Distance Measures"></a>Distance Measures</h3><p>有许多的距离公式，但很难决定什么公式能形成好的距离矩阵。所以我们只列出两个标准、经过研究的距离矩阵。</p>
 <h4 id="Euclidean-Distance"><a href="#Euclidean-Distance" class="headerlink" title="Euclidean Distance"></a>Euclidean Distance</h4><p>欧几里德距离考虑两个点$x,x’$的角度和大小来计算距离。<br>$$<br>sim(x,x’)=x^Tx’<br>$$<br>这种距离测量没有将矢量正规化，所以它们的大小是相似度计算的一个因素。</p>
-<h4 id="Cosine-Similarity-Measure"><a href="#Cosine-Similarity-Measure" class="headerlink" title="Cosine Similarity Measure"></a>Cosine Similarity Measure</h4><p>这种距离计算只考虑两个点之间的角度。注意，和欧几里德距离不同，余弦相似度测量只体现相似度，而不体现距离。且点和自身之间的余弦相似度等于1.<br>$$<br>\begin{align}<br>sim(x,x’)&amp;=cos(\theta)\<br>&amp;=\frac{x^Tx’}{||x||·||x’||}\<br>&amp;=\frac{x^Tx’}{\sqrt{x^Tx}\sqrt{x’^Tx’}}<br>\end{align}<br>$$<br>根据矢量大小的划分导致距离矩阵的正规化，并且保证了测量只取决于两个物体间的角度。</p>
+<h4 id="Cosine-Similarity-Measure"><a href="#Cosine-Similarity-Measure" class="headerlink" title="Cosine Similarity Measure"></a>Cosine Similarity Measure</h4><p>这种距离计算只考虑两个点之间的角度。注意，和欧几里德距离不同，余弦相似度测量只体现相似度，而不体现距离。且点和自身之间的余弦相似度等于1.<br>$$<br>\begin{align}<br>sim(x,x’)&amp;=cos(\theta)\\<br>&amp;=\frac{x^Tx’}{||x||·||x’||}\\<br>&amp;=\frac{x^Tx’}{\sqrt{x^Tx}\sqrt{x’^Tx’}}<br>\end{align}<br>$$<br>根据矢量大小的划分导致距离矩阵的正规化，并且保证了测量只取决于两个物体间的角度。</p>
 <h3 id="Desirable-Clustering-Properties"><a href="#Desirable-Clustering-Properties" class="headerlink" title="Desirable Clustering Properties"></a>Desirable Clustering Properties</h3><p>当我们选择特定的聚类算法时，需要考虑以下几个性质：</p>
 <ol>
 <li>可拓展性 - 在计算能力和容量方面</li>
@@ -890,7 +890,7 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -157,7 +157,7 @@
 
 
 
-  <title>CS131 Lecture 9 Image Resizing and Segmentation | Xiong's Blog</title>
+  <title>CS131 Lecture 9 Image Resizing and Segmentation | Xiong's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -176,7 +176,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -445,7 +445,7 @@
 </ol>
 <h3 id="Seam-Carving-Algorithms"><a href="#Seam-Carving-Algorithms" class="headerlink" title="Seam Carving Algorithms"></a>Seam Carving Algorithms</h3><p>算法耗费$O((n-n’)mn)$，每个循环更新$E,s,im$耗费$O(mn)$。如果要垂直调整大小，可以旋转图片用同一算法。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.8.png" alt=""></p>
-<p>图像的平均能量会随着缝剪裁算法移除低能量像素而提高。当调整大小时，我们需要移除横向和纵向的缝。如何动态同时删除横竖的缝？参考SIGGRAPH论文，利用再循环方程<br>$$<br>T(r,c)=min(T(r-1,c)+E(s^x(I_{n-r-1\times m-c})),T(r,c-1)+E(s^y(I_{n-r\times m-c-1})))\<br>\min_{s^x,s^y,\alpha}\sum_{i=1}^kE(\alpha_is_i^x+(1-\alpha_i)s_i^y)<br>$$<br> 同时剪裁横竖缝，得到更多信息。</p>
+<p>图像的平均能量会随着缝剪裁算法移除低能量像素而提高。当调整大小时，我们需要移除横向和纵向的缝。如何动态同时删除横竖的缝？参考SIGGRAPH论文，利用再循环方程<br>$$<br>T(r,c)=min(T(r-1,c)+E(s^x(I_{n-r-1\times m-c})),T(r,c-1)+E(s^y(I_{n-r\times m-c-1})))\\<br>\min_{s^x,s^y,\alpha}\sum_{i=1}^kE(\alpha_is_i^x+(1-\alpha_i)s_i^y)<br>$$<br> 同时剪裁横竖缝，得到更多信息。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.9.png" alt=""></p>
 <h2 id="Advanced-Seam-Carving"><a href="#Advanced-Seam-Carving" class="headerlink" title="Advanced Seam Carving"></a>Advanced Seam Carving</h2><h3 id="Image-Expansion"><a href="#Image-Expansion" class="headerlink" title="Image Expansion"></a>Image Expansion</h3><p>用相似的方法，我们可以提高图片大小。最原始的方法时迭代地找到能量最低的缝，并复制它们来拓展图片。但是，这种方法会形成下图：</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.11.png" alt=""></p>
@@ -466,7 +466,7 @@
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.16.png" alt=""></p>
 </li>
 </ol>
-<h3 id="Forward-Energy"><a href="#Forward-Energy" class="headerlink" title="Forward Energy"></a>Forward Energy</h3><p>如上文提及，缝剪裁会导致图片平均能量上升，产生锯齿状边缘。改进的方法是，不考虑移除最低能量的缝，而是移除插入最小能量到图像的缝。移除一个像素$P(i,j)$会有三种新的边缘情况，这些新边缘花费为<br>$$<br>C_L(i,j)=|I(i,j+1)-I(i,j-1)|+|I(i-1,j)-I(i,j-1)|\<br>C_R(i,j)=|I(i,j+1)-I(i,j-1)|+|I(i-1,j)-I(i,j+1)|\<br>C_V(i,j)=|I(i,j+1)-I(i,j-1)|<br>$$<br><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.17.png" alt=""></p>
+<h3 id="Forward-Energy"><a href="#Forward-Energy" class="headerlink" title="Forward Energy"></a>Forward Energy</h3><p>如上文提及，缝剪裁会导致图片平均能量上升，产生锯齿状边缘。改进的方法是，不考虑移除最低能量的缝，而是移除插入最小能量到图像的缝。移除一个像素$P(i,j)$会有三种新的边缘情况，这些新边缘花费为<br>$$<br>C_L(i,j)=|I(i,j+1)-I(i,j-1)|+|I(i-1,j)-I(i,j-1)|\\<br>C_R(i,j)=|I(i,j+1)-I(i,j-1)|+|I(i-1,j)-I(i,j+1)|\\<br>C_V(i,j)=|I(i,j+1)-I(i,j-1)|<br>$$<br><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.17.png" alt=""></p>
 <p>这种方式称为”forward energy”，之前的方法称为”backward energy”。forward energy通过最小化添加的能量，保留了光滑的边缘。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/9.18.png" alt=""></p>
 <h3 id="Seam-Carving-in-Videos"><a href="#Seam-Carving-in-Videos" class="headerlink" title="Seam-Carving in Videos"></a>Seam-Carving in Videos</h3><p>比起图像，视频剪裁难度更大，有以下几个问题。</p>
@@ -852,7 +852,7 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

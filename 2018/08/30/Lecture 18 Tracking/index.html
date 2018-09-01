@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -139,7 +139,7 @@
 
 
 
-  <title>CS131 Lecture 18 Tracking | Xiong's Blog</title>
+  <title>CS131 Lecture 18 Tracking | Xiong's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -158,7 +158,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -439,11 +439,11 @@
 <li>射影变换（例如，移动相机）</li>
 </ul>
 <h3 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h3><p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/18.5.png" alt=""></p>
-<p>平移运动是一个点平移到另一个点。假设我们有一个在左边$(x,y)$的点$m$。应用平移运动将$m$从点$(x,y)$移动到$(x’,y’)$<br>$$<br>x’=x+b_1\<br>y’=y+b_2<br>$$<br>可以写成用其次坐标的矩阵变换：<br>$$<br>\left(\begin{matrix}<br>x’\<br>y’<br>\end{matrix}\right)<br>=\left(\begin{matrix}<br>1&amp;0&amp;b_1\<br>0&amp;1&amp;b_2<br>\end{matrix}\right)<br>\left(\begin{matrix}<br>x\<br>y\<br>1<br>\end{matrix}\right)<br>$$<br>定义$W$<br>$$<br>W(x;p)=\left(\begin{matrix}<br>1&amp;0&amp;b_1\<br>0&amp;1&amp;b_2<br>\end{matrix}\right)<br>$$<br>其中因子向量$p=\left(\begin{matrix}<br>b_1\<br>b_2<br>\end{matrix}\right)$</p>
-<p>则$W$对$p$的偏导数为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>1&amp;0\<br>0&amp;1<br>\end{matrix}\right)<br>$$<br>上式被称作雅克比行列式(Jacobian)</p>
+<p>平移运动是一个点平移到另一个点。假设我们有一个在左边$(x,y)$的点$m$。应用平移运动将$m$从点$(x,y)$移动到$(x’,y’)$<br>$$<br>x’=x+b_1\\<br>y’=y+b_2<br>$$<br>可以写成用其次坐标的矩阵变换：<br>$$<br>\left(\begin{matrix}<br>x’\\<br>y’<br>\end{matrix}\right)<br>=\left(\begin{matrix}<br>1&amp;0&amp;b_1\\<br>0&amp;1&amp;b_2<br>\end{matrix}\right)<br>\left(\begin{matrix}<br>x\\<br>y\\<br>1<br>\end{matrix}\right)<br>$$<br>定义$W$<br>$$<br>W(x;p)=\left(\begin{matrix}<br>1&amp;0&amp;b_1\\<br>0&amp;1&amp;b_2<br>\end{matrix}\right)<br>$$<br>其中因子向量$p=\left(\begin{matrix}<br>b_1\\<br>b_2<br>\end{matrix}\right)$</p>
+<p>则$W$对$p$的偏导数为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>1&amp;0\\<br>0&amp;1<br>\end{matrix}\right)<br>$$<br>上式被称作雅克比行列式(Jacobian)</p>
 <h3 id="Similarity-Motion"><a href="#Similarity-Motion" class="headerlink" title="Similarity Motion"></a>Similarity Motion</h3><p>相似运动是一种刚体运动，包括缩放和平移。</p>
-<p>我们可以定义相似性为<br>$$<br>x’=ax+b_1\<br>y’=ay+b_2<br>$$<br>定义$W,p$<br>$$<br>W=\left(\begin{matrix}<br>a&amp;0&amp;b_1\<br>0&amp;a&amp;b_2<br>\end{matrix}\right)\<br>p=\left(\begin{matrix}<br>a&amp;b_1&amp;b_2<br>\end{matrix}\right)^T<br>$$<br>则$W$对$p$的偏导数，即雅克比行列式(Jacobian)为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>x&amp;1&amp;0\<br>y&amp;0&amp;1<br>\end{matrix}\right)<br>$$</p>
-<h3 id="Affine-motion"><a href="#Affine-motion" class="headerlink" title="Affine motion"></a>Affine motion</h3><p>仿射运动包括放缩，旋转，平移。我们可以表达为<br>$$<br>x’=a_1x+a_2y+b_1\<br>y’=a_3x+a_4y+b_1<br>$$<br>定义$W,p$<br>$$<br>W=\left(\begin{matrix}<br>a_1&amp;a_2&amp;b_1\<br>a_3&amp;a_4&amp;b_2<br>\end{matrix}\right)\<br>p=\left(\begin{matrix}<br>a_1&amp;a_2&amp;b_1&amp;a_3&amp;a_4&amp;b_2<br>\end{matrix}\right)^T<br>$$<br>则$W$对$p$的偏导数，即雅克比行列式(Jacobian)为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>x&amp;y&amp;1&amp;0&amp;0&amp;0\<br>0&amp;0&amp;0&amp;x&amp;y&amp;1<br>\end{matrix}\right)<br>$$</p>
+<p>我们可以定义相似性为<br>$$<br>x’=ax+b_1\\<br>y’=ay+b_2<br>$$<br>定义$W,p$<br>$$<br>W=\left(\begin{matrix}<br>a&amp;0&amp;b_1\\<br>0&amp;a&amp;b_2<br>\end{matrix}\right)\\<br>p=\left(\begin{matrix}<br>a&amp;b_1&amp;b_2<br>\end{matrix}\right)^T<br>$$<br>则$W$对$p$的偏导数，即雅克比行列式(Jacobian)为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>x&amp;1&amp;0\\<br>y&amp;0&amp;1<br>\end{matrix}\right)<br>$$</p>
+<h3 id="Affine-motion"><a href="#Affine-motion" class="headerlink" title="Affine motion"></a>Affine motion</h3><p>仿射运动包括放缩，旋转，平移。我们可以表达为<br>$$<br>x’=a_1x+a_2y+b_1\\<br>y’=a_3x+a_4y+b_1<br>$$<br>定义$W,p$<br>$$<br>W=\left(\begin{matrix}<br>a_1&amp;a_2&amp;b_1\\<br>a_3&amp;a_4&amp;b_2<br>\end{matrix}\right)\\<br>p=\left(\begin{matrix}<br>a_1&amp;a_2&amp;b_1&amp;a_3&amp;a_4&amp;b_2<br>\end{matrix}\right)^T<br>$$<br>则$W$对$p$的偏导数，即雅克比行列式(Jacobian)为<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>x&amp;y&amp;1&amp;0&amp;0&amp;0\\<br>0&amp;0&amp;0&amp;x&amp;y&amp;1<br>\end{matrix}\right)<br>$$</p>
 <h2 id="Iterative-KLT-tracker"><a href="#Iterative-KLT-tracker" class="headerlink" title="Iterative KLT tracker"></a>Iterative KLT tracker</h2><h3 id="Problem-formulation"><a href="#Problem-formulation" class="headerlink" title="Problem formulation"></a>Problem formulation</h3><p>给定视频顺序，找到对应每帧相连的变化顺序。要求能够处理任意类型的运动。</p>
 <h3 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h3><p>与KLT追踪器不同之处在于连接帧的方式：用特征数据和线性相似直接解决相关的变换，而不是用光流连接运动向量并追踪运动。这种方式允许我们处理更加复杂（例如，仿射和投射）转换，并更加稳健的连接物体。</p>
 <p>步骤：</p>
@@ -460,8 +460,8 @@
 </li>
 </ol>
 <h3 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h3><p>在上面第三步中，我们实际上可以近似计算$p$。假设有一个关于$p,p_0$的初始猜测，其中$p=p_0+\Delta p$</p>
-<p>现在<br>$$<br>E=\sum_x[T(W(x;p))-T(x)]^2=\sum_x[T(W(x;p_0+\Delta p))-T(x)]^2<br>$$<br>使用泰勒逼近，我们可以看出错误项约等于<br>$$<br>E\approx \sum_x[T(W(x;p_0))+\nabla T\frac{\partial W}{\partial p}\Delta p-T(x)]^2<br>$$<br>为了最小化此项，我们对$p_0$求偏导，并设为0，求出$p_0$<br>$$<br>\frac{\partial E}{\partial p}\approx\sum_x[\nabla T(\frac{\partial W}{\partial p})^T][T(W(x;p_0))+\nabla T\frac{\partial W}{\partial p}\Delta p-T(x)]=0\<br>\Delta p=H^{-1}\sum_x[\nabla T(\frac{\partial W}{\partial p})^T][T(x)-T(W(x;p_0))]\<br>H=\sum_x[\nabla T\frac{\partial W}{\partial p}]^T[\nabla T\frac{\partial W}{\partial p}]<br>$$<br>迭代地设置$p_0=p_0+\Delta p$，我们可以最终收敛于一个精确的、最小化错误值的$p$，告诉我们转换的类型。</p>
-<h3 id="Link-to-Harris-Corner-Detection"><a href="#Link-to-Harris-Corner-Detection" class="headerlink" title="Link to Harris Corner Detection"></a>Link to Harris Corner Detection</h3><p>对平移运动，<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>1&amp;0\<br>0&amp;1<br>\end{matrix}\right)<br>$$<br>容易得到，<br>$$<br>H=\left(\begin{matrix}<br>I_x^2&amp;I_xI_y\<br>I_xI_y&amp;I_y^2<br>\end{matrix}\right)<br>$$<br>但是，Harris corner检测器假设只要$H​$有大特征值（即稳定可逆），那么该点就是一个角。因此，角可能是一个用于计算平移的好特征，恰恰因为角计算出的矩阵是稳定可逆的。</p>
+<p>现在<br>$$<br>E=\sum_x[T(W(x;p))-T(x)]^2=\sum_x[T(W(x;p_0+\Delta p))-T(x)]^2<br>$$<br>使用泰勒逼近，我们可以看出错误项约等于<br>$$<br>E\approx \sum_x[T(W(x;p_0))+\nabla T\frac{\partial W}{\partial p}\Delta p-T(x)]^2<br>$$<br>为了最小化此项，我们对$p_0$求偏导，并设为0，求出$p_0$<br>$$<br>\frac{\partial E}{\partial p}\approx\sum_x[\nabla T(\frac{\partial W}{\partial p})^T][T(W(x;p_0))+\nabla T\frac{\partial W}{\partial p}\Delta p-T(x)]=0\\<br>\Delta p=H^{-1}\sum_x[\nabla T(\frac{\partial W}{\partial p})^T][T(x)-T(W(x;p_0))]\\<br>H=\sum_x[\nabla T\frac{\partial W}{\partial p}]^T[\nabla T\frac{\partial W}{\partial p}]<br>$$<br>迭代地设置$p_0=p_0+\Delta p$，我们可以最终收敛于一个精确的、最小化错误值的$p$，告诉我们转换的类型。</p>
+<h3 id="Link-to-Harris-Corner-Detection"><a href="#Link-to-Harris-Corner-Detection" class="headerlink" title="Link to Harris Corner Detection"></a>Link to Harris Corner Detection</h3><p>对平移运动，<br>$$<br>\frac{\partial W}{\partial p}(x;p)=\left(\begin{matrix}<br>1&amp;0\\<br>0&amp;1<br>\end{matrix}\right)<br>$$<br>容易得到，<br>$$<br>H=\left(\begin{matrix}<br>I_x^2&amp;I_xI_y\\<br>I_xI_y&amp;I_y^2<br>\end{matrix}\right)<br>$$<br>但是，Harris corner检测器假设只要$H​$有大特征值（即稳定可逆），那么该点就是一个角。因此，角可能是一个用于计算平移的好特征，恰恰因为角计算出的矩阵是稳定可逆的。</p>
 
       
     </div>
@@ -822,7 +822,7 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

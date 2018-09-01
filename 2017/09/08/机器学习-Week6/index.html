@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -86,19 +86,19 @@
 
 
 
-<meta name="description" content="如何评估一个学习算法评估假设函数将训练集以7：3分为训练集和测试集，m表示训练集总数，m(test)表示测试集总数。（注意随机选择） 评估步骤：  用70%的训练集算出θ  计算测试误差Jtest（θ）:a. 对于线性规划$$J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}{test}) -">
+<meta name="description" content="如何评估一个学习算法评估假设函数将训练集以7：3分为训练集和测试集，m表示训练集总数，m(test)表示测试集总数。（注意随机选择） 评估步骤：  用70%的训练集算出θ  计算测试误差Jtest（θ）:a. 对于线性规划$$J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}_{test})">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习 Week6">
 <meta property="og:url" content="http://yoursite.com/2017/09/08/机器学习-Week6/index.html">
 <meta property="og:site_name" content="Xiong&#39;s Blog">
-<meta property="og:description" content="如何评估一个学习算法评估假设函数将训练集以7：3分为训练集和测试集，m表示训练集总数，m(test)表示测试集总数。（注意随机选择） 评估步骤：  用70%的训练集算出θ  计算测试误差Jtest（θ）:a. 对于线性规划$$J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}{test}) -">
+<meta property="og:description" content="如何评估一个学习算法评估假设函数将训练集以7：3分为训练集和测试集，m表示训练集总数，m(test)表示测试集总数。（注意随机选择） 评估步骤：  用70%的训练集算出θ  计算测试误差Jtest（θ）:a. 对于线性规划$$J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}_{test})">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/nUACohi.png">
 <meta property="og:updated_time" content="2017-09-26T03:21:51.565Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习 Week6">
-<meta name="twitter:description" content="如何评估一个学习算法评估假设函数将训练集以7：3分为训练集和测试集，m表示训练集总数，m(test)表示测试集总数。（注意随机选择） 评估步骤：  用70%的训练集算出θ  计算测试误差Jtest（θ）:a. 对于线性规划$$J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}{test}) -">
+<meta name="twitter:description" content="如何评估一个学习算法评估假设函数将训练集以7：3分为训练集和测试集，m表示训练集总数，m(test)表示测试集总数。（注意随机选择） 评估步骤：  用70%的训练集算出θ  计算测试误差Jtest（θ）:a. 对于线性规划$$J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}_{test})">
 <meta name="twitter:image" content="https://i.imgur.com/nUACohi.png">
 
 
@@ -135,7 +135,7 @@
 
 
 
-  <title>机器学习 Week6 | Xiong's Blog</title>
+  <title>机器学习 Week6 | Xiong's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -154,7 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -345,7 +345,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,236
+                  1,241
                 </span>
               
 
@@ -387,11 +387,11 @@
 <ol>
 <li><p>用70%的训练集算出θ</p>
 </li>
-<li><p>计算测试误差Jtest（θ）:a. 对于线性规划<br>$$<br>J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}<em>{test}) - y^{(i)}</em>{test})^2<br>$$<br>b.对于分类问题</p>
+<li><p>计算测试误差Jtest（θ）:a. 对于线性规划<br>$$<br>J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}_{test}) - y^{(i)}_{test})^2<br>$$<br>b.对于分类问题</p>
 </li>
 </ol>
-<p>$$<br>err(h_\Theta(x),y) = \begin{matrix} 1 &amp; \mbox{if } h_\Theta(x) \geq 0.5\ and\ y = 0\ or\ h_\Theta(x) &lt; 0.5\ and\ y = 1\newline 0 &amp; \mbox otherwise \end{matrix}<br>$$</p>
-<p>​          err函数结果为1/0（&gt;=0.5则取1，1表示结果正确），接下来，计算平均误差<br>$$<br>\text{Test Error} = \dfrac{1}{m_{test}} \sum^{m_{test}}<em>{i=1} err(h</em>\Theta(x^{(i)}<em>{test}), y^{(i)}</em>{test})<br>$$</p>
+<p>$$<br>err(h_\Theta(x),y) = \begin{matrix} 1 &amp; \mbox{if } h_\Theta(x) \geq 0.5 and y = 0 or h_\Theta(x) &lt; 0.5 and y = 1\newline 0 &amp; \mbox otherwise \end{matrix}<br>$$</p>
+<p>​          err函数结果为1/0（&gt;=0.5则取1，1表示结果正确），接下来，计算平均误差<br>$$<br>\text{Test Error} = \dfrac{1}{m_{test}} \sum^{m_{test}}_{i=1} err(h_\Theta(x^{(i)}_{test}), y^{(i)}_{test})<br>$$</p>
 <h3 id="模型选择问题"><a href="#模型选择问题" class="headerlink" title="模型选择问题"></a>模型选择问题</h3><p>将数据集分为三部分：训练集 60% / 交叉验证集（CV，cross validation set） 20% / 测试集 20%</p>
 <h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ol>
 <li>对每个多项式次数d通过训练集计算出Θ</li>
@@ -816,7 +816,7 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

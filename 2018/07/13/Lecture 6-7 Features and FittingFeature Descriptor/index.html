@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -145,7 +145,7 @@
 
 
 
-  <title>CS131 Lecture 6-7 Features and Fitting/Feature Descriptor | Xiong's Blog</title>
+  <title>CS131 Lecture 6-7 Features and Fitting/Feature Descriptor | Xiong's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -164,7 +164,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -355,7 +355,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,530
+                  1,531
                 </span>
               
 
@@ -423,11 +423,11 @@
 <h3 id="General-Approach-1"><a href="#General-Approach-1" class="headerlink" title="General Approach"></a>General Approach</h3><p>我们寻找角点，因为它们在大量图像中都是可重复且有特点的。为了找到角点，我们需要寻找在所有维度上强度剧烈变化的地方，也是梯度有两个以上主要方向的地方。为了提供上下文，一个“平整”的区域在任何方向上都不会改变且边沿的方向不会产生变化。我们用Harris技术找到这些角点。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.10.png" alt=""></p>
 <h3 id="Harris-Detector"><a href="#Harris-Detector" class="headerlink" title="Harris Detector"></a>Harris Detector</h3><p>计算移动$[u,v]$强度的改变量$E(u,v)$，其中$I(x,y)$表示强度函数，$w(x,y)$表示窗函数（用于对信号进行截断，也叫截断函数）：<br>$$<br>E(u,v)=\sum _{x,y}w(x,y)[I(x+u,y+v)-I(x,y)]^{2}<br>$$<br><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.11.png" alt=""></p>
-<p>为了找到角点，我们需要最大化函数$E(u,v)$。用Taylor Expansion可以得到以下方程：<br>$$<br>E(u,v)=\left[ \begin{matrix}<br>u &amp;v<br>\end{matrix} \right]<br>M<br>\left[ \begin{matrix}<br>u \v<br>\end{matrix} \right]<br>$$<br>其中M定义为<br>$$<br>M=\sum <em>{x,y}w(x,y)\left[ \begin{matrix}<br>I</em>{x}I_{x} &amp;I_{x}I_{y}\<br>I_{x}I_{y}  &amp; I_{y}I_{y}<br>\end{matrix} \right] \<br>\left[ \begin{matrix}<br>I_{x}I_{x} &amp;I_{x}I_{y}\<br>I_{x}I_{y}  &amp; I_{y}I_{y}<br>\end{matrix} \right]=x的梯度\times y的梯度<br>$$<br>这个矩阵显示<br>$$<br>M=\left[ \begin{matrix}<br>\sum I_{x}I_{x} &amp; \sum I_{x}I_{y}\<br>\sum I_{x}I_{y}  &amp; \sum I_{y}I_{y}<br>\end{matrix} \right]=<br>\left[ \begin{matrix}<br>\lambda_{1} &amp; 0\<br>0  &amp; \lambda_{2}<br>\end{matrix} \right]<br>$$<br>角点的两个特征值$\lambda_{1}$、$\lambda_{2}$都是大且相近的，而边缘只有其中一个特征值较大，平坦区域两个特征值均较小。</p>
+<p>为了找到角点，我们需要最大化函数$E(u,v)$。用Taylor Expansion可以得到以下方程：<br>$$<br>E(u,v)=\left[ \begin{matrix}<br>u &amp;v<br>\end{matrix} \right]<br>M<br>\left[ \begin{matrix}<br>u \\v<br>\end{matrix} \right]<br>$$<br>其中M定义为<br>$$<br>M=\sum _{x,y}w(x,y)\left[ \begin{matrix}<br>I_{x}I_{x} &amp;I_{x}I_{y}\\<br>I_{x}I_{y}  &amp; I_{y}I_{y}<br>\end{matrix} \right] \\<br>\left[ \begin{matrix}<br>I_{x}I_{x} &amp;I_{x}I_{y}\\<br>I_{x}I_{y}  &amp; I_{y}I_{y}<br>\end{matrix} \right]=x的梯度\times y的梯度<br>$$<br>这个矩阵显示<br>$$<br>M=\left[ \begin{matrix}<br>\sum I_{x}I_{x} &amp; \sum I_{x}I_{y}\\<br>\sum I_{x}I_{y}  &amp; \sum I_{y}I_{y}<br>\end{matrix} \right]=<br>\left[ \begin{matrix}<br>\lambda_{1} &amp; 0\\<br>0  &amp; \lambda_{2}<br>\end{matrix} \right]<br>$$<br>角点的两个特征值$\lambda_{1}$、$\lambda_{2}$都是大且相近的，而边缘只有其中一个特征值较大，平坦区域两个特征值均较小。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.12.png" alt=""></p>
 <p>角点响应函数(Corner Response Function)为每个窗计算一个值：<br>$$<br>\theta=det(M)-\alpha trace(M)^{2}<br>$$<br>其中$\alpha$范围为$[0.04,0.06]$。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.8.png" alt=""></p>
-<p>为了增加旋转不变性，我们用经过加权和的高斯函数进行光滑化：<br>$$<br>M=g(\sigma) * \left[ \begin{matrix}<br>I_{x}I_{x} &amp;I_{x}I_{y}\<br>I_{x}I_{y}  &amp; I_{y}I_{y}<br>\end{matrix} \right]<br>$$<br>最后，下图展示了Harris detector找到的关键点：</p>
+<p>为了增加旋转不变性，我们用经过加权和的高斯函数进行光滑化：<br>$$<br>M=g(\sigma) * \left[ \begin{matrix}<br>I_{x}I_{x} &amp;I_{x}I_{y}\\<br>I_{x}I_{y}  &amp; I_{y}I_{y}<br>\end{matrix} \right]<br>$$<br>最后，下图展示了Harris detector找到的关键点：</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.9.png" alt=""></p>
 <h2 id="Scale-Invariant-Keypoint-Detection"><a href="#Scale-Invariant-Keypoint-Detection" class="headerlink" title="Scale Invariant Keypoint Detection"></a>Scale Invariant Keypoint Detection</h2><h3 id="Motivation-2"><a href="#Motivation-2" class="headerlink" title="Motivation"></a>Motivation</h3><p>之前我们用Harris detector找到角点的关键点。Harris detector为了维持良好的定位，用的窗较小。因为用的是小窗，所以会当图片缩放后，窗会受到影响，其梯度会发生改变。下图展现了同样大小的框在图片放大后的改变。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/7.1.png" alt=""></p>
@@ -435,7 +435,7 @@
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/7.4.png" alt=""></p>
 <h3 id="General-Approach-2"><a href="#General-Approach-2" class="headerlink" title="General Approach"></a>General Approach</h3><p>我们可以找到一个函数的局部最大值。相对于局部最大值，区域大小应该不随尺度改变。这意味着区域大小和图像尺寸应该共同变化。一个好的函数应该有有且仅有一个明显的局部最大值。换句话说，我们应该用在强度上有鲜明对比的函数。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/7.2.png" alt=""></p>
-<p>我们将函数定义为：$f=kernel*image$，可以用Laplacian（拉普拉斯算子）或者Difference of Gaussians（DoG，差分高斯算子）作为核<br>$$<br>L=\sigma^{2}(G_{xx}(x,y,\sigma)+G_{yy}(x,y,\sigma))\<br>DoG=G(x,y,k\sigma)-G(x,y,\sigma)\<br>where\space G(x,y,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^{2}+y^{2}}{2\sigma^{2}}}<br>$$<br>这些核都具有旋转与伸缩不变性。</p>
+<p>我们将函数定义为：$f=kernel*image$，可以用Laplacian（拉普拉斯算子）或者Difference of Gaussians（DoG，差分高斯算子）作为核<br>$$<br>L=\sigma^{2}(G_{xx}(x,y,\sigma)+G_{yy}(x,y,\sigma))\\<br>DoG=G(x,y,k\sigma)-G(x,y,\sigma)\\<br>where\space G(x,y,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^{2}+y^{2}}{2\sigma^{2}}}<br>$$<br>这些核都具有旋转与伸缩不变性。</p>
 <p>附加：拉普拉斯算子的推导</p>
 <p>对于图像$f$，首先进行高斯平滑处理滤去噪点：<br>$$<br>G(x,y,\sigma)<em>f(x,y)<br>$$<br>对上式求微分，进行边缘检测：<br>$$<br>\frac{d}{dx}(G</em>f)=\frac{dG}{dx}*f<br>$$<br>其中，$dG/dx$即为拉普拉斯算子。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/7.3.png" alt=""></p>
@@ -805,7 +805,7 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -140,7 +140,7 @@
 
 
 
-  <title>CS131 Lecture 6 Edge Detection | Xiong's Blog</title>
+  <title>CS131 Lecture 6 Edge Detection | Xiong's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -159,7 +159,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -389,13 +389,13 @@
       
         <h1 id="Lecture-6-Edge-Detection"><a href="#Lecture-6-Edge-Detection" class="headerlink" title="Lecture 6 Edge Detection"></a>Lecture 6 Edge Detection</h1><h2 id="Edge-Detection"><a href="#Edge-Detection" class="headerlink" title="Edge Detection"></a>Edge Detection</h2><h3 id="Edge-Basic"><a href="#Edge-Basic" class="headerlink" title="Edge Basic"></a>Edge Basic</h3><p>图片上的边缘主要有四个可能的来源：不连续的表面（表面角度突然改变）、深度不连续（一个表面重叠在另一个上）、表面颜色不连续、光照不连续（明/暗）。从数学上来看，梯度大的位置为边缘。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/6.1.png" alt=""></p>
-<h3 id="Sobel-Noise-Detector"><a href="#Sobel-Noise-Detector" class="headerlink" title="Sobel Noise Detector"></a>Sobel Noise Detector</h3><p>这个算法利用2个$3\times 3$核，与图像卷积，结构近似于原始图像的x和y导数。<br>$$<br>G_{x}= \left[<br> \begin{matrix}<br>  1&amp;0&amp;-1\<br>   2&amp;0&amp;-2\<br>   1&amp;0&amp;-1<br>  \end{matrix}<br>  \right] ,<br>  G_{y}= \left[<br> \begin{matrix}<br>  1&amp;2&amp;1\<br>   0&amp;0&amp;0\<br>   -1&amp;-2&amp;-1<br>  \end{matrix}<br>  \right]<br>$$<br>这些矩阵代表了光滑化和微分的结果<br>$$<br>G_{x}= \left[<br> \begin{matrix}<br>  1&amp;0&amp;-1\<br>   2&amp;0&amp;-2\<br>   1&amp;0&amp;-1<br>  \end{matrix}<br>  \right]=\left[<br> \begin{matrix}<br>  1\<br>   2\<br>   1<br>  \end{matrix}<br>  \right]<br>  \left[<br> \begin{matrix}<br>  1&amp;0&amp;-1\<br>  \end{matrix}<br>  \right]<br>$$<br>但是Sobel Filter有许多问题，包括定位差。并且Sobel Filter比起倾斜边缘，更偏向于水平和垂直边缘。</p>
+<h3 id="Sobel-Noise-Detector"><a href="#Sobel-Noise-Detector" class="headerlink" title="Sobel Noise Detector"></a>Sobel Noise Detector</h3><p>这个算法利用2个$3\times 3$核，与图像卷积，结构近似于原始图像的x和y导数。<br>$$<br>G_{x}= \left[<br> \begin{matrix}<br>  1&amp;0&amp;-1\\<br>   2&amp;0&amp;-2\\<br>   1&amp;0&amp;-1<br>  \end{matrix}<br>  \right] ,<br>  G_{y}= \left[<br> \begin{matrix}<br>  1&amp;2&amp;1\\<br>   0&amp;0&amp;0\\<br>   -1&amp;-2&amp;-1<br>  \end{matrix}<br>  \right]<br>$$<br>这些矩阵代表了光滑化和微分的结果<br>$$<br>G_{x}= \left[<br> \begin{matrix}<br>  1&amp;0&amp;-1\\<br>   2&amp;0&amp;-2\\<br>   1&amp;0&amp;-1<br>  \end{matrix}<br>  \right]=\left[<br> \begin{matrix}<br>  1\\<br>   2\\<br>   1<br>  \end{matrix}<br>  \right]<br>  \left[<br> \begin{matrix}<br>  1&amp;0&amp;-1\\<br>  \end{matrix}<br>  \right]<br>$$<br>但是Sobel Filter有许多问题，包括定位差。并且Sobel Filter比起倾斜边缘，更偏向于水平和垂直边缘。</p>
 <h3 id="Canny-Edge-Detector"><a href="#Canny-Edge-Detector" class="headerlink" title="Canny Edge Detector"></a>Canny Edge Detector</h3><p>Canny Edge Detector算法有五步：</p>
 <ul>
 <li><p>抑制噪音</p>
 <p>我们可以用一个类似于Sobel Filter的方法，同时减少噪音并计算x、y方向上的导数。</p>
 </li>
-<li><p>计算梯度大小与方向<br>$$<br>|\nabla f(x,y)|=\sqrt{f_{x}^{2}+f_{y}^{2}}\<br>\theta=tan^{-1}(f_{y}/f_{x})<br>$$</p>
+<li><p>计算梯度大小与方向<br>$$<br>|\nabla f(x,y)|=\sqrt{f_{x}^{2}+f_{y}^{2}}\\<br>\theta=tan^{-1}(f_{y}/f_{x})<br>$$</p>
 </li>
 <li><p>应用non-maximum消除</p>
 <p>我们假设只有梯度最大时出现边缘，所以消除掉所有不含最大梯度值的像素。基本上，如果一个像素不是正方向上三个像素和反方向上三个像素中梯度值最大的一个，那么就将这个像素设为0。并且，所有的梯度值都要四舍五入到接近45°</p>
@@ -845,7 +845,7 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

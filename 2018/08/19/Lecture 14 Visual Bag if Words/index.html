@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -145,7 +145,7 @@
 
 
 
-  <title>CS131 Lecture 14 Visual Bag of Words | Xiong's Blog</title>
+  <title>CS131 Lecture 14 Visual Bag of Words | Xiong's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -164,7 +164,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -437,10 +437,10 @@
 <h3 id="Some-results"><a href="#Some-results" class="headerlink" title="Some results"></a>Some results</h3><p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/14.6.png" alt=""></p>
 <h2 id="Naive-Bayes"><a href="#Naive-Bayes" class="headerlink" title="Naïve Bayes"></a>Naïve Bayes</h2><h3 id="Basic-Idea"><a href="#Basic-Idea" class="headerlink" title="Basic Idea"></a>Basic Idea</h3><p>一旦我们产生了一个视觉词直方图，我们可以用朴素贝叶斯(Naïve Bayes)来对直方图进行分类。我们简单的衡量一个给定的视觉词是否存在，然后假定一个视觉词的存在/缺失和给定类的每个视觉词条件独立。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/14.7.png" alt=""></p>
-<p>如上图，考虑一些视觉词直方图$X$，$x_i$是视觉词$i$在直方图中的总和。我们只在意视觉词$i$是否存在，即$x_i\in {0,1}$</p>
+<p>如上图，考虑一些视觉词直方图$X$，$x_i$是视觉词$i$在直方图中的总和。我们只在意视觉词$i$是否存在，即$x_i\in \{0,1\}$</p>
 <h3 id="Prior"><a href="#Prior" class="headerlink" title="Prior"></a>Prior</h3><p>$P(c)$是在所有类中出现类$c$的概率。所以对总共$m$个物体类，我们有<br>$$<br>\sum_{i=1}^m P(c)=1<br>$$<br>对于一个用直方图$x$表现的图像和一些物体类$c$，我们可以计算<br>$$<br>P(x|c)=\prod_{i=1}^m P(x_i|c)<br>$$</p>
 <h3 id="Posterior"><a href="#Posterior" class="headerlink" title="Posterior"></a>Posterior</h3><p>现在我们可以用贝叶斯理论(Bayes Theorem)来计算图像$x$属于类$c_j$的概率：<br>$$<br>P(c|x)=\frac{P(c)P(x|c)}{\sum_{c’} P(c’)P(x|c’)}<br>$$<br>$c’$表示所有类。拓展分子和分母，我们可以重写方程：<br>$$<br>P(c|x)=\frac{P(c)\prod_{i=1}^m P(x_i|c)}{\sum_{c’} P(c’)\prod_{i=1}^m P(x_i|c’)}<br>$$</p>
-<h3 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3><p>为了将用直方图$x$表现的图像分类，我们简单的找到能够最大化方程(6)的类$c^<em>$：<br>$$<br>c^</em>=\arg\max_c P(c|x)<br>$$<br>因为公式中含有大量的小概率累乘，所以可能会产生一个接近于0的不稳定值。因此，我们改用logs计算概率：<br>$$<br>c^<em>=\arg\max_clogP(c|x)<br>$$<br>现在我们考虑两个类$c_1$和$c_2$：<br>$$<br>P(c_1|x)=\frac{P(c_1)\prod_{i=1}^m P(x_i|c_1)}{\sum_{c’} P(c’)\prod_{i=1}^m P(x_i|c’)}<br>$$<br>和<br>$$<br>P(c_2|x)=\frac{P(c_2)\prod_{i=1}^m P(x_i|c_2)}{\sum_{c’} P(c’)\prod_{i=1}^m P(x_i|c’)}<br>$$<br>因为分母是固定的，所以我们计算最大值时可以忽视分母。即($\propto$是正比于的意思)<br>$$<br>P(c_1|x)\propto P(c_1)\prod_{i=1}^m P(x_i|c_1)<br>$$<br>和<br>$$<br>P(c_2|x)\propto P(c_2)\prod_{i=1}^m P(x_i|c_2)<br>$$<br>对于类$c$<br>$$<br>P(c|x)\propto P(c)\prod_{i=1}^m P(x_i|c)<br>$$<br>用上logs：<br>$$<br>logP(c|x)\propto logP(c)+\sum_{i=1}^m logP(x_i|c)<br>$$<br>现在，分类任务变成<br>$$<br>\begin{align</em>}<br>c^<em>&amp;=\arg\max_c P(c|x) \<br>&amp;=\arg\max_c logP(c|x)\<br>&amp;=\arg\max_c logP(c) +\sum_{i=1}^m logP(x_i|c)<br>\end{align</em>}<br>$$</p>
+<h3 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3><p>为了将用直方图$x$表现的图像分类，我们简单的找到能够最大化方程(6)的类$c^<em>$：<br>$$<br>c^</em>=\arg\max_c P(c|x)<br>$$<br>因为公式中含有大量的小概率累乘，所以可能会产生一个接近于0的不稳定值。因此，我们改用logs计算概率：<br>$$<br>c^<em>=\arg\max_clogP(c|x)<br>$$<br>现在我们考虑两个类$c_1$和$c_2$：<br>$$<br>P(c_1|x)=\frac{P(c_1)\prod_{i=1}^m P(x_i|c_1)}{\sum_{c’} P(c’)\prod_{i=1}^m P(x_i|c’)}<br>$$<br>和<br>$$<br>P(c_2|x)=\frac{P(c_2)\prod_{i=1}^m P(x_i|c_2)}{\sum_{c’} P(c’)\prod_{i=1}^m P(x_i|c’)}<br>$$<br>因为分母是固定的，所以我们计算最大值时可以忽视分母。即($\propto$是正比于的意思)<br>$$<br>P(c_1|x)\propto P(c_1)\prod_{i=1}^m P(x_i|c_1)<br>$$<br>和<br>$$<br>P(c_2|x)\propto P(c_2)\prod_{i=1}^m P(x_i|c_2)<br>$$<br>对于类$c$<br>$$<br>P(c|x)\propto P(c)\prod_{i=1}^m P(x_i|c)<br>$$<br>用上logs：<br>$$<br>logP(c|x)\propto logP(c)+\sum_{i=1}^m logP(x_i|c)<br>$$<br>现在，分类任务变成<br>$$<br>\begin{align</em>}<br>c^<em>&amp;=\arg\max_c P(c|x) \\<br>&amp;=\arg\max_c logP(c|x)\\<br>&amp;=\arg\max_c logP(c) +\sum_{i=1}^m logP(x_i|c)<br>\end{align</em>}<br>$$</p>
 
       
     </div>
@@ -805,7 +805,7 @@ src="//music.163.com/outchain/player?type=2&id=536622304&auto=1&height=66"></ifr
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
