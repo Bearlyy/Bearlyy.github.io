@@ -392,7 +392,17 @@ AR
 交通
 医疗图像
 
-Challenges
+Challenges因为视频的大量数据，耗时较长。并依赖于物体识别算法，在以下情况可能会失败：
+
+几何改变，例如物体的尺度改变
+光方面的改变
+图像帧中遮挡
+非线性移动
+分辨率低的模糊视频
+同框的相似物体
+
+Feature TrackingDefinition特征追踪是检测并追踪在连续时间下视觉特征点
+Challenge
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -576,7 +586,8 @@ Challenges
         
           
           Lecture 17 MotionIntroduction本节课我们会将之前的技术与新方法结合，追踪多张图片下像素的移动，应用方面有自动驾驶汽车、机器人、安全系统等
-Optical Flow and Key AssumptionsOptical Flow光流即像素随时间的运动。光流的目的是通过观察两
+Optical Flow and Key AssumptionsOptical Flow光流即像素随时间的运动。光流的目的是通过观察两张图片$I_0$和$I_1$，对每个在时间$t_0$到$t_1$之间的每个像素产生一个运动矢量。但是，光流只能呈现图像模式的明显运动，这在下一节Assumptions and Limitations有解释，
+Assumptions and LimitationsApparent Motion在二维图
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -766,7 +777,8 @@ Optical Flow and Key AssumptionsOptical Flow光流即像素随时间的运动。
 …
 
 通常，计算机视觉需要能够提供物体基本特征之外的信息。
-What can compute
+What can computer recognize today?找到特定类别的物体（品牌、地标、书本…），不过只能精确匹配。对于当今的系统来说，找到一个通用的对象要困难得多。
+What’s next to work on?计算机视觉尚未达到的主要目标是通用类别识别。即能识别图中所有物体类别。例如：对于一个橘色杯子，我们想要找到
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -951,7 +963,8 @@ What can compute
           
           Lecture 15 Detecting Objects by PartsIntroduction to Object Detection之前我们介绍了物体检测，本章将介绍物体检测和定位物体。
 
-Challenges环境改变（光照、视角、物体变形）使得同一类的物体变得不同，以至于难以正确检测并分类。
+Challenges环境改变（光照、视角、物体变形）使得同一类的物体变得不同，以至于难以正确检测并分类。另外，此处介绍的算法只适用于2D空间，例如：无法检测一个物体是否在另一个物体的旁边。还有，以下的算法不能检测物体的具体边缘，只是像上图一样的边界框。
+Current Object Detection Benchmarks(基准点)为了评估一个物体检测器的表现，研究者用标准化的物体检测器基准点。基准点
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1135,7 +1148,8 @@ Challenges环境改变（光照、视角、物体变形）使得同一类的物�
         
           
           Lecture 14 Visual Bag of WordsIntroduction首先我们要将图像表现为特征向量形式。接下来创建图像图像的空间形式，观察在低维的图像值。然后将每个图像转换成一组系数，并投影到PCA空间。转换后的数据用分类器分类，例如：K-means、HAC。
-Idea of Bag
+Idea of Bag of Words词袋模型是一个简化目标表示的方式，将其作为它们子部分的集合，以便于分类之类的操作。例如：一个段落里的单词列表和单词的频率就可以构成一个词袋，我们用词袋来表现段落以便于后续分析。
+在计算机视觉领域，我们将图像考虑为图像特征的集合。同样，结合特征的频率，我们也可以运用词袋模型来进行预测
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1324,7 +1338,12 @@ Idea of Bag
 组织相册：将相同的人放在同一相册
 人物追踪
 动作和表情：构建基于心情互动的智能设备
-安全和战争：检测特殊人物
+安全和战争：检测特殊人物、敌军
+电话会议：提供正在视频的人的信息
+
+A Key Distinction: Detection vs. RecognitionFace Detection: 检测照片是否包含人脸和照片上人脸的位置
+Face Recognition: 检测照片包含谁的脸
+Space of Faces如果我们考虑
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1507,7 +1526,10 @@ Idea of Bag
       
         
           
-          Lecture 12 Face Recognition &amp; Dimensionality ReductionOverview and MotivationOverview维度减少是用于减少特征数的一个过程，可以提高效率。主要有两种方法：奇异值分解(Singular Value Decompo
+          Lecture 12 Face Recognition &amp; Dimensionality ReductionOverview and MotivationOverview维度减少是用于减少特征数的一个过程，可以提高效率。主要有两种方法：奇异值分解(Singular Value Decomposition, SVD)和主成分分析(Principal Component Analysis, PCA)。
+Motivation
+减少计算成本。减少不重要的特征，保留关键成分。
+减少“维度灾难”的影响。lecture 11中提及，维度增加，需要更多数据点，分析耗费的时间更多。因此，减少维度能够缓解
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1692,7 +1714,11 @@ Idea of Bag
           
           Lecture 11 Object RecognitionMean-Shift一种通过分析密度方程检测它局部最大值的模式寻找(mode-seeking)技术。
 Optimizations为了提高算法速度，需要平移窗或减少窗的数量。使用吸引盆(basin of attraction)方法达成。
-Par
+Parallelization 移动不同窗口的计算是独立的，可以被分割给多个不同的处理器平行运算。因此可以在没有损失精度的前提下，平行计算提高速度。
+Basin of Attraction 因为靠近窗移动路径和停止位置的点很可能被包含进同一集群，所以我们在初始化时就加入这些点，以减少计算时间。
+方法：
+
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1877,7 +1903,8 @@ Par
           
           Lecture 10 Semantic Segmentation and ClusteringClustering and Segmentation图片分割目的是检测相似和应该在一起的图片区域或像素组。有多种相似度测量方法，以下是一个例子，将属于不同物体的像素分割。
 
-图像分割可以通过检测像素组，将
+图像分割可以通过检测像素组，将图像分割为独立的多个物体。这项功能除了能直接运用于物体检测外，还能提高后面的图像处理过程的效率。
+Gestalt School and FactorsGestalt理论认为总体大于其部分之和，各部分之间的联系可以产生新的性质与特征。这个理论定义了Gestalt因子，用于定义图像中的组。以下是Gest
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -2061,7 +2088,17 @@ Par
         
           
           Lecture 9 Image Resizing and SegmentationIntroduction为了适应不同尺寸和形状的播放器，图片或影片需要调整大小，本章介绍如何在调整大小的同时保存重要内容并减少瑕疵。
-Problem Statement输入大小为$n\times m$的原图，输出大小为
+Problem Statement输入大小为$n\times m$的原图，输出大小为$n’\times m’​$，能很好代表原图的新图像。我们希望：
+
+新图要能符合设备几何限制
+新图要展现重要内容和结构
+新图要减少瑕疵
+
+Importance Measures
+用函数$S:p\rightarrow [0,1]$来确定图像中的重要部分，再用一些操作来改变图像。如下图
+
+
+除了函数方法
           ...
           <!--noindex-->
           <div class="post-button text-center">

@@ -384,7 +384,9 @@
         
           
           Lecture 8 Feature Descriptors and ResizingScale invariant keypoint detectionMotivation给定有较大尺度差别的两张相同情景下的图片，目标是独立的检测每张图中相同关键点。解决方案是寻找再空间和尺度上合适函数的极大值。
-G
+General methodology通过合理放缩窗口，我们可以捕捉到相同的内容。如下图，右侧的窗要放大至左侧窗才能获得相同信息。  
+
+从尺度不变角度上，我们需要找到一个描述什么是“捕捉相同内容”的方法。这里我们考虑一个以区域内容作为输入，对该区域的所有尺度范围相同值作为输出的函数$f(window
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -567,7 +569,11 @@ G
       
         
           
-          Lecture 6-7 Features and Fitting/Feature DescriptorLocal Invariant(局部不变) FeaturesMotivation使用局部不变的特征的目的出于它在广泛环境下的有用性，之前讨论的方法在这些环境下均产生问题，例如：交叉相关。这个方法通过
+          Lecture 6-7 Features and Fitting/Feature DescriptorLocal Invariant(局部不变) FeaturesMotivation使用局部不变的特征的目的出于它在广泛环境下的有用性，之前讨论的方法在这些环境下均产生问题，例如：交叉相关。这个方法通过找到图像中局部、独特的结构，并用周围区域来作为小块，而不是使用全局作为代表来找到相对应的结构。这样做可以得到一个强健性更高的图片检测策略，该策略对物体旋转、视角改变、尺度变换等具有不变性。
+General Approach
+找到一系列特别的关键点
+在关键点附近定义一个局部区域
+从该区域提取并归一化局
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -752,7 +758,16 @@ G
           
           Lecture 6 Edge DetectionEdge DetectionEdge Basic图片上的边缘主要有四个可能的来源：不连续的表面（表面角度突然改变）、深度不连续（一个表面重叠在另一个上）、表面颜色不连续、光照不连续（明/暗）。从数学上来看，梯度大的位置为边缘。
 
-Sobel Noise
+Sobel Noise Detector这个算法利用2个$3\times 3$核，与图像卷积，结构近似于原始图像的x和y导数。
+
+G_{x}= \left[
+ \begin{matrix}
+  1&0&-1\\
+   2&0&-2\\
+   1&0&-1
+  \end{matrix}
+  \right] ,
+  G_{y
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -936,7 +951,9 @@ Sobel Noise
         
           
           Lecture 5 Edge DetectionEdge Detection in MammalsHubel &amp; Wiesel两个人的实验表明，猫的视觉神经在碰到特定方向的边缘时，会产生反应。
-BiedermanBiederman的实验表明，人们在只看到物品一半的轮廓时，仍能识别物体且速度不
+BiedermanBiederman的实验表明，人们在只看到物品一半的轮廓时，仍能识别物体且速度不受影响。这给计算机视觉提供了一个想法：即使只展现图像的一部分，一个系统理论上应该能够识别整个物品。
+Walther, Chai, Caddigan, Beck &amp; Fei-Fei一群研究者发现大脑的低层次在识别轮廓方面更强，而高层次对颜色识别能力更强。
+Edge Detection for 
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1122,7 +1139,14 @@ BiedermanBiederman的实验表明，人们在只看到物品一半的轮廓时�
           Lecture 4 Pixels and FiltersImage Sampling and QuantizationImage Type
 Binary Type 每个像素不是黑(0)就是白(1)
 
-Grayscale Images 比起Binary Type，每个像素在黑白之间有更大的范围(0-2
+Grayscale Images 比起Binary Type，每个像素在黑白之间有更大的范围(0-255)，即多了中间的灰色部分
+
+
+Color Images 有多个颜色通道，每张图片可以在不同的颜色模型(RGB, LAB, HSV)上呈现，每个颜色通道值的范围取决于所选的颜色模型。
+
+
+
+Sampling and Resolution图片是采样的，由离散的像素组成，不是连续的，所以可能因为像素密
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1306,7 +1330,8 @@ Grayscale Images 比起Binary Type，每个像素在黑白之间有更大的范�
         
           
           Lecture 3 Linear Algebra Primer Part 2Transformation Matrices矩阵可以用多种方式将向量转换，最简单的例子是缩放：
-$\left [ \begin{matrix} s_{x} &amp; 0 \\ 0 &amp; s_{y} \end{mat
+$\left [ \begin{matrix} s_{x} &amp; 0 \\ 0 &amp; s_{y} \end{matrix} \right ]  $ x $\left [ \begin{matrix} x \\ y \end{matrix} \right ]$ = $\left [ \begin{matrix} s_{x} x \\  s_{y}y \end{matrix} \right ]$
+Rotate 旋转
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1491,7 +1516,9 @@ $\left [ \begin{matrix} s_{x} &amp; 0 \\ 0 &amp; s_{y} \end{mat
           
           Lecture 2 Color and Linear Algebra颜色物理学什么是颜色？颜色是环境中的物理光和我们视觉系统交互的结果。它是一种我们在看物品和光时的视觉体验的心理性质，而不是这些物品和光的物理性质。
 颜色和光白光由几乎平均能量的可视光谱的波长组成
-电磁光谱光由不同波长的波组成，可视光
+电磁光谱光由不同波长的波组成，可视光谱范围从400nm到700nm，人类对可视光谱中间部分最敏感。人类只能看到可视光谱的原因的太阳发射黄光最多，而且温度较高。
+可视光Plank’s Law基于星球的表面温度测量电磁辐射发出的波长。
+物理光任何光都可以用它的光谱描述（每秒钟发射的波长在400-700nm之间的能量）。物品反射的光时常集中
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1678,7 +1705,10 @@ $\left [ \begin{matrix} s_{x} &amp; 0 \\ 0 &amp; s_{y} \end{mat
 从数字图像中提取信息。这些信息可以随着定义不同而改变，可以是空间测量、现实增强等等
 构造一个可以理解图片意思并能应用的算法。一个艰难的问题50年来，计算视觉都没有很好的被解决。
 可以暴力算出棋类解法，但是无法写诗
-目标
+目标识别比3D建模更难
+计算机视觉难在像素和其意义的不同理解人类视觉视觉定义
+一个可以提取尽可能多的信息的传感器（眼睛、相机）。这方面相机优于人眼，因为可以通过技术看到更远的地方。
+处理器需要处理信息并提取其中的含义。这部分计算机视觉仍然落后于人类。人类视觉系统1962年，科学家发现猫的一些视觉神经只有
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1864,7 +1894,11 @@ $\left [ \begin{matrix} s_{x} &amp; 0 \\ 0 &amp; s_{y} \end{mat
           Matrices and OperatorsThe colon Operatora:b\:c表示行向量a,a+b,…,a+nb(a+nb\b则返回空矩阵
 Accessing Parts of a Matrix
 x(a,b)返回x矩阵中a行b列的元素
-X(a,b)=c，若X矩阵不存在或者(a,b)超出
+X(a,b)=c，若X矩阵不存在或者(a,b)超出其行列数，则matlab会拓展出一个最小满足该要求的矩阵，除了(a,b)位置为c其他新增位置为0。X存在则c替换(a,b)原有数字
+X([a,b],c)，返回第c列中的a、b行的元素，有各种变式
+end是matlab中的一个关键字，不能作为变量名，矩阵索引中可以当作一个表示最后的数字
+
+Combin
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -2050,7 +2084,11 @@ X(a,b)=c，若X矩阵不存在或者(a,b)超出
           Photo OCRProblem Description and PipelinePhoto OCR全称为photo optical character recognition(照片光学字符识别)，用于读取图片中的文字信息。
 photo OCR步骤（又称机器学习流水线）：
 
-给定图片，检测有文字的位
+给定图片，检测有文字的位置
+通过得到的矩形文字框，对里面的字母进行独立分割
+识别字母，通过修正
+
+Sliding Windows滑动窗分类器用于文字检测(text detection)，确定一个长宽固定的矩形框，在一幅图片中每次一个步长(又称步幅参数stride parameter)移动矩形框遍历图片获得图像块数据，通常步
           ...
           <!--noindex-->
           <div class="post-button text-center">

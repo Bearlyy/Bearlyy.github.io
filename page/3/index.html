@@ -384,7 +384,7 @@
         
           
           Gradient Descent with Large DatasetsLearning With Large Datasets先使用小的数据集（例如m=1000），绘制学习曲线(Jtrain(θ)、Jcv(θ))，看m为小数值的时候是否出现高偏差(high variance)，出现则用大数据集
-S
+Stochastic Gradient Descent随机梯度下降通常用于大数据算法，扫描所有算法，对每个样本分别进行梯度下降。应该提前随机打乱数据，可以让梯度下降更快。第二步的整个循环一般进行1-10次，通常m越大执行次数越小。同时，Jtrain必须执行batch gradient descent（
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -570,7 +570,18 @@ S
           异常检测(Anomaly detection)简介：通过一系列特征变量X建造一个模型p(x)，若p(x)&lt;ε，则可以认为该数据异常，进行进一步检测。
 应用：制造业、用户行为检测、数据中心
 高斯分布(正态分布)x~N(μ,σ²)
-~表示服从····分布，N表示Normal(正态)，μ表示均值，σ
+~表示服从····分布，N表示Normal(正态)，μ表示均值，σ²表示方差（σ为标准差）
+μ决定中心位置，σ越小曲线越窄高，但曲线所围面积总为1
+算法Π：累乘标志
+步骤：
+
+找出可以用于检测错误的特征x，或者可以描述相关属性的特征x
+找出m个无标签数据构成的训练集，拟合出期望与方差值
+计算p(x)，如果p(X)&lt;ε，则异常
+
+公式如下：
+
+如何开发异常检测
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -756,7 +767,13 @@ S
           聚类(clustering)无监督学习(unsupervised learning)输入没有标记的数据，通过算法找出结构。
 K均值算法(K-Means Algorithm)选择k个聚类中心（需要聚k个类），K均值要迭代的做两件事：簇分配和移动聚类中心。
 
-簇分配：遍历所有样本，根据样本更靠近哪个聚类
+簇分配：遍历所有样本，根据样本更靠近哪个聚类中心来分类。
+移动聚类中心：将两个聚类中心移动到同类型的均值处。
+
+最终聚类中心不再移动时，算法完成。
+详细步骤：
+
+注意图中K的大小写，小写k是聚类的下标，大写K为聚类的总数 ，c(i)的值为x(i)最靠近的那个聚类的编号（下标）。如果出现某个簇没有被分配数据，则删除这个簇，或者重新随机分配一个簇
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -943,7 +960,11 @@ K均值算法(K-Means Algorithm)选择k个聚类中心（需要聚k个类），K
 可以从线性的代价函数中推导而出，如下：
 
 相比线性函数去掉1/m：习惯问题，不影响
-将A+λB的形式换
+将A+λB的形式换为CA+B的形式：控制权重的不同方式
+Large Margin IntuitionSVM在分类时会以一个最大间距来分类数据，C越大，过拟合的可能性越大，即高方差低偏差小λ。
+Kernels(核函数)(高斯)核函数 ：
+
+其中f1代替了Θ1+Θ2*x1·····中的x1，而σ越大，特征变量值减小越慢。
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1133,7 +1154,11 @@ K均值算法(K-Means Algorithm)选择k个聚类中心（需要聚k个类），K
 
 计算测试误差Jtest（θ）:a. 对于线性规划
 
-J_{test}(\Theta) = \dfrac{1}{2m_{test
+J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}_{test}) - y^{(i)}_{test})^2b.对于分类问题
+
+
+
+err(h_\Theta(x),y) = \begin{matrix} 1 & \mbox{if } h_\Theta(x) \geq 0
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1322,7 +1347,12 @@ sl = l层的单元数（不包括偏置单元）
 K = 输出单元数
 
 代价函数
-由逻辑回归的代价函数推广得到神经网络的代价函数。其中，前半部分∑k=1 K表示h(x)的所有维（输出单元数
+由逻辑回归的代价函数推广得到神经网络的代价函数。其中，前半部分∑k=1 K表示h(x)的所有维（输出单元数）相加，后半部分两个∑表示所有单元的θ之和。
+反向传播最小化代价函数的一种方式，也是通过计算J(θ)的导数来实现。具体方式如下：
+
+深入理解：
+
+J(\Theta) = - \frac{1}{m} \sum_{t=1}^m\sum_{k=1}^K \left[ y^{(t)}_k \ \log (h
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1506,8 +1536,12 @@ K = 输出单元数
         
           
           神经网络 模拟大脑，用于解决样本量大的非线性分类问题。θ=模型参数=权重，表示一个波矩阵，起到控制层与层之间的作用。矩阵大小：下一层特征量数X（本层特征量数+1）
-layer1输入层（输入特征项x0,x1，…,xn）——&gt;layer2,3,…,n-1隐藏层（激励函数a0,a1,…,an）——&
-          ...
+layer1输入层（输入特征项x0,x1，…,xn）——&gt;layer2,3,…,n-1隐藏层（激励函数a0,a1,…,an）——&gt;layern输出层(最终的一个神经元)。
+其中，x0=1,a0=1被称为bios unit（偏置单元），可以选择性画出。
+
+实现方法依据cost公式通过向前传播的方法依层计算
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/08/31/机器学习Week4/#more" rel="contents">
@@ -1695,7 +1729,9 @@ layer1输入层（输入特征项x0,x1，…,xn）——&gt;layer2,3,…,n-1隐�
 图像:
 
 x=0，y=0.5；x=正无穷，y=1；x=负无穷，y=0；
-概率角度：P(y=0|x;θ)+
+概率角度：P(y=0|x;θ)+P(y=1|x;θ)=1，P(y=1|x;θ)表示在给定x数值时y=1的概率。
+由图可知，要使得h&gt;0(y=1),就要z&gt;0，所以是theta定义了决策边界，而训练集用于拟合参数theta
+一对多问题（One-vs-all）若有个分类，则将问题分成n个1/0简单分类问题。每个简单分类问题
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1883,7 +1919,10 @@ Suppose you have the following training set, and fit a logistic regression class
 
 
 
-Which of the following are true? Chec
+Which of the following are true? Check all that apply.
+
+J(θ) will be a convex function, so gradient descent should converge to the global minimum.
+Adding polynomial features (e.g., instea
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -2068,7 +2107,9 @@ Which of the following are true? Chec
           
           一些缩写n=特征量的数目x(i)=第i行特征量的向量x下标j上标i=第i行第j个特征量向量：nX1矩阵
 多变量的线性回归将Week1的梯度下降算法推广到多元向量上
-缩小范围加速梯度下降特征缩放（Feature scaling）由于特征值的范围会导致特征图是一个高瘦的椭圆形，不利于梯度下降的进行。所以
+缩小范围加速梯度下降特征缩放（Feature scaling）由于特征值的范围会导致特征图是一个高瘦的椭圆形，不利于梯度下降的进行。所以通过将特征值除以其范围的上限，使得特征值范围在-1～1附近（不能过大或者过小），可以使得梯度下降更快且特征图接近圆形。
+均值归一化（Mean normalization）将特征值减去平均值再除以总量（或标准差）。例如：房间大小在0～2000使得所有特征量都有0的平均值  
+选择合适的学习率alpha
           ...
           <!--noindex-->
           <div class="post-button text-center">
