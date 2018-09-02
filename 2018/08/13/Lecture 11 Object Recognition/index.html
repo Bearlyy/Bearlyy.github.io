@@ -101,11 +101,11 @@
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/11.10.png">
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/11.2.png">
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/11.11.png">
-<meta property="og:image" content="d:/Machine%20Learning/cs131/lecture10_11/11.3.png">
+<meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/11.3.png">
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/11.4.png">
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/11.5.png">
 <meta property="og:image" content="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/11.6.png">
-<meta property="og:updated_time" content="2018-09-01T16:12:04.443Z">
+<meta property="og:updated_time" content="2018-09-02T07:56:27.694Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS131 Lecture 11 Object Recognition">
 <meta name="twitter:description" content="Lecture 11 Object RecognitionMean-Shift一种通过分析密度方程检测它局部最大值的模式寻找(mode-seeking)技术。 Optimizations为了提高算法速度，需要平移窗或减少窗的数量。使用吸引盆(basin of attraction)方法达成。 Parallelization 移动不同窗口的计算是独立的，可以被分割给多个不同的处理器平行运算。因此可以">
@@ -514,9 +514,9 @@ Dist(X^n,X^m)=||X^n-X^m||^2=\sqrt{\sum_i (X^n_i-X^m_i)^2}</script><p>最近邻�
 <li>K-NN决策边界灵活</li>
 <li>当有无限样本时，1-NN被证明误差最多是贝叶斯最优误差的两倍。</li>
 </ul>
-<h3 id="Problems-with-K-NN"><a href="#Problems-with-K-NN" class="headerlink" title="Problems with K-NN"></a>Problems with K-NN</h3><h4 id="Choosing-the-value-of-K"><a href="#Choosing-the-value-of-K" class="headerlink" title="Choosing the value of K"></a>Choosing the value of K</h4><p>若$K$值过小，算法会对噪音点过敏感。如果$K$值过大，邻居会包括过多的其他类点，精度下降。随着$K$的增加，决策边界也会更加平滑。</p>
+<h3 id="Problems-with-K-NN"><a href="#Problems-with-K-NN" class="headerlink" title="Problems with K-NN"></a>Problems with K-NN</h3><h4 id="Choosing-the-value-of-K"><a href="#Choosing-the-value-of-K" class="headerlink" title="Choosing the value of K"></a>Choosing the value of K</h4><p>若$K​$值过小，算法会对噪音点过敏感。如果$K​$值过大，邻居会包括过多的其他类点，精度下降。随着$K​$的增加，决策边界也会更加平滑。</p>
 <p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/11.11.png" alt=""></p>
-<p><img src="D:/Machine%20Learning/cs131/lecture10_11/11.3.png" alt="1534226506819"></p>
+<p><img src="https://bearly.oss-cn-hangzhou.aliyuncs.com/CS131/11.3.png" alt=""></p>
 <p><strong>Solution</strong>: 交叉验证</p>
 <p>从训练集中分离出交叉验证集。用不同的$K$在训练集上训练，在交叉验证集上验证。最后选择在交叉验证集上精度最高的$K$，用于测试集。</p>
 <h4 id="Euclidean-measurement"><a href="#Euclidean-measurement" class="headerlink" title="Euclidean measurement"></a>Euclidean measurement</h4><p>欧几里德测量可能会得出反直觉的结果。例如：</p>
